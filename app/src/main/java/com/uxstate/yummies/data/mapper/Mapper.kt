@@ -14,14 +14,14 @@ fun MealDTO.toModel(): Meal {
             origin = this.strArea,
             directions = this.strInstructions,
             imageUrl = this.strMeal,
-            ingredients = combineIngredientsToAList(this),
+            ingredients = combineStrIngredientsToAList(this),
             units = listOf(),
             tags = listOf()
     )
 }
 
 
-fun combineIngredientsToAList(mealDTO: MealDTO): List<String> {
+fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
 
 
     val ing1 = mealDTO.strIngredient1 ?: ""
@@ -68,6 +68,59 @@ fun combineIngredientsToAList(mealDTO: MealDTO): List<String> {
             ing18,
             ing19,
             ing20
+    )
+
+
+}
+
+
+fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
+
+
+    val msr1 = mealDTO.strMeasure1 ?: ""
+    val msr2 = mealDTO.strMeasure2 ?: ""
+    val msr3 = mealDTO.strMeasure3 ?: ""
+    val msr4 = mealDTO.strMeasure4 ?: ""
+    val msr5 = mealDTO.strMeasure5 ?: ""
+    val msr6 = mealDTO.strMeasure6 ?: ""
+    val msr7 = mealDTO.strMeasure7 ?: ""
+    val msr8 = mealDTO.strMeasure8 ?: ""
+    val msr9 = mealDTO.strMeasure9 ?: ""
+    val msr10 = mealDTO.strMeasure10 ?: ""
+    val msr11 = mealDTO.strMeasure11 ?: ""
+    val msr12 = mealDTO.strMeasure12 ?: ""
+    val msr13 = mealDTO.strMeasure13 ?: ""
+    val msr14 = mealDTO.strMeasure14 ?: ""
+    val msr15 = mealDTO.strMeasure15 ?: ""
+    val msr16 = mealDTO.strMeasure16 ?: ""
+    val msr17 = mealDTO.strMeasure17 ?: ""
+    val msr18 = mealDTO.strMeasure18 ?: ""
+    val msr19 = mealDTO.strMeasure19 ?: ""
+    val msr20 = mealDTO.strMeasure20 ?: ""
+
+
+
+    return mutableListOf(
+            msr1,
+            msr2,
+            msr3,
+            msr4,
+            msr5,
+            msr6,
+            msr7,
+            msr8,
+            msr9,
+            msr10,
+            msr11,
+            msr12,
+            msr13,
+            msr14,
+            msr15,
+            msr16,
+            msr17,
+            msr18,
+            msr19,
+            msr20
     )
 
 
