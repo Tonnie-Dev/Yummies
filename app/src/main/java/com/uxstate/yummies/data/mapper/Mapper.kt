@@ -1,6 +1,8 @@
 package com.uxstate.yummies.data.mapper
 
+import com.uxstate.yummies.data.remote.dto.CategoryDTO
 import com.uxstate.yummies.data.remote.dto.MealDTO
+import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
 
 //dto to Meal model class
@@ -18,6 +20,19 @@ fun MealDTO.toModel(): Meal {
             units = combineStrMeasuresToAList(this),
             tags = listOf()
     )
+}
+
+
+//dto to Category model class
+fun CategoryDTO.toModel(): Category {
+
+    return Category(
+            categoryId = this.idCategory.toInt(),
+            categoryType = this.strCategory,
+            categoryDescription = this.strCategoryDescription,
+            categoryImageUrl = this.strCategoryThumb
+    )
+
 }
 
 
