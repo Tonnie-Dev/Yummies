@@ -3,7 +3,7 @@ package com.uxstate.yummies.data.remote.dto
 
 import com.squareup.moshi.Json
 
-data class Category(
+data class CategoryDTO(
     @Json(name = "idCategory")
     val idCategory: String,
     @Json(name = "strCategory")
