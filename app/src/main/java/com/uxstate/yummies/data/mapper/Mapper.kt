@@ -15,7 +15,7 @@ fun MealDTO.toModel(): Meal {
             origin = this.strArea,
             directions = this.strInstructions,
             imageUrl = this.strMeal,
-            ingredients = listOf(),
+            ingredients = combineIngredientsToAList(this),
             units = listOf(),
             tags = listOf()
     )
@@ -48,7 +48,7 @@ fun combineIngredientsToAList(mealDTO: MealDTO): List<String> {
 
 
 
-    return mutableListOf<String>(
+    return mutableListOf(
             ing1,
             ing2,
             ing3,
