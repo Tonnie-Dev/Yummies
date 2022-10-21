@@ -65,45 +65,45 @@ data class MealDTO(
     @Json(name = "strMealThumb")
     val strMealThumb: String,
     @Json(name = "strMeasure1")
-    val strMeasure1: String,
+    val strMeasure1: String?,
     @Json(name = "strMeasure10")
-    val strMeasure10: String,
+    val strMeasure10: String?,
     @Json(name = "strMeasure11")
-    val strMeasure11: String,
+    val strMeasure11: String?,
     @Json(name = "strMeasure12")
-    val strMeasure12: String,
+    val strMeasure12: String?,
     @Json(name = "strMeasure13")
-    val strMeasure13: String,
+    val strMeasure13: String?,
     @Json(name = "strMeasure14")
-    val strMeasure14: String,
+    val strMeasure14: String?,
     @Json(name = "strMeasure15")
-    val strMeasure15: String,
+    val strMeasure15: String?,
     @Json(name = "strMeasure16")
-    val strMeasure16: Any?,
+    val strMeasure16: String?,
     @Json(name = "strMeasure17")
-    val strMeasure17: Any?,
+    val strMeasure17: String?,
     @Json(name = "strMeasure18")
-    val strMeasure18: Any?,
+    val strMeasure18: String?,
     @Json(name = "strMeasure19")
-    val strMeasure19: Any?,
+    val strMeasure19: String?,
     @Json(name = "strMeasure2")
-    val strMeasure2: String,
+    val strMeasure2: String?,
     @Json(name = "strMeasure20")
-    val strMeasure20: Any?,
+    val strMeasure20: String?,
     @Json(name = "strMeasure3")
-    val strMeasure3: String,
+    val strMeasure3: String?,
     @Json(name = "strMeasure4")
-    val strMeasure4: String,
+    val strMeasure4: String?,
     @Json(name = "strMeasure5")
-    val strMeasure5: String,
+    val strMeasure5: String?,
     @Json(name = "strMeasure6")
-    val strMeasure6: String,
+    val strMeasure6: String?,
     @Json(name = "strMeasure7")
-    val strMeasure7: String,
+    val strMeasure7: String?,
     @Json(name = "strMeasure8")
-    val strMeasure8: String,
+    val strMeasure8: String?,
     @Json(name = "strMeasure9")
-    val strMeasure9: String,
+    val strMeasure9: String?,
     @Json(name = "strSource")
     val strSource: Any?,
     @Json(name = "strTags")

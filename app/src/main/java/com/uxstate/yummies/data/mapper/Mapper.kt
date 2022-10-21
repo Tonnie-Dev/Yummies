@@ -7,7 +7,6 @@ import com.uxstate.yummies.domain.model.Meal
 
 fun MealDTO.toModel(): Meal {
 
-
     return Meal(
             id = this.idMeal.toInt(),
             name = this.strMeal,
