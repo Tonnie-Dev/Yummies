@@ -10,12 +10,12 @@ interface YummiesAPI {
     //Search meal by name - www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata
 
     @GET("search.php")
-    suspend fun getMealsByName(@Query("s") name: String): MealsResponseDTO
+    suspend fun getMealsByName(@Query("s") mealName: String): MealsResponseDTO
 
     //Lookup full meal details by id - www.themealdb.com/api/json/v1/1/lookup.php?i=52772
 
     @GET("lookup.php")
-    suspend fun getMealsById(@Query("i") id:String):MealsResponseDTO
+    suspend fun getMealsById(@Query("i") mealId:String):MealsResponseDTO
 
 
     //List all meal categories - www.themealdb.com/api/json/v1/1/categories.php
