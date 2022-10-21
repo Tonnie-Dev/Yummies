@@ -15,7 +15,7 @@ fun MealDTO.toModel(): Meal {
             directions = this.strInstructions,
             imageUrl = this.strMeal,
             ingredients = combineStrIngredientsToAList(this),
-            units = listOf(),
+            units = combineStrMeasuresToAList(this),
             tags = listOf()
     )
 }
@@ -44,7 +44,6 @@ fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
     val ing18 = mealDTO.strIngredient18 ?: ""
     val ing19 = mealDTO.strIngredient19 ?: ""
     val ing20 = mealDTO.strIngredient20 ?: ""
-
 
 
     return mutableListOf(
@@ -97,8 +96,6 @@ fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
     val msr18 = mealDTO.strMeasure18 ?: ""
     val msr19 = mealDTO.strMeasure19 ?: ""
     val msr20 = mealDTO.strMeasure20 ?: ""
-
-
 
     return mutableListOf(
             msr1,
