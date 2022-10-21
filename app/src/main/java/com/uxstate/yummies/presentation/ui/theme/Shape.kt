@@ -1,4 +1,4 @@
-package com.uxstate.yummies.ui.theme
+package com.uxstate.yummies.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
