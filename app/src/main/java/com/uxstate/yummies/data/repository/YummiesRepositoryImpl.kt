@@ -39,7 +39,7 @@ class YummiesRepositoryImpl @Inject constructor(
         // Emit Loading status true
         emit(Resource.Loading(loading = true))
 
-        // Query database and emit
+        // Query database and emit immediately
         val localMeals = dao.getMealItems(query = query)
         emit(Resource.Success(data = localMeals.map { it.toModel() }))
 
@@ -61,7 +61,12 @@ class YummiesRepositoryImpl @Inject constructor(
             api.getMealsByName(query)
         } catch (e: HttpException) {
 
-            emit(Resource.Error(errorMessage = "UnExpected Error Occurred", data = null))
+            emit(
+                    Resource.Error(
+                            errorMessage = "Unknown Error Occurred, Please try again",
+                            data = null
+                    )
+            )
             null
         } catch (e: IOException) {
             emit(
@@ -91,7 +96,66 @@ class YummiesRepositoryImpl @Inject constructor(
         emit(Resource.Loading(loading = false))
     }
 
-    override fun fetchCategoriesItems(): Flow<Resource<List<Category>>> {
-        TODO("Not yet implemented")
+    override fun fetchCategoriesItems(): Flow<Resource<List<Category>>> = flow {
+
+
+        //show loading
+        emit(Resource.Loading(loading = true))
+
+        //Query Database and Emit immediately
+
+        val localCategories = dao.getCategoriesItems()
+
+        //Determine if API Call is needed
+        val fetchJustFromCache = localCategories.isNotEmpty()
+
+        if (fetchJustFromCache) {
+
+            //Go Local
+            emit(Resource.Loading(loading = false))
+
+            //return control to @flow
+            return@flow
+        }
+
+        //Go Remote
+
+        val remoteCategories = try {
+
+            api.getCategories()
+
+        } catch (e: HttpException) {
+
+            Resource.Error(
+                    data = null,
+                    errorMessage = "Unknown Error Occurred, Please try again"
+            )
+
+            null
+        } catch (e: IOException) {
+
+            emit(
+                    Resource.Error(
+                            data = null,
+                            errorMessage = "Could not load data, please check your internet connection"
+                    )
+            )
+
+            null
+        }
+
+
+        //clear and re-populate database
+        db.withTransaction {
+
+            dao.clearCategories()
+
+            remoteCategories?.let {
+
+                dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
+            }
+        }
+        //stop loading
+        emit(Resource.Loading(loading = false))
     }
 }
