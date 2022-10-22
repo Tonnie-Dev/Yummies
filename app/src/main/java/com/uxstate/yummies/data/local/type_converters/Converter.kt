@@ -4,16 +4,19 @@ import androidx.room.TypeConverter
 
 class Converter {
 
-    // Read @TypeConverter - convert String to list
-
-
-
     // Write @TypeConverter - convert List to a String
 
     @TypeConverter
-    fun writeListIntoDatabase(list:List<String>): String{
-
+    fun writeListIntoDatabase(list: List<String>): String {
 
         return list.joinToString(separator = ",")
+    }
+
+    // Read @TypeConverter - convert String to list
+
+    @TypeConverter
+    fun readListFromDatabase(roomString:String):List<String> {
+
+        return roomString.split( ",").map { it }
     }
 }
