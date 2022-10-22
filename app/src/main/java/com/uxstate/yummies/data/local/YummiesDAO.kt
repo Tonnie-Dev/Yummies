@@ -26,4 +26,7 @@ interface YummiesDAO {
     @Query("DELETE FROM meals_table")
     suspend fun clearMeals()
 
+    @Query("DELETE FROM categories_table")
+    suspend fun clearCategories()
+
 }
