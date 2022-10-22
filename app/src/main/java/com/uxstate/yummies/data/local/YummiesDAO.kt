@@ -17,8 +17,15 @@ interface YummiesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(categories: List<CategoryEntity>)
 
-    @Query("SELECT * FROM meals_table")
-    fun getMealItems(): Flow<List<MealEntity>>
+    @Query(
+            """
+        SELECT * FROM meals_table
+WHERE 
+LOWER(name) LIKE '%' || LOWER (:query)|| '%'
+
+    """
+    )
+    fun getMealItems(query: String): List<MealEntity>
 
     @Query("SELECT * FROM categories_table")
     fun getCategoriesItems(): Flow<List<CategoryEntity>>
