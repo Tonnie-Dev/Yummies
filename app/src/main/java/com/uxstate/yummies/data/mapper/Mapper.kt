@@ -1,5 +1,6 @@
 package com.uxstate.yummies.data.mapper
 
+import com.uxstate.yummies.data.local.entity.MealEntity
 import com.uxstate.yummies.data.remote.dto.CategoryDTO
 import com.uxstate.yummies.data.remote.dto.MealDTO
 import com.uxstate.yummies.domain.model.Category
@@ -32,6 +33,23 @@ fun CategoryDTO.toModel(): Category {
     )
 }
 
+//entity to Meal model class
+fun MealEntity.toModel():Meal {
+
+    return Meal(
+            id = this.id,
+            name = this.name,
+            category = this.category,
+            origin = this.origin,
+            directions = this.directions,
+            imageUrl = this.imageUrl,
+            ingredients = this.ingredients,
+            units = this.units
+    )
+}
+
+
+//entity to Category model class
 fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
 
     val ing1 = mealDTO.strIngredient1 ?: ""
