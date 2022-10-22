@@ -1,7 +1,5 @@
 package com.uxstate.yummies.domain.model
 
-import com.squareup.moshi.Json
-
 data class Category(
 
     val categoryId: Int,

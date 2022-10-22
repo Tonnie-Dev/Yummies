@@ -5,39 +5,35 @@ import com.uxstate.yummies.data.remote.dto.MealDTO
 import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
 
-//dto to Meal model class
+// dto to Meal model class
 
 fun MealDTO.toModel(): Meal {
 
     return Meal(
-            id = this.idMeal.toInt(),
-            name = this.strMeal,
-            category = this.strCategory,
-            origin = this.strArea,
-            directions = this.strInstructions,
-            imageUrl = this.strMeal,
-            ingredients = combineStrIngredientsToAList(this),
-            units = combineStrMeasuresToAList(this),
-            tags = listOf()
+        id = this.idMeal.toInt(),
+        name = this.strMeal,
+        category = this.strCategory,
+        origin = this.strArea,
+        directions = this.strInstructions,
+        imageUrl = this.strMeal,
+        ingredients = combineStrIngredientsToAList(this),
+        units = combineStrMeasuresToAList(this),
+        tags = listOf()
     )
 }
 
-
-//dto to Category model class
+// dto to Category model class
 fun CategoryDTO.toModel(): Category {
 
     return Category(
-            categoryId = this.idCategory.toInt(),
-            categoryType = this.strCategory,
-            categoryDescription = this.strCategoryDescription,
-            categoryImageUrl = this.strCategoryThumb
+        categoryId = this.idCategory.toInt(),
+        categoryType = this.strCategory,
+        categoryDescription = this.strCategoryDescription,
+        categoryImageUrl = this.strCategoryThumb
     )
-
 }
 
-
 fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
-
 
     val ing1 = mealDTO.strIngredient1 ?: ""
     val ing2 = mealDTO.strIngredient2 ?: ""
@@ -60,36 +56,31 @@ fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
     val ing19 = mealDTO.strIngredient19 ?: ""
     val ing20 = mealDTO.strIngredient20 ?: ""
 
-
     return mutableListOf(
-            ing1,
-            ing2,
-            ing3,
-            ing4,
-            ing5,
-            ing6,
-            ing7,
-            ing8,
-            ing9,
-            ing10,
-            ing11,
-            ing12,
-            ing13,
-            ing14,
-            ing15,
-            ing16,
-            ing17,
-            ing18,
-            ing19,
-            ing20
+        ing1,
+        ing2,
+        ing3,
+        ing4,
+        ing5,
+        ing6,
+        ing7,
+        ing8,
+        ing9,
+        ing10,
+        ing11,
+        ing12,
+        ing13,
+        ing14,
+        ing15,
+        ing16,
+        ing17,
+        ing18,
+        ing19,
+        ing20
     )
-
-
 }
 
-
 fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
-
 
     val msr1 = mealDTO.strMeasure1 ?: ""
     val msr2 = mealDTO.strMeasure2 ?: ""
@@ -113,27 +104,25 @@ fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
     val msr20 = mealDTO.strMeasure20 ?: ""
 
     return mutableListOf(
-            msr1,
-            msr2,
-            msr3,
-            msr4,
-            msr5,
-            msr6,
-            msr7,
-            msr8,
-            msr9,
-            msr10,
-            msr11,
-            msr12,
-            msr13,
-            msr14,
-            msr15,
-            msr16,
-            msr17,
-            msr18,
-            msr19,
-            msr20
+        msr1,
+        msr2,
+        msr3,
+        msr4,
+        msr5,
+        msr6,
+        msr7,
+        msr8,
+        msr9,
+        msr10,
+        msr11,
+        msr12,
+        msr13,
+        msr14,
+        msr15,
+        msr16,
+        msr17,
+        msr18,
+        msr19,
+        msr20
     )
-
-
 }
