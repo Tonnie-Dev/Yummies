@@ -10,14 +10,17 @@ import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface YummiesDAO{
+interface YummiesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMeals(meals:List<MealEntity>)
+    suspend fun insertMeals(meals: List<MealEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCategories(categories:List<CategoryEntity>)
+    suspend fun insertCategories(categories: List<CategoryEntity>)
 
     @Query("SELECT * FROM meals_table")
-    fun getMealItems():Flow<List<MealEntity>>
+    fun getMealItems(): Flow<List<MealEntity>>
+
+    @Query("SELECT * FROM categories_table")
+    fun getCategoriesItems(): Flow<List<CategoryEntity>>
 
 }
