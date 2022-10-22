@@ -2,7 +2,7 @@ package com.uxstate.yummies.data.local.type_converters
 
 import androidx.room.TypeConverter
 
-class Converter {
+class Converters {
 
     // Write @TypeConverter - convert List to a String
 
@@ -15,8 +15,8 @@ class Converter {
     // Read @TypeConverter - convert String to list
 
     @TypeConverter
-    fun readListFromDatabase(roomString:String):List<String> {
+    fun readListFromDatabase(roomString: String): List<String> {
 
-        return roomString.split( ",").map { it }
+        return roomString.split(",").map { it }
     }
 }
