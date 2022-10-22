@@ -9,14 +9,14 @@ import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.repository.YummiesRepository
 import com.uxstate.yummies.util.Resource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 
-//force single instance of our repository impl for the entire app
+// force single instance of our repository impl for the entire app
 @Singleton
 
 /*
@@ -24,7 +24,7 @@ Use @Inject so that Hilt knows how to create CountryRepositoryImpl object
 noting we will be injecting the interface and not the impl
 */
 
-//always favor/depend on abstractions instead of concrete classes
+// always favor/depend on abstractions instead of concrete classes
 class YummiesRepositoryImpl @Inject constructor(
     private val api: YummiesAPI,
     private val db: YummiesDatabase
@@ -47,12 +47,11 @@ class YummiesRepositoryImpl @Inject constructor(
 
         val isFetchFromCache = (!fetchFromRemote && localMeals.isNotEmpty())
 
-
         if (isFetchFromCache) {
             // go local
             emit(Resource.Loading(loading = false))
 
-            //return control to @flow
+            // return control to @flow
             return@flow
         }
 
@@ -62,23 +61,23 @@ class YummiesRepositoryImpl @Inject constructor(
         } catch (e: HttpException) {
 
             emit(
-                    Resource.Error(
-                            errorMessage = "Unknown Error Occurred, Please try again",
-                            data = null
-                    )
+                Resource.Error(
+                    errorMessage = "Unknown Error Occurred, Please try again",
+                    data = null
+                )
             )
             null
         } catch (e: IOException) {
             emit(
-                    Resource.Error(
-                            errorMessage = "Could not load data, please check your internet connection",
-                            data = null
-                    )
+                Resource.Error(
+                    errorMessage = "Could not load data, please check your internet connection",
+                    data = null
+                )
             )
             null
         }
 
-        //clear and re-populate the database
+        // clear and re-populate the database
         db.withTransaction {
 
             dao.clearMeals()
@@ -87,7 +86,6 @@ class YummiesRepositoryImpl @Inject constructor(
 
                 dao.insertMeals(remoteMeals.mealDTOS.map { dto -> dto.toEntity() })
             }
-
 
             val updatedCache = dao.getMealItems(query = query)
             emit(Resource.Success(data = updatedCache.map { it.toModel() }))
@@ -98,50 +96,51 @@ class YummiesRepositoryImpl @Inject constructor(
 
     override fun fetchCategoriesItems(): Flow<Resource<List<Category>>> = flow {
 
-
-        //show loading
+        // show loading
         emit(Resource.Loading(loading = true))
 
-        //Query Database and Emit immediately
+        // Query Database and Emit immediately
 
         val localCategories = dao.getCategoriesItems()
 
-        //Determine if API Call is needed
+        // Determine if API Call is needed
         val fetchJustFromCache = localCategories.isNotEmpty()
 
         if (fetchJustFromCache) {
 
-            //Go Local
+            // Go Local
             emit(Resource.Loading(loading = false))
 
-            //return control to @flow
+            // return control to @flow
             return@flow
         }
 
-        //Go Remote
+        // Go Remote
 
         val remoteCategories = try {
 
             api.getCategories()
-
         } catch (e: HttpException) {
 
             emit(
-                    Resource.Error(errorMessage = "Unknown Error Occurred, Please try again")
+                Resource.Error(errorMessage = "Unknown Error Occurred, Please try again")
             )
 
             null
         } catch (e: IOException) {
 
             emit(
-                    Resource.Error(errorMessage = "Could not load data, please check your internet connection")
+                Resource.Error(
+                    errorMessage = """
+                    Could not load data, please check your internet connection
+                    """.trimIndent()
+                )
             )
 
             null
         }
 
-
-        //clear and re-populate database
+        // clear and re-populate database
         db.withTransaction {
 
             dao.clearCategories()
@@ -151,7 +150,7 @@ class YummiesRepositoryImpl @Inject constructor(
                 dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
             }
         }
-        //stop loading
+        // stop loading
         emit(Resource.Loading(loading = false))
     }
 }
