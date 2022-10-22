@@ -1,5 +1,6 @@
 package com.uxstate.yummies.data.mapper
 
+import com.uxstate.yummies.data.local.entity.CategoryEntity
 import com.uxstate.yummies.data.local.entity.MealEntity
 import com.uxstate.yummies.data.remote.dto.CategoryDTO
 import com.uxstate.yummies.data.remote.dto.MealDTO
@@ -11,14 +12,14 @@ import com.uxstate.yummies.domain.model.Meal
 fun MealDTO.toModel(): Meal {
 
     return Meal(
-        id = this.idMeal.toInt(),
-        name = this.strMeal,
-        category = this.strCategory,
-        origin = this.strArea,
-        directions = this.strInstructions,
-        imageUrl = this.strMeal,
-        ingredients = combineStrIngredientsToAList(this),
-        units = combineStrMeasuresToAList(this)
+            id = this.idMeal.toInt(),
+            name = this.strMeal,
+            category = this.strCategory,
+            origin = this.strArea,
+            directions = this.strInstructions,
+            imageUrl = this.strMeal,
+            ingredients = combineStrIngredientsToAList(this),
+            units = combineStrMeasuresToAList(this)
     )
 }
 
@@ -26,15 +27,15 @@ fun MealDTO.toModel(): Meal {
 fun CategoryDTO.toModel(): Category {
 
     return Category(
-        categoryId = this.idCategory.toInt(),
-        categoryType = this.strCategory,
-        categoryDescription = this.strCategoryDescription,
-        categoryImageUrl = this.strCategoryThumb
+            categoryId = this.idCategory.toInt(),
+            categoryType = this.strCategory,
+            categoryDescription = this.strCategoryDescription,
+            categoryImageUrl = this.strCategoryThumb
     )
 }
 
 //entity to Meal model class
-fun MealEntity.toModel():Meal {
+fun MealEntity.toModel(): Meal {
 
     return Meal(
             id = this.id,
@@ -50,6 +51,18 @@ fun MealEntity.toModel():Meal {
 
 
 //entity to Category model class
+
+fun CategoryEntity.toModel(): Category {
+
+    return Category(
+            categoryId = this.categoryId,
+            categoryType = this.categoryType,
+            categoryDescription = this.categoryDescription,
+            categoryImageUrl = this.categoryImageUrl
+    )
+}
+
+//help function 1
 fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
 
     val ing1 = mealDTO.strIngredient1 ?: ""
@@ -74,29 +87,30 @@ fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
     val ing20 = mealDTO.strIngredient20 ?: ""
 
     return mutableListOf(
-        ing1,
-        ing2,
-        ing3,
-        ing4,
-        ing5,
-        ing6,
-        ing7,
-        ing8,
-        ing9,
-        ing10,
-        ing11,
-        ing12,
-        ing13,
-        ing14,
-        ing15,
-        ing16,
-        ing17,
-        ing18,
-        ing19,
-        ing20
+            ing1,
+            ing2,
+            ing3,
+            ing4,
+            ing5,
+            ing6,
+            ing7,
+            ing8,
+            ing9,
+            ing10,
+            ing11,
+            ing12,
+            ing13,
+            ing14,
+            ing15,
+            ing16,
+            ing17,
+            ing18,
+            ing19,
+            ing20
     )
 }
 
+//helper function 2
 fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
 
     val msr1 = mealDTO.strMeasure1 ?: ""
@@ -121,25 +135,25 @@ fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
     val msr20 = mealDTO.strMeasure20 ?: ""
 
     return mutableListOf(
-        msr1,
-        msr2,
-        msr3,
-        msr4,
-        msr5,
-        msr6,
-        msr7,
-        msr8,
-        msr9,
-        msr10,
-        msr11,
-        msr12,
-        msr13,
-        msr14,
-        msr15,
-        msr16,
-        msr17,
-        msr18,
-        msr19,
-        msr20
+            msr1,
+            msr2,
+            msr3,
+            msr4,
+            msr5,
+            msr6,
+            msr7,
+            msr8,
+            msr9,
+            msr10,
+            msr11,
+            msr12,
+            msr13,
+            msr14,
+            msr15,
+            msr16,
+            msr17,
+            msr18,
+            msr19,
+            msr20
     )
 }
