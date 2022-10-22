@@ -8,6 +8,5 @@ data class Meal(
     val directions: String,
     val imageUrl: String,
     val ingredients: List<String>,
-    val units: List<String>,
-    val tags: List<String>
+    val units: List<String>
 )

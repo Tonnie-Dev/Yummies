@@ -17,8 +17,7 @@ fun MealDTO.toModel(): Meal {
         directions = this.strInstructions,
         imageUrl = this.strMeal,
         ingredients = combineStrIngredientsToAList(this),
-        units = combineStrMeasuresToAList(this),
-        tags = listOf()
+        units = combineStrMeasuresToAList(this)
     )
 }
 
