@@ -25,10 +25,10 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
 
     """
     )
-    fun getMealItems(query: String): List<MealEntity>
+    suspend fun getMealItems(query: String): List<MealEntity>
 
     @Query("SELECT * FROM categories_table")
-    fun getCategoriesItems():List<CategoryEntity>
+   suspend fun getCategoriesItems():List<CategoryEntity>
 
     @Query("DELETE FROM meals_table")
     suspend fun clearMeals()
