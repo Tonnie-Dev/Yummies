@@ -74,9 +74,12 @@ ktlint{
     reporters {
         reporter "plain"
         reporter "checkstyle"
-        report "sarif"
+        reporter "sarif"
     }
 }
+
+
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.9.0'
