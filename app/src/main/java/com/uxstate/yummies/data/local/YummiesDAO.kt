@@ -28,7 +28,7 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     fun getMealItems(query: String): List<MealEntity>
 
     @Query("SELECT * FROM categories_table")
-    fun getCategoriesItems(): Flow<List<CategoryEntity>>
+    fun getCategoriesItems():List<CategoryEntity>
 
     @Query("DELETE FROM meals_table")
     suspend fun clearMeals()
