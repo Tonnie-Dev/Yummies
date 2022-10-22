@@ -23,4 +23,7 @@ interface YummiesDAO {
     @Query("SELECT * FROM categories_table")
     fun getCategoriesItems(): Flow<List<CategoryEntity>>
 
+    @Query("DELETE FROM meals_table")
+    suspend fun clearMeals()
+
 }
