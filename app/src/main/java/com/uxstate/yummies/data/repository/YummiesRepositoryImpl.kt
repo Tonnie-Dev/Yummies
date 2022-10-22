@@ -126,19 +126,15 @@ class YummiesRepositoryImpl @Inject constructor(
 
         } catch (e: HttpException) {
 
-            Resource.Error(
-                    data = null,
-                    errorMessage = "Unknown Error Occurred, Please try again"
+            emit(
+                    Resource.Error(errorMessage = "Unknown Error Occurred, Please try again")
             )
 
             null
         } catch (e: IOException) {
 
             emit(
-                    Resource.Error(
-                            data = null,
-                            errorMessage = "Could not load data, please check your internet connection"
-                    )
+                    Resource.Error(errorMessage = "Could not load data, please check your internet connection")
             )
 
             null
