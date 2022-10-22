@@ -6,8 +6,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.uxstate.yummies.data.local.entity.CategoryEntity
 import com.uxstate.yummies.data.local.entity.MealEntity
-import kotlinx.coroutines.flow.Flow
-
 
 @Dao
 interface YummiesDAO {
@@ -18,7 +16,7 @@ interface YummiesDAO {
     suspend fun insertCategories(categories: List<CategoryEntity>)
 
     @Query(
-            """
+        """
         SELECT * FROM meals_table
 WHERE 
 LOWER(name) LIKE '%' || LOWER (:query)|| '%'
@@ -28,12 +26,11 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     suspend fun getMealItems(query: String): List<MealEntity>
 
     @Query("SELECT * FROM categories_table")
-   suspend fun getCategoriesItems():List<CategoryEntity>
+    suspend fun getCategoriesItems(): List<CategoryEntity>
 
     @Query("DELETE FROM meals_table")
     suspend fun clearMeals()
 
     @Query("DELETE FROM categories_table")
     suspend fun clearCategories()
-
 }
