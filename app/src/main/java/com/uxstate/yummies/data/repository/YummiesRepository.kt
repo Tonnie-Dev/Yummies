@@ -1,4 +1,9 @@
 package com.uxstate.yummies.data.repository
 
-class YummiesRepository {
+import com.uxstate.yummies.data.remote.YummiesAPI
+import javax.inject.Inject
+
+class YummiesRepository @Inject constructor(api:YummiesAPI) {
+
+
 }
