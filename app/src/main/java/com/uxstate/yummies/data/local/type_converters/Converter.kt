@@ -1,3 +1,19 @@
 package com.uxstate.yummies.data.local.type_converters
 
-class Converter
+import androidx.room.TypeConverter
+
+class Converter {
+
+    // Read @TypeConverter - convert String to list
+
+
+
+    // Write @TypeConverter - convert List to a String
+
+    @TypeConverter
+    fun writeListIntoDatabase(list:List<String>): String{
+
+
+        return list.joinToString(separator = ",")
+    }
+}
