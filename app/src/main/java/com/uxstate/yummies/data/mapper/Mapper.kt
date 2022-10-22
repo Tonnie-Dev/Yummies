@@ -62,6 +62,21 @@ fun CategoryEntity.toModel(): Category {
     )
 }
 
+
+//dto to MealEntity entity
+fun MealDTO.toEntity():MealEntity{
+    return MealEntity(
+            id = this.idMeal.toInt(),
+            name = this.strMeal,
+            category = this.strCategory,
+            origin = this.strArea,
+            directions =this.strInstructions,
+            imageUrl = this.strMealThumb,
+            ingredients =combineStrIngredientsToAList(this),
+            units = combineStrMeasuresToAList(this)
+    )
+}
+
 //help function 1
 fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
 
