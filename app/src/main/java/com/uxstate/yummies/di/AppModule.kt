@@ -45,17 +45,23 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
+        /* connect timeout defines a time period in which our
+           client should establish a connection with a target host.
+      By default, for the OkHttpClient, this timeout is set to 10 seconds.   */
 
+
+        /*maximum time of inactivity between two data packets when waiting for the
+        server's response.The default timeout of 10 seconds */
         return OkHttpClient.Builder()
-                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)// find a relationship
+                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)//courtship
                 .build()
     }
 
     @Provides
     @Singleton
 
-    fun provideApiService(): YummiesAPI {
+    fun provideApiService(okHttpClient: OkHttpClient): YummiesAPI {
 
 
         val moshi = Moshi.Builder()
@@ -65,6 +71,7 @@ object AppModule {
         return Retrofit.Builder()
                 .baseUrl(YummiesAPI.BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .client(okHttpClient)
                 .build()
                 .create()
     }
