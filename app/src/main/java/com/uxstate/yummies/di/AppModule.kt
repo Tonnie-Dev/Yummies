@@ -6,6 +6,10 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.uxstate.yummies.data.local.YummiesDatabase
 import com.uxstate.yummies.data.remote.YummiesAPI
+import com.uxstate.yummies.domain.repository.YummiesRepository
+import com.uxstate.yummies.domain.use_cases.GetCategoriesUseCase
+import com.uxstate.yummies.domain.use_cases.GetMealsUseCase
+import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.util.Constants
 import com.uxstate.yummies.util.Constants.CONNECT_TIMEOUT
 import com.uxstate.yummies.util.Constants.READ_TIMEOUT
@@ -14,13 +18,13 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.TimeUnit
-import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.create
+import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -34,11 +38,11 @@ object AppModule {
     fun provideDatabase(@ApplicationContext context: Context): YummiesDatabase {
 
         return Room.databaseBuilder(
-            context,
-            YummiesDatabase::class.java,
-            Constants.DATABASE_NAME
+                context,
+                YummiesDatabase::class.java,
+                Constants.DATABASE_NAME
         )
-            .build()
+                .build()
     }
 
     /*For debugging purposes it’s nice to have a log feature integrated to
@@ -67,10 +71,10 @@ object AppModule {
         /*maximum time of inactivity between two data packets when waiting for the
         server's response.The default timeout of 10 seconds */
         return OkHttpClient.Builder()
-            .addInterceptor(interceptor) //activate interceptor
-            .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS) // find a relationship
-            .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS) // courtship
-            .build()
+                .addInterceptor(interceptor) //activate interceptor
+                .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS) // find a relationship
+                .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS) // courtship
+                .build()
     }
 
 
@@ -80,14 +84,26 @@ object AppModule {
     fun provideApiService(okHttpClient: OkHttpClient): YummiesAPI {
 
         val moshi = Moshi.Builder()
-            .addLast(KotlinJsonAdapterFactory())
-            .build()
+                .addLast(KotlinJsonAdapterFactory())
+                .build()
 
         return Retrofit.Builder()
-            .baseUrl(YummiesAPI.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .client(okHttpClient)
-            .build()
-            .create()
+                .baseUrl(YummiesAPI.BASE_URL)
+                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .client(okHttpClient)
+                .build()
+                .create()
+    }
+
+    //provide use case container
+    @Provides
+    @Singleton
+
+    fun provideUseCaseContainer(repository: YummiesRepository): UseCaseContainer {
+
+        return UseCaseContainer(
+                getMealsUseCase = GetMealsUseCase(repository = repository),
+                getCategoriesUseCase = GetCategoriesUseCase(repository = repository)
+        )
     }
 }
