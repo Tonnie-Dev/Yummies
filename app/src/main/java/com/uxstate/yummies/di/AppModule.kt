@@ -42,6 +42,8 @@ object AppModule {
                 .build()
     }
 
+    @Provides
+    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
 
         return OkHttpClient.Builder()
