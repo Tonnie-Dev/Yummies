@@ -4,9 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
+import com.uxstate.yummies.presentation.screens.overview_screen.states.StateCategory
 import com.uxstate.yummies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,8 +22,8 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     val query by mutableStateOf("")
     val fetchFromRemote by mutableStateOf(false)
 
-    private val _categories = MutableStateFlow<List<Category>>(emptyList())
-    val categories = _categories.asStateFlow()
+    private val _stateCategory = MutableStateFlow(StateCategory())
+    val stateCategory = _stateCategory.asStateFlow()
 
     private val _meals = MutableStateFlow<List<Meal>>(emptyList())
     val meals = _meals.asStateFlow()
@@ -38,7 +38,10 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
               when(result) {
 
-                  is Resource.Loading -> {}
+                  is Resource.Loading -> {
+
+                      _stateCategory.value = StateCategory().copy(isLoading = result.loading)
+                  }
                   is Resource.Error -> {}
                   is Resource.Success -> {}
               }
