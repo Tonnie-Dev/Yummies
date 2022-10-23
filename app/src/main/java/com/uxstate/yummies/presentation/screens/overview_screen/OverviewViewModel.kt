@@ -42,7 +42,10 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
                       _stateCategory.value = StateCategory().copy(isLoading = result.loading)
                   }
-                  is Resource.Error -> {}
+                  is Resource.Error -> {
+
+                    _stateCategory.value = StateCategory().copy(error = )
+                  }
                   is Resource.Success -> {}
               }
 
