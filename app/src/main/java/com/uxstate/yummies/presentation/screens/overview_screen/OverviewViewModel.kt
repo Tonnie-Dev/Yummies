@@ -3,12 +3,15 @@ package com.uxstate.yummies.presentation.screens.overview_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
+import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.presentation.screens.overview_screen.states.StateCategories
 import com.uxstate.yummies.presentation.screens.overview_screen.states.StateMeals
+import com.uxstate.yummies.util.Constants.SEARCH_TRIGGER_DELAY
 import com.uxstate.yummies.util.Resource
 import com.uxstate.yummies.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,9 +29,36 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
-    val searchJob: Job? = null
+    var searchJob: Job? = null
 
 
+
+    fun onEvent(event: OverviewEvent){
+
+        when(event){
+
+
+
+                is OverviewEvent.OnClearText -> {
+
+                    _stateMeals .value = StateMeals().copy(searchQuery = "")
+                }
+                is OverviewEvent.OnSearchQueryChange -> {
+
+                    //cancel any existing job
+                    searchJob?.cancel()
+
+                    //re-initialize the job
+                    searchJob = viewModelScope.launch {
+
+                        delay(SEARCH_TRIGGER_DELAY)
+                    }
+
+                }
+                is OverviewEvent.OnRefresh -> {}
+        }
+
+    }
     private fun getMeals(query: String = "", fetchFromRemote: Boolean = false) {
 
         viewModelScope.launch {
