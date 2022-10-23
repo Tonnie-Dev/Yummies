@@ -47,7 +47,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        
+
         return HttpLoggingInterceptor().apply {
 
             //set level
