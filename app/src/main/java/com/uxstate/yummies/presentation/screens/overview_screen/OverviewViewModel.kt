@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
-import com.uxstate.yummies.presentation.screens.overview_screen.states.StateCategory
+import com.uxstate.yummies.presentation.screens.overview_screen.states.StateCategories
 import com.uxstate.yummies.util.Resource
 import com.uxstate.yummies.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +20,8 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     val query by mutableStateOf("")
     val fetchFromRemote by mutableStateOf(false)
 
-    private val _stateCategory = MutableStateFlow(StateCategory())
-    val stateCategory = _stateCategory.asStateFlow()
+    private val _stateCategories = MutableStateFlow(StateCategories())
+    val stateCategory = _stateCategories.asStateFlow()
 
     private val _meals = MutableStateFlow<List<Meal>>(emptyList())
     val meals = _meals.asStateFlow()
@@ -44,8 +44,8 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
                         is Resource.Loading -> {
 
-                            _stateCategory.value =
-                                StateCategory().copy(isLoading = result.loading)
+                            _stateCategories.value =
+                                StateCategories().copy(isLoading = result.loading)
                         }
                         is Resource.Error -> {
                             val errorMessage = result.errorMessage ?: "Unknown Error"
@@ -54,7 +54,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                         is Resource.Success -> {
 
                             result.data?.let {
-                                _stateCategory.value = StateCategory().copy(categories = it)
+                                _stateCategories.value = StateCategories().copy(categories = it)
                             }
                         }
                     }
