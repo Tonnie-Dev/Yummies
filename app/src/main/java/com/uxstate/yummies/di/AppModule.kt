@@ -98,7 +98,6 @@ object AppModule {
     //provide use case container
     @Provides
     @Singleton
-
     fun provideUseCaseContainer(repository: YummiesRepository): UseCaseContainer {
 
         return UseCaseContainer(
