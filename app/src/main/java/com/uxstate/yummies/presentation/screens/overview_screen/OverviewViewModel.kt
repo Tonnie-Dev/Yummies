@@ -52,10 +52,16 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                     searchJob = viewModelScope.launch {
 
                         delay(SEARCH_TRIGGER_DELAY)
+
+                        //execute search after the delay
+                        getMeals(query = event.text)
                     }
 
                 }
-                is OverviewEvent.OnRefresh -> {}
+                is OverviewEvent.OnRefresh -> {
+
+                    _stateMeals.value = StateMeals( ).copy(isLoading = true)
+                }
         }
 
     }
