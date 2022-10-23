@@ -1,4 +1,10 @@
 package com.uxstate.yummies.presentation.screens.overview_screen.states
 
-class StateMeals {
+import com.uxstate.yummies.domain.model.Meal
+
+data class StateMeals(
+    val searchQuery: String = "",
+    val isLoading: Boolean = false,
+    val meals: List<Meal> = emptyList()
+) {
 }

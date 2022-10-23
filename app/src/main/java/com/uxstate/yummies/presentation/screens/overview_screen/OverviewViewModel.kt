@@ -29,7 +29,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
-    
+
 
     private fun getCategories() {
 
