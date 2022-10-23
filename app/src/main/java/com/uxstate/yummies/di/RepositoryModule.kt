@@ -13,14 +13,11 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
 
     @Binds
-    @Singleton//@Binds used for 1-to-1 interface-implementation mapping
-
+    @Singleton // @Binds used for 1-to-1 interface-implementation mapping
 
     /*The abstract function takes only a single parameter which
      is the interface implementation and the return type is the
      interface implemented by the given parameter object.*/
 
-    abstract fun bindYummiesRepository(repositoryImpl: YummiesRepositoryImpl):YummiesRepository
-
-
+    abstract fun bindYummiesRepository(repositoryImpl: YummiesRepositoryImpl): YummiesRepository
 }
