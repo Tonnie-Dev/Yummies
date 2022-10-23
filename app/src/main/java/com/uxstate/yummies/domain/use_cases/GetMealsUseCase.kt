@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 class GetMealsUseCase(private val repository: YummiesRepository) {
 
-     operator fun invoke(query: String, fetchFromRemote: Boolean): Flow<Resource<List<Meal>>> {
+    operator fun invoke(query: String, fetchFromRemote: Boolean): Flow<Resource<List<Meal>>> {
 
         return repository.fetchMealItems(query = query, fetchFromRemote = fetchFromRemote)
     }
