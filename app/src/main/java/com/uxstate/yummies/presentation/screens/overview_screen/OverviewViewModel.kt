@@ -8,16 +8,14 @@ import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.presentation.screens.overview_screen.states.StateCategory
 import com.uxstate.yummies.util.Resource
+import com.uxstate.yummies.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(private val container: UseCaseContainer) : ViewModel() {
-
 
     val query by mutableStateOf("")
     val fetchFromRemote by mutableStateOf(false)
@@ -28,30 +26,39 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     private val _meals = MutableStateFlow<List<Meal>>(emptyList())
     val meals = _meals.asStateFlow()
 
-    private fun getCategories(){
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
-      viewModelScope.launch {
+    
 
-          container.getCategoriesUseCase().collectLatest {
+    private fun getCategories() {
 
-              result ->
+        viewModelScope.launch {
 
-              when(result) {
+            container.getCategoriesUseCase()
+                .collectLatest {
 
-                  is Resource.Loading -> {
+                    result ->
 
-                      _stateCategory.value = StateCategory().copy(isLoading = result.loading)
-                  }
-                  is Resource.Error -> {
+                    when (result) {
 
-                    _stateCategory.value = StateCategory().copy(error = )
-                  }
-                  is Resource.Success -> {}
-              }
+                        is Resource.Loading -> {
 
-          }
-      }
+                            _stateCategory.value =
+                                StateCategory().copy(isLoading = result.loading)
+                        }
+                        is Resource.Error -> {
+                            val errorMessage = result.errorMessage ?: "Unknown Error"
+                            _uiEvent.emit(UiEvent.ShowSnackbar(errorMessage))
+                        }
+                        is Resource.Success -> {
 
+                            result.data?.let {
+                                _stateCategory.value = StateCategory().copy(categories = it)
+                            }
+                        }
+                    }
+                }
+        }
     }
-
 }
