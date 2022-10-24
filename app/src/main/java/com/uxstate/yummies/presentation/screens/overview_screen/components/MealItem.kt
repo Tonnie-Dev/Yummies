@@ -1,5 +1,6 @@
 package com.uxstate.yummies.presentation.screens.overview_screen.components
 
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.net.toUri
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.R
@@ -41,9 +43,10 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
                 .padding(spacing.spaceExtraSmall)
         ) {
 
+            val url = meal.imageUrl.toUri().buildUpon().scheme("https").build()
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(meal.imageUrl)
+                    .data(url)
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_category_error)
                     .build()
