@@ -47,12 +47,15 @@ fun OverviewScreen(
             )
 
             // Search Box
-            SearchBoxItem(query = meals.searchQuery, onSearchTextChange = {
-                viewModel.onEvent(
-                    OverviewEvent.OnSearchQueryChange(it)
-                )
-            }) {
+            SearchBoxItem(
+                query = meals.searchQuery,
+                onSearchTextChange = {
+                    viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+                }, onClearText = {
+
+                viewModel.onEvent(OverviewEvent.OnClearText)
             }
+            )
 
             // Header
             Text(

@@ -41,13 +41,13 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
             is OverviewEvent.OnClearText -> {
 
-                _stateMeals.value = StateMeals().copy(searchQuery = "")
+                _stateMeals.value = _stateMeals.value.copy(searchQuery = "")
             }
 
             is OverviewEvent.OnSearchQueryChange -> {
 
                 // update query value
-                _stateMeals.value = StateMeals().copy(searchQuery = event.text)
+                _stateMeals.value = _stateMeals.value.copy(searchQuery = event.text)
 
                 // cancel any existing job
                 searchJob?.cancel()
@@ -64,7 +64,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
             is OverviewEvent.OnRefresh -> {
 
-                _stateMeals.value = StateMeals().copy(isLoading = true)
+                _stateMeals.value = _stateMeals.value.copy(isLoading = true)
             }
         }
     }
@@ -90,7 +90,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
                             result.data?.let {
 
-                                _stateMeals.value = StateMeals().copy(meals = it)
+                                _stateMeals.value = _stateMeals.value.copy(meals = it)
                             }
                         }
                         is Resource.Error -> {
@@ -103,7 +103,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                         }
                         is Resource.Loading -> {
 
-                            _stateMeals.value = StateMeals().copy(isLoading = true)
+                            _stateMeals.value = _stateMeals.value.copy(isLoading = true)
                         }
                     }
                 }
@@ -124,7 +124,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                         is Resource.Loading -> {
 
                             _stateCategories.value =
-                                StateCategories().copy(isLoading = result.loading)
+                                _stateCategories.value.copy(isLoading = result.loading)
                         }
                         is Resource.Error -> {
                             val errorMessage = result.errorMessage ?: "Unknown Error"
@@ -133,7 +133,8 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                         is Resource.Success -> {
 
                             result.data?.let {
-                                _stateCategories.value = StateCategories().copy(categories = it)
+                                _stateCategories.value =
+                                    _stateCategories.value.copy(categories = it)
                             }
                         }
                     }
