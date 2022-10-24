@@ -78,7 +78,7 @@ class YummiesRepositoryImpl @Inject constructor(
         }
 
         // clear and re-populate the database
-      
+
 
         dao.clearMeals()
 
@@ -148,6 +148,9 @@ class YummiesRepositoryImpl @Inject constructor(
 
                 dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
             }
+
+        val updatedCache = dao.getCategoriesItems()
+        emit(Resource.Success(data = updatedCache.map { it.toModel() }))
 
         // stop loading
         emit(Resource.Loading(loading = false))
