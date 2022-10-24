@@ -3,6 +3,8 @@ package com.uxstate.yummies.presentation.screens.overview_screen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -15,9 +17,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.util.LocalSpacing
+import timber.log.Timber
 
 @RootNavGraph(start = true)
 @Destination
@@ -64,7 +68,17 @@ fun OverviewScreen(
                 style = MaterialTheme.typography.h6
             )
 
-            //
+            // Categories
+            LazyRow() {
+
+                Timber.i("The length of categories List is: ${categories.categories.size}")
+                items(categories.categories) {
+                    category ->
+
+                    CategoryItem(category = category) {
+                    }
+                }
+            }
         }
     }
 }

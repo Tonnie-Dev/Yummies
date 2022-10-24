@@ -106,7 +106,7 @@ data class MealDTO(
     @Json(name = "strSource")
     val strSource: Any?,
     @Json(name = "strTags")
-    val strTags: String,
+    val strTags: String?,
     @Json(name = "strYoutube")
     val strYoutube: String
 )
