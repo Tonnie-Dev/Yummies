@@ -4,6 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,6 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
+import com.uxstate.yummies.presentation.screens.overview_screen.components.MealItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.util.LocalSpacing
@@ -33,8 +37,8 @@ fun OverviewScreen(
     navigator: DestinationsNavigator
 ) {
 
-    val meals by viewModel.stateMeals.collectAsState()
-    val categories by viewModel.stateCategory.collectAsState()
+    val mealsState by viewModel.stateMeals.collectAsState()
+    val categoriesState by viewModel.stateCategory.collectAsState()
     val spacing = LocalSpacing.current
 
     Surface {
@@ -52,7 +56,7 @@ fun OverviewScreen(
 
             // Search Box
             SearchBoxItem(
-                query = meals.searchQuery,
+                query = mealsState.searchQuery,
                 onSearchTextChange = {
                     viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
                 }, onClearText = {
@@ -67,8 +71,8 @@ fun OverviewScreen(
             // Categories
             LazyRow() {
 
-                Timber.i("The length of categories List is: ${categories.categories.size}")
-                items(categories.categories) { category ->
+                Timber.i("The length of categories List is: ${categoriesState.categories.size}")
+                items(categoriesState.categories) { category ->
 
                     CategoryItem(category = category) {
                     }
@@ -77,6 +81,15 @@ fun OverviewScreen(
 
             // Header 3
             HeaderTextItem(text = stringResource(R.string.recipes_header_text))
+
+            // Grid
+            LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
+
+                items(mealsState.meals) { meal ->
+
+                    MealItem(meal = meal, onClickCategory = {})
+                }
+            })
         }
     }
 }
