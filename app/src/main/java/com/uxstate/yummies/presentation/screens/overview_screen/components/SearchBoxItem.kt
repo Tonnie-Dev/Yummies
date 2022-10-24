@@ -43,7 +43,11 @@ fun SearchBoxItem(
                     contentDescription = stringResource(R.string.clear_text_icon)
                 )
             }
-        }, singleLine = true, modifier = Modifier.fillMaxWidth()
+        },
+            singleLine = true, modifier = Modifier.fillMaxWidth(),
+            colors = TextFieldDefaults.textFieldColors(
+                backgroundColor = MaterialTheme.colors.surface
+            )
         )
     }
 }

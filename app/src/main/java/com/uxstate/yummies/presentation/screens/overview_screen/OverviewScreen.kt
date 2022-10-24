@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,25 +32,36 @@ fun OverviewScreen(
     val categories by viewModel.stateCategory.collectAsState()
     val spacing = LocalSpacing.current
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(spacing.spaceSmall)
-    ) {
+    Surface {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(spacing.spaceSmall)
+        ) {
 
-        // Header
-        Text(
-            text = "Find Best Recipe For Cooking",
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.h3
-        )
-
-        // Search Box
-        SearchBoxItem(query = meals.searchQuery, onSearchTextChange = {
-            viewModel.onEvent(
-                OverviewEvent.OnSearchQueryChange("")
+            // Header
+            Text(
+                text = "Find Best Recipe For Cooking",
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.h4
             )
-        }) {
+
+            // Search Box
+            SearchBoxItem(query = meals.searchQuery, onSearchTextChange = {
+                viewModel.onEvent(
+                    OverviewEvent.OnSearchQueryChange(it)
+                )
+            }) {
+            }
+
+            // Header
+            Text(
+                text = "Categories",
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.h6
+            )
+
+            //
         }
     }
 }

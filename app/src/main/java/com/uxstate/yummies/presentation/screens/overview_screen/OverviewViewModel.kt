@@ -40,6 +40,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
             }
             is OverviewEvent.OnSearchQueryChange -> {
 
+                _stateMeals.value = StateMeals().copy(searchQuery = event.text)
                 // cancel any existing job
                 searchJob?.cancel()
 
@@ -49,7 +50,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                     delay(SEARCH_TRIGGER_DELAY)
 
                     // execute search after the delay
-                    getMeals(query = event.text)
+                    getMeals(query = _stateMeals.value.searchQuery)
                 }
             }
             is OverviewEvent.OnRefresh -> {

@@ -78,18 +78,17 @@ class YummiesRepositoryImpl @Inject constructor(
         }
 
         // clear and re-populate the database
-        db.withTransaction {
+      
 
-            dao.clearMeals()
+        dao.clearMeals()
 
-            remoteMeals?.let {
+        remoteMeals?.let {
 
-                dao.insertMeals(remoteMeals.mealDTOS.map { dto -> dto.toEntity() })
-            }
-
-            val updatedCache = dao.getMealItems(query = query)
-            emit(Resource.Success(data = updatedCache.map { it.toModel() }))
+            dao.insertMeals(remoteMeals.mealDTOS.map { dto -> dto.toEntity() })
         }
+
+        val updatedCache = dao.getMealItems(query = query)
+        emit(Resource.Success(data = updatedCache.map { it.toModel() }))
 
         emit(Resource.Loading(loading = false))
     }
@@ -141,7 +140,7 @@ class YummiesRepositoryImpl @Inject constructor(
         }
 
         // clear and re-populate database
-        db.withTransaction {
+
 
             dao.clearCategories()
 
@@ -149,7 +148,7 @@ class YummiesRepositoryImpl @Inject constructor(
 
                 dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
             }
-        }
+
         // stop loading
         emit(Resource.Loading(loading = false))
     }
