@@ -6,6 +6,5 @@ data class StateMeals(
     val searchQuery: String = "",
     val isLoading: Boolean = false,
     val meals: List<Meal> = emptyList(),
-    val fetchFromRemote:Boolean = false
-) {
-}
+    val fetchFromRemote: Boolean = false
+)

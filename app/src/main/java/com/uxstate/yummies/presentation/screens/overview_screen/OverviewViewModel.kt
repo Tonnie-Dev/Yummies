@@ -10,15 +10,14 @@ import com.uxstate.yummies.util.Constants.SEARCH_TRIGGER_DELAY
 import com.uxstate.yummies.util.Resource
 import com.uxstate.yummies.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(private val container: UseCaseContainer) : ViewModel() {
-
 
     private val _stateCategories = MutableStateFlow(StateCategories())
     val stateCategory = _stateCategories.asStateFlow()
@@ -31,78 +30,70 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
     var searchJob: Job? = null
 
+    fun onEvent(event: OverviewEvent) {
 
+        when (event) {
 
-    fun onEvent(event: OverviewEvent){
+            is OverviewEvent.OnClearText -> {
 
-        when(event){
+                _stateMeals.value = StateMeals().copy(searchQuery = "")
+            }
+            is OverviewEvent.OnSearchQueryChange -> {
 
+                // cancel any existing job
+                searchJob?.cancel()
 
+                // re-initialize the job
+                searchJob = viewModelScope.launch {
 
-                is OverviewEvent.OnClearText -> {
+                    delay(SEARCH_TRIGGER_DELAY)
 
-                    _stateMeals .value = StateMeals().copy(searchQuery = "")
+                    // execute search after the delay
+                    getMeals(query = event.text)
                 }
-                is OverviewEvent.OnSearchQueryChange -> {
+            }
+            is OverviewEvent.OnRefresh -> {
 
-                    //cancel any existing job
-                    searchJob?.cancel()
-
-                    //re-initialize the job
-                    searchJob = viewModelScope.launch {
-
-                        delay(SEARCH_TRIGGER_DELAY)
-
-                        //execute search after the delay
-                        getMeals(query = event.text)
-                    }
-
-                }
-                is OverviewEvent.OnRefresh -> {
-
-                    _stateMeals.value = StateMeals( ).copy(isLoading = true)
-                }
+                _stateMeals.value = StateMeals().copy(isLoading = true)
+            }
         }
-
     }
     private fun getMeals(query: String = "", fetchFromRemote: Boolean = false) {
 
         viewModelScope.launch {
 
             container.getMealsUseCase(
-                    query = query,
-                    fetchFromRemote = fetchFromRemote
+                query = query,
+                fetchFromRemote = fetchFromRemote
             )
-                    .collectLatest {
+                .collectLatest {
 
-                        result ->
+                    result ->
 
-                        when (result) {
+                    when (result) {
 
-                            is Resource.Success -> {
+                        is Resource.Success -> {
 
-                                result.data?.let {
+                            result.data?.let {
 
-                                    _stateMeals.value = StateMeals().copy(meals = it)
-                                }
-                            }
-                            is Resource.Error -> {
-
-                                _uiEvent.emit(
-                                        UiEvent.ShowSnackbar(
-                                                result.errorMessage ?: "Unknown Error"
-                                        )
-                                )
-                            }
-                            is Resource.Loading -> {
-
-                                _stateMeals.value = StateMeals().copy(isLoading = true)
+                                _stateMeals.value = StateMeals().copy(meals = it)
                             }
                         }
+                        is Resource.Error -> {
+
+                            _uiEvent.emit(
+                                UiEvent.ShowSnackbar(
+                                    result.errorMessage ?: "Unknown Error"
+                                )
+                            )
+                        }
+                        is Resource.Loading -> {
+
+                            _stateMeals.value = StateMeals().copy(isLoading = true)
+                        }
                     }
+                }
         }
-
-
     }
 
     private fun getCategories() {
@@ -110,29 +101,29 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         viewModelScope.launch {
 
             container.getCategoriesUseCase()
-                    .collectLatest {
+                .collectLatest {
 
-                        result ->
+                    result ->
 
-                        when (result) {
+                    when (result) {
 
-                            is Resource.Loading -> {
+                        is Resource.Loading -> {
 
-                                _stateCategories.value =
-                                    StateCategories().copy(isLoading = result.loading)
-                            }
-                            is Resource.Error -> {
-                                val errorMessage = result.errorMessage ?: "Unknown Error"
-                                _uiEvent.emit(UiEvent.ShowSnackbar(errorMessage))
-                            }
-                            is Resource.Success -> {
+                            _stateCategories.value =
+                                StateCategories().copy(isLoading = result.loading)
+                        }
+                        is Resource.Error -> {
+                            val errorMessage = result.errorMessage ?: "Unknown Error"
+                            _uiEvent.emit(UiEvent.ShowSnackbar(errorMessage))
+                        }
+                        is Resource.Success -> {
 
-                                result.data?.let {
-                                    _stateCategories.value = StateCategories().copy(categories = it)
-                                }
+                            result.data?.let {
+                                _stateCategories.value = StateCategories().copy(categories = it)
                             }
                         }
                     }
+                }
         }
     }
 }
