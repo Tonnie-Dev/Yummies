@@ -101,13 +101,13 @@ class YummiesRepositoryImpl @Inject constructor(
 
         val localCategories = dao.getCategoriesItems()
         emit(Resource.Success(data = localCategories.map { it.toModel() }))
-        Timber.i("After Querying the db size is ${localCategories.size}")
+      
         // Determine if API Call is needed
         val fetchJustFromCache = localCategories.isNotEmpty()
 
         if (fetchJustFromCache) {
 
-            Timber.i("Enter justFetchFromCache if-block")
+
             // Go Local
             emit(Resource.Loading(loading = false))
 
@@ -116,7 +116,7 @@ class YummiesRepositoryImpl @Inject constructor(
         }
 
         // Go Remote
-        Timber.i("Going remote")
+
         val remoteCategories = try {
 
             api.getCategories()
@@ -143,7 +143,7 @@ class YummiesRepositoryImpl @Inject constructor(
         // clear and re-populate database
 
         dao.clearCategories()
-        Timber.i("Db deleted, size is${localCategories.size}")
+
         remoteCategories?.let {
 
             dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
@@ -151,7 +151,7 @@ class YummiesRepositoryImpl @Inject constructor(
 
         val updatedCache = dao.getCategoriesItems()
 
-        Timber.i("New Records inserted - new size is ${updatedCache.size}")
+
         emit(Resource.Success(data = updatedCache.map { it.toModel() }))
 
         // stop loading
