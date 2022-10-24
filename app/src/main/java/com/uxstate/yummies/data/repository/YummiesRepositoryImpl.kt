@@ -14,7 +14,6 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
-import timber.log.Timber
 
 // force single instance of our repository impl for the entire app
 @Singleton
@@ -101,12 +100,11 @@ class YummiesRepositoryImpl @Inject constructor(
 
         val localCategories = dao.getCategoriesItems()
         emit(Resource.Success(data = localCategories.map { it.toModel() }))
-      
+
         // Determine if API Call is needed
         val fetchJustFromCache = localCategories.isNotEmpty()
 
         if (fetchJustFromCache) {
-
 
             // Go Local
             emit(Resource.Loading(loading = false))
@@ -150,7 +148,6 @@ class YummiesRepositoryImpl @Inject constructor(
         }
 
         val updatedCache = dao.getCategoriesItems()
-
 
         emit(Resource.Success(data = updatedCache.map { it.toModel() }))
 

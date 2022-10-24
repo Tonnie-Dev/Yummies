@@ -82,7 +82,7 @@ fun CategoryDTO.toEntity(): CategoryEntity {
         categoryId = this.idCategory.toInt(),
         categoryType = this.strCategory,
         categoryDescription = this.strCategoryDescription,
-        categoryImageUrl = this.strCategoryDescription
+        categoryImageUrl = this.strCategoryThumb
     )
 }
 

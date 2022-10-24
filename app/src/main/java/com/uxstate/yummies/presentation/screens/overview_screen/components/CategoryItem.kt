@@ -16,7 +16,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.net.toUri
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.R
@@ -41,10 +40,10 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier, onClickCateg
                 .padding(spacing.spaceExtraSmall)
         ) {
 
-            val url = category.categoryImageUrl.toUri().buildUpon().scheme("https").build()
+            //  val url = category.categoryImageUrl.toUri().buildUpon().scheme("https").build()
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data(url)
+                    .data(category.categoryImageUrl)
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_category_error)
                     .build()
