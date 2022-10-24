@@ -1,10 +1,7 @@
 package com.uxstate.yummies.presentation.screens.overview_screen.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -27,8 +24,8 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier, onClickCateg
 
     val spacing = LocalSpacing.current
     Surface(
-        shape = RoundedCornerShape(spacing.spaceExtraSmall),
-        elevation = spacing.spaceExtraSmall,
+        shape = RoundedCornerShape(spacing.spaceMedium),
+        elevation = spacing.spaceSmall,
         modifier = modifier.padding(spacing.spaceExtraSmall)
     ) {
 
@@ -36,7 +33,6 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier, onClickCateg
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier
-                .size(width = spacing.spaceOneHundred, spacing.spaceOneHundredFifty)
                 .padding(spacing.spaceExtraSmall)
         ) {
 
@@ -44,6 +40,7 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier, onClickCateg
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(category.categoryImageUrl)
+                    .crossfade(true)
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_category_error)
                     .build()
@@ -51,13 +48,16 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier, onClickCateg
             Image(
                 painter = painter,
                 contentDescription = stringResource(R.string.meal_category_label),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.weight(.7f)
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .height(spacing.spaceOneHundred)
+                    .aspectRatio(17f / 20f)
+
             )
 
             Text(
                 text = category.categoryType,
-                modifier = Modifier.weight(.3f),
+
                 style = MaterialTheme.typography.subtitle2
             )
         }

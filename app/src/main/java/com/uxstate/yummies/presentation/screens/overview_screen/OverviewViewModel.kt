@@ -41,7 +41,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
             is OverviewEvent.OnClearText -> {
 
-                _stateMeals.value = _stateMeals.value.copy(searchQuery = "")
+                _stateMeals.value = _stateMeals.value.copy(searchQuery = " ")
             }
 
             is OverviewEvent.OnSearchQueryChange -> {
