@@ -76,9 +76,7 @@ class YummiesRepositoryImpl @Inject constructor(
             null
         }
 
-        // clear and re-populate the database
-
-        dao.clearMeals()
+        // re-populate the database with the already existing data
 
         remoteMeals?.let {
 
