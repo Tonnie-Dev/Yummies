@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.R
-import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.util.LocalSpacing
 
@@ -29,39 +28,39 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
 
     val spacing = LocalSpacing.current
     Surface(
-            shape = RoundedCornerShape(spacing.spaceExtraSmall),
-            elevation = spacing.spaceExtraSmall,
-            modifier = modifier.padding(spacing.spaceExtraSmall)
+        shape = RoundedCornerShape(spacing.spaceExtraSmall),
+        elevation = spacing.spaceExtraSmall,
+        modifier = modifier.padding(spacing.spaceExtraSmall)
     ) {
 
         Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                        .size(width = spacing.spaceOneHundred, spacing.spaceOneHundredFifty)
-                        .padding(spacing.spaceExtraSmall)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .size(width = spacing.spaceOneHundred, spacing.spaceOneHundredFifty)
+                .padding(spacing.spaceExtraSmall)
         ) {
 
             val painter = rememberAsyncImagePainter(
-                    model = ImageRequest.Builder(LocalContext.current)
-                            .data(meal.imageUrl)
-                            .placeholder(R.drawable.loading_animation)
-                            .error(R.drawable.ic_category_error)
-                            .build()
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(meal.imageUrl)
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_category_error)
+                    .build()
             )
             Image(
-                    painter = painter,
-                    contentDescription = stringResource(R.string.meal_category_label),
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.weight(.7f)
+                painter = painter,
+                contentDescription = stringResource(R.string.meal_category_label),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.weight(.7f)
             )
 
             Text(
-                    text = meal.name,
-                    modifier = Modifier.weight(.3f),
-                    style = MaterialTheme.typography.subtitle2,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                text = meal.name,
+                modifier = Modifier.weight(.3f),
+                style = MaterialTheme.typography.subtitle2,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         }
     }
@@ -72,16 +71,16 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
 fun MealItemPreview() {
 
     MealItem(
-            meal = Meal(
-                    id = 0,
-                    name = "Salmon",
-                    category = "",
-                    origin = "",
-                    directions = "",
-                    imageUrl = "",
-                    ingredients = listOf(),
-                    units = listOf()
-            ),
-            onClickCategory = {}
+        meal = Meal(
+            id = 0,
+            name = "Salmon",
+            category = "",
+            origin = "",
+            directions = "",
+            imageUrl = "",
+            ingredients = listOf(),
+            units = listOf()
+        ),
+        onClickCategory = {}
     )
 }

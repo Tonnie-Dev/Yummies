@@ -67,7 +67,7 @@ fun CategoryItem(category: Category, modifier: Modifier = Modifier, onClickCateg
 @Composable
 fun CategoryItemPreview() {
 
-   CategoryItem(
+    CategoryItem(
         category = Category(
             categoryId = 13,
             categoryType = "Miscellaneous",
