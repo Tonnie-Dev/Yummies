@@ -30,6 +30,11 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
     var searchJob: Job? = null
 
+    init {
+        getCategories()
+        getMeals()
+    }
+
     fun onEvent(event: OverviewEvent) {
 
         when (event) {
@@ -38,9 +43,12 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
                 _stateMeals.value = StateMeals().copy(searchQuery = "")
             }
+
             is OverviewEvent.OnSearchQueryChange -> {
 
+                // update query value
                 _stateMeals.value = StateMeals().copy(searchQuery = event.text)
+
                 // cancel any existing job
                 searchJob?.cancel()
 
@@ -49,17 +57,22 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
                     delay(SEARCH_TRIGGER_DELAY)
 
-                    // execute search after the delay
-                    getMeals(query = _stateMeals.value.searchQuery)
+                    // called only after a delay of 500 ms
+                    getMeals()
                 }
             }
+
             is OverviewEvent.OnRefresh -> {
 
                 _stateMeals.value = StateMeals().copy(isLoading = true)
             }
         }
     }
-    private fun getMeals(query: String = "", fetchFromRemote: Boolean = false) {
+
+    private fun getMeals(
+        query: String = _stateMeals.value.searchQuery,
+        fetchFromRemote: Boolean = false
+    ) {
 
         viewModelScope.launch {
 

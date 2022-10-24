@@ -1,6 +1,5 @@
 package com.uxstate.yummies.data.repository
 
-import androidx.room.withTransaction
 import com.uxstate.yummies.data.local.YummiesDatabase
 import com.uxstate.yummies.data.mapper.toEntity
 import com.uxstate.yummies.data.mapper.toModel
@@ -79,7 +78,6 @@ class YummiesRepositoryImpl @Inject constructor(
 
         // clear and re-populate the database
 
-
         dao.clearMeals()
 
         remoteMeals?.let {
@@ -141,13 +139,12 @@ class YummiesRepositoryImpl @Inject constructor(
 
         // clear and re-populate database
 
+        dao.clearCategories()
 
-            dao.clearCategories()
+        remoteCategories?.let {
 
-            remoteCategories?.let {
-
-                dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
-            }
+            dao.insertCategories(it.categories.map { dto -> dto.toEntity() })
+        }
 
         val updatedCache = dao.getCategoriesItems()
         emit(Resource.Success(data = updatedCache.map { it.toModel() }))
