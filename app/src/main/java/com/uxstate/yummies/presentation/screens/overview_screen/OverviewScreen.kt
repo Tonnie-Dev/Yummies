@@ -7,16 +7,17 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.uxstate.yummies.R
+import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
@@ -43,10 +44,9 @@ fun OverviewScreen(
                 .padding(spacing.spaceSmall)
         ) {
 
-            // Header
-            Text(
-                text = "Find Best Recipe For Cooking",
-                fontWeight = FontWeight.Bold,
+            // Header 1
+            HeaderTextItem(
+                text = stringResource(R.string.overview_header_text),
                 style = MaterialTheme.typography.h4
             )
 
@@ -61,24 +61,22 @@ fun OverviewScreen(
             }
             )
 
-            // Header
-            Text(
-                text = "Categories",
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.h6
-            )
+            // Header 2
+            HeaderTextItem(text = stringResource(R.string.categories_header_text))
 
             // Categories
             LazyRow() {
 
                 Timber.i("The length of categories List is: ${categories.categories.size}")
-                items(categories.categories) {
-                    category ->
+                items(categories.categories) { category ->
 
                     CategoryItem(category = category) {
                     }
                 }
             }
+
+            // Header 3
+            HeaderTextItem(text = stringResource(R.string.recipes_header_text))
         }
     }
 }
