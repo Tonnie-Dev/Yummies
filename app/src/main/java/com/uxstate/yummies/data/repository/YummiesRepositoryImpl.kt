@@ -1,5 +1,6 @@
 package com.uxstate.yummies.data.repository
 
+import com.squareup.moshi.JsonDataException
 import com.uxstate.yummies.data.local.YummiesDatabase
 import com.uxstate.yummies.data.mapper.toEntity
 import com.uxstate.yummies.data.mapper.toModel
@@ -14,6 +15,7 @@ import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
+import timber.log.Timber
 
 // force single instance of our repository impl for the entire app
 @Singleton
@@ -47,6 +49,8 @@ class YummiesRepositoryImpl @Inject constructor(
         val isFetchFromCache = (!fetchFromRemote && localMeals.isNotEmpty())
 
         if (isFetchFromCache) {
+
+            Timber.i("Entering Local")
             // go local
             emit(Resource.Loading(loading = false))
 
@@ -56,6 +60,8 @@ class YummiesRepositoryImpl @Inject constructor(
 
         // go remote
         val remoteMeals = try {
+
+            Timber.i("Going remote")
             api.getMealsByName(query)
         } catch (e: HttpException) {
 
@@ -67,6 +73,15 @@ class YummiesRepositoryImpl @Inject constructor(
             )
             null
         } catch (e: IOException) {
+            emit(
+                Resource.Error(
+                    errorMessage = "Could not load data, please check your internet connection",
+                    data = null
+                )
+            )
+            null
+        } catch (e: JsonDataException) {
+
             emit(
                 Resource.Error(
                     errorMessage = "Could not load data, please check your internet connection",
