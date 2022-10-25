@@ -9,4 +9,8 @@ data class Meal(
     val imageUrl: String,
     val ingredients: List<String>,
     val units: List<String>
-)
+) {
+
+    val ingredientsCount: Int
+        get() = ingredients.size
+}
