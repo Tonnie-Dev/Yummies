@@ -29,8 +29,8 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
 
     val spacing = LocalSpacing.current
     Surface(
-        shape = RoundedCornerShape(spacing.spaceExtraSmall),
-        elevation = spacing.spaceExtraSmall,
+        shape = RoundedCornerShape(spacing.spaceMedium),
+        elevation = spacing.spaceSmall,
         modifier = modifier.padding(spacing.spaceExtraSmall)
     ) {
 
@@ -42,7 +42,7 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
                 .padding(spacing.spaceExtraSmall)
         ) {
 
-            val url = meal.imageUrl.toUri().buildUpon().scheme("https").build()
+
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(meal.imageUrl)
