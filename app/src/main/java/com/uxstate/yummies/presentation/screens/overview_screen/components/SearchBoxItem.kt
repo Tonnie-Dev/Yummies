@@ -46,7 +46,9 @@ fun SearchBoxItem(
         },
             singleLine = true, modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colors.surface
+                backgroundColor = MaterialTheme.colors.surface,
+                focusedIndicatorColor = MaterialTheme.colors.background,
+
             )
         )
     }
