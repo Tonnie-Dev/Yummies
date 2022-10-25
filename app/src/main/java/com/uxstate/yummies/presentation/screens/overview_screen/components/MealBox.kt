@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.domain.model.Meal
@@ -24,36 +25,54 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier) {
 
     val spacing = LocalSpacing.current
     Box(
-            modifier = modifier, contentAlignment = Alignment.BottomCenter
-    )
-
-    {
+        modifier = modifier, contentAlignment = Alignment.BottomCenter
+    ) {
 
         val painter = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                        .data(meal.imageUrl)
-                        .crossfade(true)
-                        .build()
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(meal.imageUrl)
+                .crossfade(true)
+                .build()
         )
 
         Image(
-                painter = painter,
-                contentDescription = meal.name,
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
+            painter = painter,
+            contentDescription = meal.name,
+            modifier = Modifier
+                .fillMaxWidth()
+                .aspectRatio(2f / 1f)
         )
 
-        Surface(color = Color(0x7F000000), shape = RoundedCornerShape(spacing.spaceMedium)) {
+        Surface(
+            color = Color(0x7F000000),
+            shape = RoundedCornerShape(spacing.spaceMedium),
+            modifier = Modifier.align(
+                Alignment.BottomCenter
+            )
+        ) {
             Column() {
 
                 val randomNumber = Random.nextInt(50)
                 Text(text = meal.name)
                 Text(text = "Ingredients | $randomNumber Min")
             }
-
-
         }
-
     }
+}
+
+@Preview
+@Composable
+fun MealBoxItemPreview() {
+    MealBoxItem(
+        meal = Meal(
+            id = 0,
+            name = "Salmon Sushi Matcha",
+            category = "",
+            origin = "",
+            directions = "",
+            imageUrl = "",
+            ingredients = listOf(),
+            units = listOf()
+        )
+    )
 }
