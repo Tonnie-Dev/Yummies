@@ -1,11 +1,11 @@
 package com.uxstate.yummies.presentation.screens.overview_screen
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
@@ -22,7 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
-import com.uxstate.yummies.presentation.screens.overview_screen.components.MealItem
+import com.uxstate.yummies.presentation.screens.overview_screen.components.MealBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.util.LocalSpacing
@@ -82,14 +82,22 @@ fun OverviewScreen(
             // Header 3
             HeaderTextItem(text = stringResource(R.string.recipes_header_text))
 
-            // Grid
+            LazyColumn(contentPadding = PaddingValues(spacing.spaceSmall), content = {
+
+                items(mealsState.meals) { meal ->
+
+                    MealBoxItem(meal = meal)
+                }
+            })
+
+          /*  // Grid
             LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
 
                 items(mealsState.meals) { meal ->
 
                     MealItem(meal = meal, onClickCategory = {})
                 }
-            })
+            })*/
         }
     }
 }
