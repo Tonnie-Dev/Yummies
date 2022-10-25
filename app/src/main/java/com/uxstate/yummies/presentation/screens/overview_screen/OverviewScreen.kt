@@ -82,7 +82,7 @@ fun OverviewScreen(
             // Header 3
             HeaderTextItem(text = stringResource(R.string.recipes_header_text))
 
-            LazyColumn(contentPadding = PaddingValues(spacing.spaceSmall), content = {
+            LazyColumn(contentPadding = PaddingValues(vertical = spacing.spaceMedium), content = {
 
                 items(mealsState.meals) { meal ->
 
