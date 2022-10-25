@@ -3,10 +3,9 @@ package com.uxstate.yummies.presentation.screens.overview_screen.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -15,23 +14,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.util.LocalSpacing
-import kotlin.random.Random
 
 @Composable
-fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier) {
+fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean = true) {
 
     val spacing = LocalSpacing.current
     Card(
         elevation = spacing.spaceSmall,
         backgroundColor = MaterialTheme.colors.surface,
 
-        modifier = modifier.fillMaxWidth().padding(vertical = spacing.spaceSmall)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(spacing.spaceSmall)
     ) {
         Box(
             modifier = modifier, contentAlignment = Alignment.BottomCenter
@@ -49,38 +48,49 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier) {
                 contentDescription = meal.name,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
-                    .fillMaxWidth()
                     .clip(RoundedCornerShape(spacing.spaceMedium))
-                    .aspectRatio(5f / 4f)
+                    .fillMaxWidth()
+                    .aspectRatio(4f / 3f)
                     .padding(spacing.spaceLarge)
+            )
+
+            Icon(
+                imageVector = Icons.Default.CheckCircle,
+                contentDescription = "Bookmark",
+                modifier = Modifier.size(spacing.spaceExtraLarge).align(
+                    Alignment.TopEnd
+                ),
+                tint = if (isBookMarked)Color.Red else Color.Gray
             )
 
             Surface(
                 color = Color(0x7F000000),
-                shape = RoundedCornerShape(spacing.spaceMedium),
                 elevation = spacing.spaceExtraSmall,
                 modifier = Modifier
                     .align(
                         Alignment.BottomCenter
                     )
                     .fillMaxWidth()
-                    .padding(spacing.spaceMedium)
+                    .padding(
+                        spacing.spaceLarge
+                    )
             ) {
                 Column() {
 
-                    val randomNumber = Random.nextInt(50)
                     Text(
                         text = meal.name,
                         color = Color.White,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.h5,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(spacing.spaceSmall)
+
+                        modifier = Modifier
+                            .padding(spacing.spaceExtraSmall)
                     )
                     Text(
                         text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
                         color = Color.White,
-                        modifier = Modifier.padding(spacing.spaceSmall)
+                        modifier = Modifier
+                            .padding(spacing.spaceExtraSmall)
                     )
                 }
             }
@@ -101,6 +111,7 @@ fun MealBoxItemPreview() {
             imageUrl = "",
             ingredients = listOf("Onion", "Pepper"),
             units = listOf()
-        )
+        ),
+        isBookMarked = true
     )
 }
