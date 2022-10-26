@@ -18,8 +18,8 @@ fun MealDTO.toModel(): Meal {
         origin = this.strArea,
         directions = this.strInstructions,
         imageUrl = this.strMeal,
-        ingredients = combineStrIngredientsToAList(this),
-        units = combineStrMeasuresToAList(this)
+        ingredients = combineStrIngredientsToList(this),
+        units = combineStrMeasuresToList(this)
     )
 }
 
@@ -70,8 +70,8 @@ fun MealDTO.toEntity(): MealEntity {
         origin = this.strArea,
         directions = this.strInstructions,
         imageUrl = this.strMealThumb,
-        ingredients = combineStrIngredientsToAList(this),
-        units = combineStrMeasuresToAList(this)
+        ingredients = combineStrIngredientsToList(this),
+        units = combineStrMeasuresToList(this)
     )
 }
 
@@ -87,7 +87,7 @@ fun CategoryDTO.toEntity(): CategoryEntity {
 }
 
 // help function 1
-fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
+fun combineStrIngredientsToList(mealDTO: MealDTO): List<String> {
 
     val ing1 = mealDTO.strIngredient1 ?: ""
     val ing2 = mealDTO.strIngredient2 ?: ""
@@ -137,7 +137,7 @@ fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
 }
 
 // helper function 2
-fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
+fun combineStrMeasuresToList(mealDTO: MealDTO): List<String> {
 
     val msr1 = mealDTO.strMeasure1 ?: ""
     val msr2 = mealDTO.strMeasure2 ?: ""
