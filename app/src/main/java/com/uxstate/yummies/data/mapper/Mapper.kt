@@ -160,7 +160,7 @@ fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
     val msr19 = mealDTO.strMeasure19 ?: ""
     val msr20 = mealDTO.strMeasure20 ?: ""
 
-    return mutableListOf(
+    val fullList = mutableListOf(
         msr1,
         msr2,
         msr3,
@@ -182,4 +182,6 @@ fun combineStrMeasuresToAList(mealDTO: MealDTO): List<String> {
         msr19,
         msr20
     )
+
+    return fullList.filterNot { msr -> msr=="" }
 }
