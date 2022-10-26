@@ -183,5 +183,5 @@ fun combineStrMeasuresToList(mealDTO: MealDTO): List<String> {
         msr20
     )
 
-    return fullList.filterNot { msr -> msr=="" }
+    return fullList.filterNot { msr -> msr == "" }
 }

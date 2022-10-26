@@ -8,6 +8,7 @@ import com.uxstate.yummies.data.local.YummiesDatabase
 import com.uxstate.yummies.data.remote.YummiesAPI
 import com.uxstate.yummies.domain.repository.YummiesRepository
 import com.uxstate.yummies.domain.use_cases.GetCategoriesUseCase
+import com.uxstate.yummies.domain.use_cases.GetCategorySearchWordUseCase
 import com.uxstate.yummies.domain.use_cases.GetMealsUseCase
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.util.Constants
@@ -100,7 +101,8 @@ object AppModule {
 
         return UseCaseContainer(
             getMealsUseCase = GetMealsUseCase(repository = repository),
-            getCategoriesUseCase = GetCategoriesUseCase(repository = repository)
+            getCategoriesUseCase = GetCategoriesUseCase(repository = repository),
+            getCategorySearchWordUseCase = GetCategorySearchWordUseCase(repository = repository)
         )
     }
 }
