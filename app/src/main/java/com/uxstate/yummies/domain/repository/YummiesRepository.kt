@@ -9,4 +9,5 @@ interface YummiesRepository {
 
     fun fetchMealItems(query: String, fetchFromRemote: Boolean): Flow<Resource<List<Meal>>>
     fun fetchCategoriesItems(): Flow<Resource<List<Category>>>
+    fun getCategorySearchWord(categoryId:Int):String
 }
