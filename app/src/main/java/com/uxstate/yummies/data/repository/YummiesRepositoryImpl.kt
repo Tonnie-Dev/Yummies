@@ -169,7 +169,7 @@ class YummiesRepositoryImpl @Inject constructor(
     }
 
 
-    fun getCategorySearchWord(key: Int): String {
+    override fun getCategorySearchWord(categoryId: Int): String {
         val mealMap = mapOf(
                 1 to "beef",
                 2 to "chicken",
@@ -187,6 +187,6 @@ class YummiesRepositoryImpl @Inject constructor(
                 14 to "Goat"
         )
 
-        return mealMap[key] ?: ""
+        return mealMap[categoryId] ?: ""
     }
 }
