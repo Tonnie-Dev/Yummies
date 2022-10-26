@@ -4,8 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,10 +11,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.uxstate.yummies.R
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.util.LocalSpacing
 
@@ -53,15 +53,20 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean
                     .aspectRatio(4f / 3f)
                     .padding(spacing.spaceLarge)
             )
+            IconButton(
+                onClick = { /*TODO*/ },
+                enabled = true,
+                modifier = Modifier.align(Alignment.TopEnd)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_bookmark_filled),
+                    contentDescription = "Bookmark",
+                    modifier = Modifier
+                        .size(spacing.spaceLarge),
 
-            Icon(
-                imageVector = Icons.Default.CheckCircle,
-                contentDescription = "Bookmark",
-                modifier = Modifier.size(spacing.spaceExtraLarge).align(
-                    Alignment.TopEnd
-                ),
-                tint = if (isBookMarked)Color.Red else Color.Gray
-            )
+                    tint = if (isBookMarked)MaterialTheme.colors.primary else Color.Gray
+                )
+            }
 
             Surface(
                 color = Color(0x7F000000),

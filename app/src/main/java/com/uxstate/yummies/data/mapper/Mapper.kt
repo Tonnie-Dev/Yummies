@@ -110,7 +110,7 @@ fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
     val ing19 = mealDTO.strIngredient19 ?: ""
     val ing20 = mealDTO.strIngredient20 ?: ""
 
-    return mutableListOf(
+    val fullList = mutableListOf(
         ing1,
         ing2,
         ing3,
@@ -132,6 +132,8 @@ fun combineStrIngredientsToAList(mealDTO: MealDTO): List<String> {
         ing19,
         ing20
     )
+
+    return fullList.filterNot { ing -> ing == "" }
 }
 
 // helper function 2
