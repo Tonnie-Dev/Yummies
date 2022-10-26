@@ -5,4 +5,5 @@ sealed class OverviewEvent() {
     data class OnSearchQueryChange(val text: String) : OverviewEvent()
     object OnRefresh : OverviewEvent()
     object OnClearText : OverviewEvent()
+    data class OnCategoryClick(val categoryId: Int) : OverviewEvent()
 }
