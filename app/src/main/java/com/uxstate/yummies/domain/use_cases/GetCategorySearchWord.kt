@@ -1,6 +1,11 @@
 package com.uxstate.yummies.domain.use_cases
 
-class GetCategorySearchWord(repository:I) {
+import com.uxstate.yummies.domain.repository.YummiesRepository
 
-    operator fun invoke(key:Int):String{}
+class GetCategorySearchWordUseCase(private val repository: YummiesRepository) {
+
+    operator fun invoke(categoryId: Int): String {
+
+        return repository.getCategorySearchWord(categoryId)
+    }
 }
