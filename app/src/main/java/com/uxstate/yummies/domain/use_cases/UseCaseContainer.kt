@@ -3,5 +3,5 @@ package com.uxstate.yummies.domain.use_cases
 data class UseCaseContainer(
     val getMealsUseCase: GetMealsUseCase,
     val getCategoriesUseCase: GetCategoriesUseCase,
-    val getCategorySearchWordUseCase: GetCategorySearchWordUseCase
+    val getMealsByCategoryUseCase: GetMealsByCategoryUseCase
 )
