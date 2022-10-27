@@ -168,5 +168,5 @@ class YummiesRepositoryImpl @Inject constructor(
         emit(Resource.Loading(loading = false))
     }
 
- 
+
 }
