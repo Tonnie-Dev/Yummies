@@ -17,7 +17,7 @@ interface YummiesDAO {
     suspend fun insertCategories(categories: List<CategoryEntity>)
 
     @Query(
-        """
+            """
         SELECT * FROM meals_table
 WHERE 
 LOWER(name) LIKE '%' || LOWER (:query)|| '%'
@@ -38,5 +38,5 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     @Query("SELECT * FROM meals_table WHERE id LIKE :category")
     fun getMealsByCategory(category: String): Flow<List<MealEntity>>
 
-    /*Cecilia is a Zombie*/
+
 }
