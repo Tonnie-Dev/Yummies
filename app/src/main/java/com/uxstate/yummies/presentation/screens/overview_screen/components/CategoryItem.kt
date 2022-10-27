@@ -29,43 +29,43 @@ fun CategoryItem(
 
     val spacing = LocalSpacing.current
     Surface(
-            shape = RoundedCornerShape(spacing.spaceMedium),
-            elevation = spacing.spaceSmall,
-            modifier = modifier
-                    .padding(spacing.spaceExtraSmall)
-                    .clickable { onClickCategory(category.categoryId) }
+        shape = RoundedCornerShape(spacing.spaceMedium),
+        elevation = spacing.spaceSmall,
+        modifier = modifier
+            .padding(spacing.spaceExtraSmall)
+            .clickable { onClickCategory(category.categoryId) }
     ) {
 
         Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                        .padding(spacing.spaceExtraSmall)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .padding(spacing.spaceExtraSmall)
         ) {
 
             //  val url = category.categoryImageUrl.toUri().buildUpon().scheme("https").build()
             val painter = rememberAsyncImagePainter(
-                    model = ImageRequest.Builder(LocalContext.current)
-                            .data(category.categoryImageUrl)
-                            .crossfade(true)
-                            .placeholder(R.drawable.loading_animation)
-                            .error(R.drawable.ic_category_error)
-                            .build()
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(category.categoryImageUrl)
+                    .crossfade(true)
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_category_error)
+                    .build()
             )
             Image(
-                    painter = painter,
-                    contentDescription = stringResource(R.string.meal_category_label),
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
-                            .height(spacing.spaceOneHundred)
-                            .aspectRatio(17f / 20f)
+                painter = painter,
+                contentDescription = stringResource(R.string.meal_category_label),
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .height(spacing.spaceOneHundred)
+                    .aspectRatio(17f / 20f)
 
             )
 
             Text(
-                    text = category.categoryType,
+                text = category.categoryType,
 
-                    style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.typography.subtitle2
             )
         }
     }
@@ -76,12 +76,12 @@ fun CategoryItem(
 fun CategoryItemPreview() {
 
     CategoryItem(
-            category = Category(
-                    categoryId = 13,
-                    categoryType = "Miscellaneous",
-                    categoryDescription = "Mutton is Good",
-                    categoryImageUrl = ""
-            ),
-            onClickCategory = {}
+        category = Category(
+            categoryId = 13,
+            categoryType = "Miscellaneous",
+            categoryDescription = "Mutton is Good",
+            categoryImageUrl = ""
+        ),
+        onClickCategory = {}
     )
 }

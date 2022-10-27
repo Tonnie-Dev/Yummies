@@ -75,6 +75,7 @@ fun OverviewScreen(
                 items(categoriesState.categories) { category ->
 
                     CategoryItem(category = category) {
+                        viewModel.onEvent(OverviewEvent.OnCategoryClick(it))
                     }
                 }
             }

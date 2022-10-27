@@ -69,7 +69,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
             is OverviewEvent.OnCategoryClick -> {
                 val searchWord = container.getCategorySearchWordUseCase(event.categoryId)
                 _stateMeals.value = _stateMeals.value.copy(searchQuery = searchWord)
-
+                getMeals()
             }
 
             is OverviewEvent.OnRefresh -> {
