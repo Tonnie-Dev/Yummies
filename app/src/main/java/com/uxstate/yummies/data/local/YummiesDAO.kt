@@ -35,6 +35,8 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     @Query("DELETE FROM categories_table")
     suspend fun clearCategories()
 
-    @Query("SELECT * FROM meals_table WHERE category LIKE :category")
-    fun getMealsByCategory(category:String): Flow<List<MealEntity>>
+    @Query("SELECT * FROM meals_table WHERE id LIKE :category")
+    fun getMealsByCategory(category: String): Flow<List<MealEntity>>
+
+    /*Cecilia is a Zombie*/
 }
