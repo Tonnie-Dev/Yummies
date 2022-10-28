@@ -57,8 +57,8 @@ fun CategoryItem(
                 contentDescription = stringResource(R.string.meal_category_label),
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    .height(spacing.spaceOneHundred)
-                    .aspectRatio(17f / 20f)
+                    .height(spacing.spaceExtraLarge)
+                    .aspectRatio(1f / 1f)
 
             )
 
