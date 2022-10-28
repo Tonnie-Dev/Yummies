@@ -9,14 +9,14 @@ import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.repository.YummiesRepository
 import com.uxstate.yummies.util.Resource
+import java.io.IOException
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import retrofit2.HttpException
 import timber.log.Timber
-import java.io.IOException
-import javax.inject.Inject
-import javax.inject.Singleton
 
 // force single instance of our repository impl for the entire app
 @Singleton
@@ -67,27 +67,27 @@ class YummiesRepositoryImpl @Inject constructor(
         } catch (e: HttpException) {
 
             emit(
-                    Resource.Error(
-                            errorMessage = "Unknown Error Occurred, Please try again",
-                            data = null
-                    )
+                Resource.Error(
+                    errorMessage = "Unknown Error Occurred, Please try again",
+                    data = null
+                )
             )
             null
         } catch (e: IOException) {
             emit(
-                    Resource.Error(
-                            errorMessage = "Could not load data, please check your internet connection",
-                            data = null
-                    )
+                Resource.Error(
+                    errorMessage = "Could not load data, please check your internet connection",
+                    data = null
+                )
             )
             null
         } catch (e: JsonDataException) {
 
             emit(
-                    Resource.Error(
-                            errorMessage = "Could not load data, please check your internet connection",
-                            data = null
-                    )
+                Resource.Error(
+                    errorMessage = "Could not load data, please check your internet connection",
+                    data = null
+                )
             )
             null
         }
@@ -135,18 +135,18 @@ class YummiesRepositoryImpl @Inject constructor(
         } catch (e: HttpException) {
 
             emit(
-                    Resource.Error(errorMessage = "Unknown Error Occurred, Please try again")
+                Resource.Error(errorMessage = "Unknown Error Occurred, Please try again")
             )
 
             null
         } catch (e: IOException) {
 
             emit(
-                    Resource.Error(
-                            errorMessage = """
+                Resource.Error(
+                    errorMessage = """
                     Could not load data, please check your internet connection
                     """.trimIndent()
-                    )
+                )
             )
 
             null
@@ -171,10 +171,10 @@ class YummiesRepositoryImpl @Inject constructor(
 
     override fun getWordByCategory(category: String): Flow<List<Meal>> {
         return dao.getMealsByCategory(category)
-                .map {
+            .map {
 
-                    meals ->
-                    meals.map { it.toModel() }
-                }
+                meals ->
+                meals.map { it.toModel() }
+            }
     }
 }

@@ -68,8 +68,10 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
             is OverviewEvent.OnCategoryClick -> {
 
-                _stateMeals.value = _stateMeals.value.copy(searchQuery = searchWord)
-                getMeals()
+                // collect flow meal item
+                container.getMealsByCategoryUseCase(event.category).onEach {
+                    _stateMeals.value = _stateMeals.value.copy(meals = it)
+                }.launchIn(viewModelScope)
             }
 
             is OverviewEvent.OnRefresh -> {

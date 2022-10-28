@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -49,10 +48,10 @@ fun OverviewScreen(
         ) {
 
             // Header 1
-            HeaderTextItem(
+            /*HeaderTextItem(
                 text = stringResource(R.string.overview_header_text),
                 style = MaterialTheme.typography.h4
-            )
+            )*/
 
             // Search Box
             SearchBoxItem(

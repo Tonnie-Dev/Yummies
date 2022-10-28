@@ -24,7 +24,7 @@ import com.uxstate.yummies.util.LocalSpacing
 fun CategoryItem(
     category: Category,
     modifier: Modifier = Modifier,
-    onClickCategory: (category:String) -> Unit
+    onClickCategory: (category: String) -> Unit
 ) {
 
     val spacing = LocalSpacing.current
