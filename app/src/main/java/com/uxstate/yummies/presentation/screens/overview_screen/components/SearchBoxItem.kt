@@ -48,7 +48,7 @@ fun SearchBoxItem(
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colors.surface,
                 focusedIndicatorColor = MaterialTheme.colors.background,
-
+                unfocusedIndicatorColor = MaterialTheme.colors.background
             )
         )
     }
