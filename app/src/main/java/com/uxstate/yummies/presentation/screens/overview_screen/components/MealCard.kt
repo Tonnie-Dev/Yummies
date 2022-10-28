@@ -1,12 +1,15 @@
 package com.uxstate.yummies.presentation.screens.overview_screen.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -34,12 +37,20 @@ fun MealCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(spacing.spaceSmall),
-        backgroundColor = Color.LightGray,
+
         elevation = spacing.spaceSmall,
         shape = RoundedCornerShape(spacing.spaceSmall)
     ) {
 
-        Row() {
+        Row(
+            modifier = Modifier.background(
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        Color(0xFFFED234), Color(0xFFFAF1d6), Color(0xFFF4F4F4)
+                    )
+                )
+            )
+        ) {
 
             Column(
                 modifier = Modifier
@@ -67,9 +78,12 @@ fun MealCard(
                 }
 
                 Surface(
-                    modifier = Modifier.padding(spacing.spaceExtraSmall),
+                    modifier = Modifier
+                        .background(
+                            Color(0xFFFED234)
+                        ).padding(spacing.spaceExtraSmall),
                     shape = RoundedCornerShape(spacing.spaceExtraSmall),
-                    color = Color(0xFFFF6600)
+
                 ) {
                     Text(text = "Like", fontWeight = FontWeight.Bold)
                 }
@@ -91,7 +105,7 @@ fun MealCard(
                 modifier = Modifier
                     .size(spacing.spaceOneHundredFifty)
                     .weight(5.5f)
-                    .clip(RoundedCornerShape(spacing.spaceSmall))
+                    .clip(CircleShape)
 
             )
         }
