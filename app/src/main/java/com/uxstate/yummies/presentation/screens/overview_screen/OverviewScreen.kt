@@ -21,7 +21,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
-import com.uxstate.yummies.presentation.screens.overview_screen.components.MealBoxItem
+import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.util.LocalSpacing
@@ -86,7 +86,7 @@ fun OverviewScreen(
 
                 items(mealsState.meals) { meal ->
 
-                    MealBoxItem(meal = meal)
+                    MealCard(meal = meal, onClickMeal = {})
                 }
             })
 

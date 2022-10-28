@@ -7,4 +7,5 @@
     <string name="overview_header_text">Find Best Recipe For Cooking</string>
     <string name="categories_header_text">Categories</string>
     <string name="recipes_header_text">Recipes</string>
+    <string name="ingredients_text_label">Ingredients</string>
 </resources>
