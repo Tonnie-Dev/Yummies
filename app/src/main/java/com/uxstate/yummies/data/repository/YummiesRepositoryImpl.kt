@@ -39,7 +39,7 @@ class YummiesRepositoryImpl @Inject constructor(
     ): Flow<Resource<List<Meal>>> = flow {
 
         // Emit Loading status true
-        emit(Resource.Loading(loading = true))
+        emit(Resource.Loading(isLoading = true))
 
         // Query database and emit immediately
         val localMeals = dao.getMealItems(query = query)
@@ -53,7 +53,7 @@ class YummiesRepositoryImpl @Inject constructor(
 
             Timber.i("Entering Local")
             // go local
-            emit(Resource.Loading(loading = false))
+            emit(Resource.Loading(isLoading = false))
 
             // return control to @flow
             return@flow
@@ -77,7 +77,7 @@ class YummiesRepositoryImpl @Inject constructor(
             emit(
                 Resource.Error(
                     errorMessage = "Could not load data, please check your internet connection",
-                    data = null
+
                 )
             )
             null
@@ -86,7 +86,7 @@ class YummiesRepositoryImpl @Inject constructor(
             emit(
                 Resource.Error(
                     errorMessage = "Could not load data, please check your internet connection",
-                    data = null
+
                 )
             )
             null
@@ -102,13 +102,13 @@ class YummiesRepositoryImpl @Inject constructor(
         val updatedCache = dao.getMealItems(query = query)
         emit(Resource.Success(data = updatedCache.map { it.toModel() }))
 
-        emit(Resource.Loading(loading = false))
+        emit(Resource.Loading(isLoading = false))
     }
 
     override fun fetchCategoriesItems(): Flow<Resource<List<Category>>> = flow {
 
         // show loading
-        emit(Resource.Loading(loading = true))
+        emit(Resource.Loading(isLoading = true))
 
         // Query Database and Emit immediately
 
@@ -121,7 +121,7 @@ class YummiesRepositoryImpl @Inject constructor(
         if (fetchJustFromCache) {
 
             // Go Local
-            emit(Resource.Loading(loading = false))
+            emit(Resource.Loading(isLoading = false))
 
             // return control to @flow
             return@flow
@@ -166,7 +166,7 @@ class YummiesRepositoryImpl @Inject constructor(
         emit(Resource.Success(data = updatedCache.map { it.toModel() }))
 
         // stop loading
-        emit(Resource.Loading(loading = false))
+        emit(Resource.Loading(isLoading = false))
     }
 
     override fun getWordByCategory(category: String): Flow<List<Meal>> {

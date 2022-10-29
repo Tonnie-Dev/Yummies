@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -27,7 +26,6 @@ import com.uxstate.yummies.presentation.screens.overview_screen.components.Searc
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
-import timber.log.Timber
 
 @RootNavGraph(start = true)
 @Destination
@@ -71,7 +69,6 @@ fun OverviewScreen(
             // Categories
             LazyRow() {
 
-                Timber.i("The length of categories List is: ${categoriesState.categories.size}")
                 items(categoriesState.categories) { category ->
 
                     CategoryItem(category = category) {
@@ -83,35 +80,28 @@ fun OverviewScreen(
             // Header 2
             HeaderTextItem(text = stringResource(R.string.recipes_header_text))
 
-            Box(modifier = Modifier.fillMaxWidth()) {
-
-                if (mealsState.isLoading) {
-                    CircularProgressIndicator()
-                } else {
-
-                    // apply swipe refresh view
-                    SwipeRefresh(
-                        state = swipeRefreshState,
-                        onRefresh = {
-                            viewModel.onEvent(event = OverviewEvent.OnRefresh)
-                        }
-                    ) {
-
-                        // content to be refreshed
-                        LazyColumn(
-                            contentPadding =
-                            PaddingValues(vertical = spacing.spaceMedium),
-                            content = {
-
-                                items(mealsState.meals) { meal ->
-
-                                    MealCard(meal = meal, onClickMeal = {})
-                                }
-                            }
-                        )
-                    }
+            // apply swipe refresh view
+            SwipeRefresh(
+                state = swipeRefreshState,
+                onRefresh = {
+                    viewModel.onEvent(event = OverviewEvent.OnRefresh)
                 }
+            ) {
+
+                // content to be refreshed
+                LazyColumn(
+                    contentPadding =
+                    PaddingValues(vertical = spacing.spaceMedium),
+                    content = {
+
+                        items(mealsState.meals) { meal ->
+
+                            MealCard(meal = meal, onClickMeal = {})
+                        }
+                    }
+                )
             }
+        }
 
             /*  // Grid
               LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
@@ -121,6 +111,5 @@ fun OverviewScreen(
                       MealItem(meal = meal, onClickCategory = {})
                   }
               })*/
-        }
     }
 }

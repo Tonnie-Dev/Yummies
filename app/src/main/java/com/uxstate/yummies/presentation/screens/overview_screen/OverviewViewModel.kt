@@ -76,7 +76,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
             is OverviewEvent.OnRefresh -> {
 
-                _stateMeals.value = _stateMeals.value.copy(isLoading = true)
+                getMeals(fetchFromRemote = true)
             }
         }
     }
@@ -97,7 +97,10 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                     result ->
 
                     when (result) {
+                        is Resource.Loading -> {
 
+                            _stateMeals.value = _stateMeals.value.copy(isLoading = result.isLoading)
+                        }
                         is Resource.Success -> {
 
                             result.data?.let {
@@ -112,10 +115,6 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                                     result.errorMessage ?: "Unknown Error"
                                 )
                             )
-                        }
-                        is Resource.Loading -> {
-
-                            _stateMeals.value = _stateMeals.value.copy(isLoading = true)
                         }
                     }
                 }
@@ -136,7 +135,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                         is Resource.Loading -> {
 
                             _stateCategories.value =
-                                _stateCategories.value.copy(isLoading = result.loading)
+                                _stateCategories.value.copy(isLoading = result.isLoading)
                         }
                         is Resource.Error -> {
                             val errorMessage = result.errorMessage ?: "Unknown Error"
