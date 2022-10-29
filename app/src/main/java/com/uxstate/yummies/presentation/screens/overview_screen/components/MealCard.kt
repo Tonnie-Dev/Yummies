@@ -37,7 +37,7 @@ fun MealCard(
 
 ) {
     val spacing = LocalSpacing.current
-    val isFavorite = meal.isFavorite
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -105,7 +105,7 @@ fun MealCard(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
-                    tint = if (isFavorite) MaterialTheme.colors.primary
+                    tint = if (meal.isFavorite) MaterialTheme.colors.primary
                     else Color.Gray.copy(ContentAlpha.disabled),
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
                 )

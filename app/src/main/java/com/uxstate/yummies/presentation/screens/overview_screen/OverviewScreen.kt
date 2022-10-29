@@ -51,12 +51,7 @@ fun OverviewScreen(
                 .padding(spacing.spaceSmall)
         ) {
 
-            // Header 1
-            /*HeaderTextItem(
-                text = stringResource(R.string.overview_header_text),
-                style = MaterialTheme.typography.h4
-            )*/
-
+           
             // Search Box
             SearchBoxItem(
                 query = mealsState.searchQuery,
