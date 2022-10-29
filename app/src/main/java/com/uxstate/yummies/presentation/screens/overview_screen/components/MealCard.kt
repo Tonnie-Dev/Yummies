@@ -25,6 +25,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.R
 import com.uxstate.yummies.domain.model.Meal
+import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -49,9 +50,7 @@ fun MealCard(
         Row(
             modifier = Modifier.background(
                 brush = Brush.linearGradient(
-                    colors = listOf(
-                        Color(0xFFFED234), Color(0xFFFAF1d6), Color(0xFFF4F4F4)
-                    )
+                    colors = MaterialTheme.colors.gradientColors
                 )
             )
         ) {

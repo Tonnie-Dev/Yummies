@@ -28,6 +28,9 @@ val Lime300 = Color(0xFFDCE775)
 val Lime200 = Color(0xFFE6EE9C)
 val Lime50 = Color(0xFFF9FBE7)
 
-
 val Colors.statusBarColor
     get() = if (this.isLight) Lime800 else Color.Black
+
+val Colors.gradientColors
+    get() = if (this.isLight) listOf(Yellow300, Yellow200, Yellow50)
+    else listOf(Lime300, Lime200, Lime50)
