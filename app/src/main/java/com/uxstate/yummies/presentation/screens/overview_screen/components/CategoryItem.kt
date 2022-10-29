@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -73,7 +74,7 @@ fun CategoryItem(
 
             Text(
                 text = category.categoryType,
-                color = MaterialTheme.colors.onSurface,
+                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.subtitle2
             )

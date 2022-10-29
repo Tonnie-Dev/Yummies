@@ -12,15 +12,15 @@ import com.uxstate.yummies.domain.model.Meal
 fun MealDTO.toModel(): Meal {
 
     return Meal(
-            id = this.idMeal.toInt(),
-            name = this.strMeal,
-            category = this.strCategory,
-            origin = this.strArea,
-            directions = this.strInstructions,
-            imageUrl = this.strMeal,
-            ingredients = combineStrIngredientsToList(this),
-            units = combineStrMeasuresToList(this),
-            isFavorite = false
+        id = this.idMeal.toInt(),
+        name = this.strMeal,
+        category = this.strCategory,
+        origin = this.strArea,
+        directions = this.strInstructions,
+        imageUrl = this.strMeal,
+        ingredients = combineStrIngredientsToList(this),
+        units = combineStrMeasuresToList(this),
+        isFavorite = false
     )
 }
 
@@ -28,10 +28,10 @@ fun MealDTO.toModel(): Meal {
 fun CategoryDTO.toModel(): Category {
 
     return Category(
-            categoryId = this.idCategory.toInt(),
-            categoryType = this.strCategory,
-            categoryDescription = this.strCategoryDescription,
-            categoryImageUrl = this.strCategoryThumb
+        categoryId = this.idCategory.toInt(),
+        categoryType = this.strCategory,
+        categoryDescription = this.strCategoryDescription,
+        categoryImageUrl = this.strCategoryThumb
     )
 }
 
@@ -39,15 +39,15 @@ fun CategoryDTO.toModel(): Category {
 fun MealEntity.toModel(): Meal {
 
     return Meal(
-            id = this.id,
-            name = this.name,
-            category = this.category,
-            origin = this.origin,
-            directions = this.directions,
-            imageUrl = this.imageUrl,
-            ingredients = this.ingredients,
-            units = this.units,
-            isFavorite = this.isFavorite
+        id = this.id,
+        name = this.name,
+        category = this.category,
+        origin = this.origin,
+        directions = this.directions,
+        imageUrl = this.imageUrl,
+        ingredients = this.ingredients,
+        units = this.units,
+        isFavorite = this.isFavorite
     )
 }
 
@@ -56,25 +56,25 @@ fun MealEntity.toModel(): Meal {
 fun CategoryEntity.toModel(): Category {
 
     return Category(
-            categoryId = this.categoryId,
-            categoryType = this.categoryType,
-            categoryDescription = this.categoryDescription,
-            categoryImageUrl = this.categoryImageUrl
+        categoryId = this.categoryId,
+        categoryType = this.categoryType,
+        categoryDescription = this.categoryDescription,
+        categoryImageUrl = this.categoryImageUrl
     )
 }
 
 // dto to MealEntity entity
 fun MealDTO.toEntity(): MealEntity {
     return MealEntity(
-            id = this.idMeal.toInt(),
-            name = this.strMeal,
-            category = this.strCategory,
-            origin = this.strArea,
-            directions = this.strInstructions,
-            imageUrl = this.strMealThumb,
-            ingredients = combineStrIngredientsToList(this),
-            units = combineStrMeasuresToList(this),
-            isFavorite = false
+        id = this.idMeal.toInt(),
+        name = this.strMeal,
+        category = this.strCategory,
+        origin = this.strArea,
+        directions = this.strInstructions,
+        imageUrl = this.strMealThumb,
+        ingredients = combineStrIngredientsToList(this),
+        units = combineStrMeasuresToList(this),
+        isFavorite = false
     )
 }
 
@@ -82,10 +82,10 @@ fun MealDTO.toEntity(): MealEntity {
 fun CategoryDTO.toEntity(): CategoryEntity {
 
     return CategoryEntity(
-            categoryId = this.idCategory.toInt(),
-            categoryType = this.strCategory,
-            categoryDescription = this.strCategoryDescription,
-            categoryImageUrl = this.strCategoryThumb
+        categoryId = this.idCategory.toInt(),
+        categoryType = this.strCategory,
+        categoryDescription = this.strCategoryDescription,
+        categoryImageUrl = this.strCategoryThumb
     )
 }
 
@@ -114,26 +114,26 @@ fun combineStrIngredientsToList(mealDTO: MealDTO): List<String> {
     val ing20 = mealDTO.strIngredient20 ?: ""
 
     val fullList = mutableListOf(
-            ing1,
-            ing2,
-            ing3,
-            ing4,
-            ing5,
-            ing6,
-            ing7,
-            ing8,
-            ing9,
-            ing10,
-            ing11,
-            ing12,
-            ing13,
-            ing14,
-            ing15,
-            ing16,
-            ing17,
-            ing18,
-            ing19,
-            ing20
+        ing1,
+        ing2,
+        ing3,
+        ing4,
+        ing5,
+        ing6,
+        ing7,
+        ing8,
+        ing9,
+        ing10,
+        ing11,
+        ing12,
+        ing13,
+        ing14,
+        ing15,
+        ing16,
+        ing17,
+        ing18,
+        ing19,
+        ing20
     )
 
     return fullList.filterNot { ing -> ing == "" }
@@ -164,26 +164,26 @@ fun combineStrMeasuresToList(mealDTO: MealDTO): List<String> {
     val msr20 = mealDTO.strMeasure20 ?: ""
 
     val fullList = mutableListOf(
-            msr1,
-            msr2,
-            msr3,
-            msr4,
-            msr5,
-            msr6,
-            msr7,
-            msr8,
-            msr9,
-            msr10,
-            msr11,
-            msr12,
-            msr13,
-            msr14,
-            msr15,
-            msr16,
-            msr17,
-            msr18,
-            msr19,
-            msr20
+        msr1,
+        msr2,
+        msr3,
+        msr4,
+        msr5,
+        msr6,
+        msr7,
+        msr8,
+        msr9,
+        msr10,
+        msr11,
+        msr12,
+        msr13,
+        msr14,
+        msr15,
+        msr16,
+        msr17,
+        msr18,
+        msr19,
+        msr20
     )
 
     return fullList.filterNot { msr -> msr == "" }

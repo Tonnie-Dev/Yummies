@@ -9,7 +9,7 @@ data class Meal(
     val imageUrl: String,
     val ingredients: List<String>,
     val units: List<String>,
-    val isFavorite:Boolean
+    val isFavorite: Boolean
 ) {
 
     val ingredientsCount: Int

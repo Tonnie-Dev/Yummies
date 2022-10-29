@@ -37,7 +37,7 @@ fun MealCard(
 
 ) {
     val spacing = LocalSpacing.current
-val isFavorite = meal.isFavorite
+    val isFavorite = meal.isFavorite
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -101,19 +101,14 @@ val isFavorite = meal.isFavorite
                 }
 
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
-                IconButton(onClick = {
 
-
-
-                }) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "",
-                        tint = if (isFavorite) MaterialTheme.colors.primary
-                        else Color.Gray.copy(ContentAlpha.disabled),
-                        modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
-                    )
-                }
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "",
+                    tint = if (isFavorite) MaterialTheme.colors.primary
+                    else Color.Gray.copy(ContentAlpha.disabled),
+                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
+                )
             }
 
             val painter = rememberAsyncImagePainter(
@@ -151,7 +146,8 @@ fun MealCardPreview() {
             directions = "",
             imageUrl = "",
             ingredients = listOf("A", "B", "C"),
-            units = listOf()
+            units = listOf(),
+            isFavorite = true
         ),
         onClickMeal = { /*TODO*/ }
     )

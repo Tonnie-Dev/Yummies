@@ -78,7 +78,8 @@ fun MealItemPreview() {
             directions = "",
             imageUrl = "",
             ingredients = listOf(),
-            units = listOf()
+            units = listOf(),
+            isFavorite = true
         ),
         onClickCategory = {}
     )
