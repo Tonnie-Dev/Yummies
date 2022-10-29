@@ -45,6 +45,7 @@ fun SearchBoxItem(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
+                        tint = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
                     contentDescription = stringResource(R.string.search_icon_label)
                 )
             }, trailingIcon = {
@@ -52,6 +53,7 @@ fun SearchBoxItem(
 
                 Icon(
                     imageVector = Icons.Default.Close,
+
                     contentDescription = stringResource(R.string.clear_text_icon)
                 )
             }
