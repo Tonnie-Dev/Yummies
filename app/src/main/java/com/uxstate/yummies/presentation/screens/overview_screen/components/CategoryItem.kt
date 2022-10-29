@@ -12,15 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.R
 import com.uxstate.yummies.domain.model.Category
+import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -45,9 +46,7 @@ fun CategoryItem(
             modifier = Modifier
                 .background(
                     brush = Brush.linearGradient(
-                        colors = listOf(
-                            Color(0xFFFED234), Color(0xFFFAF1d6), Color(0xFFF4F4F4)
-                        )
+                        MaterialTheme.colors.gradientColors
                     )
                 )
                 .padding(spacing.spaceExtraSmall)
@@ -74,7 +73,8 @@ fun CategoryItem(
 
             Text(
                 text = category.categoryType,
-
+                color = MaterialTheme.colors.onSurface,
+                fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.subtitle2
             )
         }
