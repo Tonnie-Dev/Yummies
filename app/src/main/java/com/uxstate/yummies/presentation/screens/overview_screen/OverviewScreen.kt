@@ -1,13 +1,10 @@
 package com.uxstate.yummies.presentation.screens.overview_screen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -16,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -40,31 +38,40 @@ fun OverviewScreen(
 ) {
 
     val mealsState by viewModel.stateMeals.collectAsState()
+    val swipeRefreshState = rememberSwipeRefreshState(
+            isRefreshing = mealsState.isLoading
+    )
+
+
+
+
+
     val categoriesState by viewModel.stateCategory.collectAsState()
     val spacing = LocalSpacing.current
     val uiController = rememberSystemUiController()
     uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
     Surface {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(spacing.spaceSmall)
+                modifier = Modifier
+                        .fillMaxSize()
+                        .padding(spacing.spaceSmall)
         ) {
 
-           
+
             // Search Box
             SearchBoxItem(
-                query = mealsState.searchQuery,
-                onSearchTextChange = {
-                    viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
-                }, onClearText = {
+                    query = mealsState.searchQuery,
+                    onSearchTextChange = {
+                        viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+                    }, onClearText = {
 
                 viewModel.onEvent(OverviewEvent.OnClearText)
             }
             )
 
-            // Header 2
+            // Header 1
             HeaderTextItem(text = stringResource(R.string.categories_header_text))
+
 
             // Categories
             LazyRow() {
@@ -78,8 +85,20 @@ fun OverviewScreen(
                 }
             }
 
-            // Header 3
+            // Header 2
             HeaderTextItem(text = stringResource(R.string.recipes_header_text))
+
+            Box(modifier = Modifier.fillMaxWidth()) {
+
+                if (mealsState.isLoading) {
+
+                    CircularProgressIndicator()
+                } else {
+
+
+                }
+            }
+
 
             LazyColumn(contentPadding = PaddingValues(vertical = spacing.spaceMedium), content = {
 
@@ -89,14 +108,14 @@ fun OverviewScreen(
                 }
             })
 
-          /*  // Grid
-            LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
+            /*  // Grid
+              LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
 
-                items(mealsState.meals) { meal ->
+                  items(mealsState.meals) { meal ->
 
-                    MealItem(meal = meal, onClickCategory = {})
-                }
-            })*/
+                      MealItem(meal = meal, onClickCategory = {})
+                  }
+              })*/
         }
     }
 }
