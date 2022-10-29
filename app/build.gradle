@@ -143,9 +143,7 @@ dependencies {
     implementation 'com.google.accompanist:accompanist-flowlayout:0.24.9-beta'
 
 
-    //Paging 3
-    implementation "androidx.paging:paging-compose:$paging_compose"
-    implementation "com.google.accompanist:accompanist-swiperefresh:$swipe_refresh"
+
 
     //Timber Logging
     implementation 'com.jakewharton.timber:timber:5.0.1'
