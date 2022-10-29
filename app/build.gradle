@@ -150,4 +150,10 @@ dependencies {
     //Timber Logging
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
+    // Swipe to Refresh - Accompanist
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
+
+    // System UI Controller - Accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+
 }

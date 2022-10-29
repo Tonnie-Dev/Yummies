@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,7 +40,8 @@ fun OverviewScreen(
     val mealsState by viewModel.stateMeals.collectAsState()
     val categoriesState by viewModel.stateCategory.collectAsState()
     val spacing = LocalSpacing.current
-
+    val uiController = rememberSystemUiController()
+    uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
     Surface {
         Column(
             modifier = Modifier
