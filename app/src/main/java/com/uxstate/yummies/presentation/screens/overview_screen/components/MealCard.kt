@@ -37,7 +37,7 @@ fun MealCard(
 
 ) {
     val spacing = LocalSpacing.current
-val isFavorite =
+val isFavorite = meal.isFavorite
     Card(
         modifier = modifier
             .fillMaxWidth()
