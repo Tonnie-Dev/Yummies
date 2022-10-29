@@ -13,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.annotation.Destination
@@ -39,12 +40,8 @@ fun OverviewScreen(
 
     val mealsState by viewModel.stateMeals.collectAsState()
     val swipeRefreshState = rememberSwipeRefreshState(
-            isRefreshing = mealsState.isLoading
+        isRefreshing = mealsState.isLoading
     )
-
-
-
-
 
     val categoriesState by viewModel.stateCategory.collectAsState()
     val spacing = LocalSpacing.current
@@ -52,18 +49,17 @@ fun OverviewScreen(
     uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
     Surface {
         Column(
-                modifier = Modifier
-                        .fillMaxSize()
-                        .padding(spacing.spaceSmall)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(spacing.spaceSmall)
         ) {
-
 
             // Search Box
             SearchBoxItem(
-                    query = mealsState.searchQuery,
-                    onSearchTextChange = {
-                        viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
-                    }, onClearText = {
+                query = mealsState.searchQuery,
+                onSearchTextChange = {
+                    viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+                }, onClearText = {
 
                 viewModel.onEvent(OverviewEvent.OnClearText)
             }
@@ -71,7 +67,6 @@ fun OverviewScreen(
 
             // Header 1
             HeaderTextItem(text = stringResource(R.string.categories_header_text))
-
 
             // Categories
             LazyRow() {
@@ -91,22 +86,32 @@ fun OverviewScreen(
             Box(modifier = Modifier.fillMaxWidth()) {
 
                 if (mealsState.isLoading) {
-
                     CircularProgressIndicator()
                 } else {
 
+                    // apply swipe refresh view
+                    SwipeRefresh(
+                        state = swipeRefreshState,
+                        onRefresh = {
+                            viewModel.onEvent(event = OverviewEvent.OnRefresh)
+                        }
+                    ) {
 
+                        // content to be refreshed
+                        LazyColumn(
+                            contentPadding =
+                            PaddingValues(vertical = spacing.spaceMedium),
+                            content = {
+
+                                items(mealsState.meals) { meal ->
+
+                                    MealCard(meal = meal, onClickMeal = {})
+                                }
+                            }
+                        )
+                    }
                 }
             }
-
-
-            LazyColumn(contentPadding = PaddingValues(vertical = spacing.spaceMedium), content = {
-
-                items(mealsState.meals) { meal ->
-
-                    MealCard(meal = meal, onClickMeal = {})
-                }
-            })
 
             /*  // Grid
               LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
