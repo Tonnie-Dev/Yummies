@@ -33,11 +33,11 @@ fun MealCard(
     meal: Meal,
     // navigator: DestinationsNavigator,
     onClickMeal: () -> Unit,
-    modifier: Modifier = Modifier,
-    isFavorite: Boolean = false
+    modifier: Modifier = Modifier
+
 ) {
     val spacing = LocalSpacing.current
-
+val isFavorite =
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -102,6 +102,9 @@ fun MealCard(
 
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
                 IconButton(onClick = {
+
+
+
                 }) {
                     Icon(
                         imageVector = Icons.Default.Star,
