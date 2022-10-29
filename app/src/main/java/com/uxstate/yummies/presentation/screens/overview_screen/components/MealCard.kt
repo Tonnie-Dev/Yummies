@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -38,8 +39,8 @@ fun MealCard(
 
     Card(
         modifier = modifier
-                .fillMaxWidth()
-                .padding(spacing.spaceSmall),
+            .fillMaxWidth()
+            .padding(spacing.spaceSmall),
 
         elevation = spacing.spaceSmall,
         shape = RoundedCornerShape(spacing.spaceSmall)
@@ -57,8 +58,8 @@ fun MealCard(
 
             Column(
                 modifier = Modifier
-                        .weight(4.5f)
-                        .padding(spacing.spaceMedium),
+                    .weight(4.5f)
+                    .padding(spacing.spaceMedium),
                 verticalArrangement = Arrangement.Center,
 
             ) {
@@ -78,13 +79,19 @@ fun MealCard(
                     Text(text = meal.origin, style = MaterialTheme.typography.body1)
                 }
 
-             Row(modifier = Modifier.border(width = spacing.)) {
-
-             }
-                Text(
-                    text = "${meal.ingredientsCount} Ingredients",
-                    style = MaterialTheme.typography.subtitle2
-                )
+                Row(
+                    modifier = Modifier.border(
+                        width = spacing.spaceDoubleDp,
+                        color = Color(0xFFFED234),
+                        shape = CutCornerShape(spacing.spaceSmall)
+                    )
+                ) {
+                    Text(
+                        text = "${meal.ingredientsCount} Ingredients",
+                        style = MaterialTheme.typography.caption,
+                        modifier = Modifier.padding(spacing.spaceExtraSmall)
+                    )
+                }
 
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
@@ -110,9 +117,9 @@ fun MealCard(
                 contentDescription = stringResource(R.string.meal_category_label),
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                        .size(spacing.spaceOneHundredFifty)
-                        .weight(5.5f)
-                        .clip(CircleShape)
+                    .size(spacing.spaceOneHundredFifty)
+                    .weight(5.5f)
+                    .clip(CircleShape)
 
             )
         }
