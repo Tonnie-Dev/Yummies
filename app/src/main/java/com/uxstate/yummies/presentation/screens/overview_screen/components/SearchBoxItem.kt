@@ -45,7 +45,7 @@ fun SearchBoxItem(
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
-                        tint = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
+                    tint = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.disabled),
                     contentDescription = stringResource(R.string.search_icon_label)
                 )
             }, trailingIcon = {

@@ -73,31 +73,41 @@ fun MealCard(
                 Row() {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_flag),
+                        tint = Color.Black.copy(alpha = ContentAlpha.medium),
                         contentDescription = stringResource(R.string.origin_text_label)
                     )
-                    Text(text = meal.origin, style = MaterialTheme.typography.body1)
+                    Text(
+                        text = meal.origin,
+                        style = MaterialTheme.typography.body1,
+                        color = MaterialTheme.colors.onSurface
+                    )
                 }
 
                 Row(
-                    modifier = Modifier.border(
-                        width = spacing.spaceDoubleDp,
-                        color = Color(0xFFFED234),
-                        shape = CutCornerShape(spacing.spaceSmall)
-                    )
+                    modifier = Modifier
+                        .border(
+                            width = spacing.spaceSingleDp,
+                            color = Color.Black,
+                            shape = CutCornerShape(spacing.spaceSmall)
+                        )
+                        .padding(spacing.spaceExtraSmall)
                 ) {
                     Text(
                         text = "${meal.ingredientsCount} Ingredients",
                         style = MaterialTheme.typography.caption,
+                        color = MaterialTheme.colors.onSurface,
                         modifier = Modifier.padding(spacing.spaceExtraSmall)
                     )
                 }
 
+                Spacer(modifier = Modifier.height(spacing.spaceSmall))
                 IconButton(onClick = { /*TODO*/ }) {
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "",
-                        tint = if (isFavorite) Color.Cyan else Color.Gray,
-                        modifier = Modifier.size(spacing.spaceLarge)
+                        tint = if (isFavorite) MaterialTheme.colors.primary
+                        else Color.Gray.copy(ContentAlpha.disabled),
+                        modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
                     )
                 }
             }
