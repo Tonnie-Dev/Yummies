@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -77,15 +79,18 @@ fun MealCard(
                     Text(text = meal.origin, style = MaterialTheme.typography.body1)
                 }
 
-                Surface(
-                    modifier = Modifier
-                        .background(
-                            Color(0xFFFED234)
-                        ).padding(spacing.spaceExtraSmall),
-                    shape = RoundedCornerShape(spacing.spaceExtraSmall),
+                Text(
+                    text = "${meal.ingredientsCount} Ingredients",
+                    style = MaterialTheme.typography.subtitle2
+                )
 
-                ) {
-                    Text(text = "Like", fontWeight = FontWeight.Bold)
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "",
+                        tint = if (isFavorite) Color.Cyan else Color.Gray,
+                        modifier = Modifier.size(spacing.spaceLarge)
+                    )
                 }
             }
 
@@ -101,7 +106,7 @@ fun MealCard(
             Image(
                 painter = painter,
                 contentDescription = stringResource(R.string.meal_category_label),
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(spacing.spaceOneHundredFifty)
                     .weight(5.5f)
