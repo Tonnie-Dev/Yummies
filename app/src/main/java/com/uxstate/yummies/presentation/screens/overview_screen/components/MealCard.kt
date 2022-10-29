@@ -101,7 +101,8 @@ fun MealCard(
                 }
 
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                }) {
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "",
