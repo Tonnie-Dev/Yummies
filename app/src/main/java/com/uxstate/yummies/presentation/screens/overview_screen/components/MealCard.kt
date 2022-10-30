@@ -32,7 +32,7 @@ import com.uxstate.yummies.util.LocalSpacing
 @Composable
 fun MealCard(
     meal: Meal,
-    onClickMeal: () -> Unit,
+    onClickMeal: (meal: Meal) -> Unit,
     modifier: Modifier = Modifier
 
 ) {
@@ -41,7 +41,7 @@ fun MealCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onClickMeal() }
+            .clickable { onClickMeal(meal) }
             .padding(spacing.spaceSmall),
 
         elevation = spacing.spaceSmall,
