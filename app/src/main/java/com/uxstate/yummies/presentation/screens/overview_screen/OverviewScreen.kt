@@ -1,5 +1,6 @@
 package com.uxstate.yummies.presentation.screens.overview_screen
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -26,6 +27,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
+import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryTogglePanel
 import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
@@ -43,11 +45,11 @@ fun OverviewScreen(
 ) {
 
     val mealsState by viewModel.stateMeals.collectAsState()
+    val categoriesState by viewModel.stateCategory.collectAsState()
     val swipeRefreshState = rememberSwipeRefreshState(
         isRefreshing = mealsState.isLoading
     )
 
-    val categoriesState by viewModel.stateCategory.collectAsState()
     val spacing = LocalSpacing.current
     val uiController = rememberSystemUiController()
     uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
@@ -89,15 +91,23 @@ fun OverviewScreen(
                 }
             }
             // Header 1
-            HeaderTextItem(text = stringResource(R.string.categories_header_text))
+            CategoryTogglePanel(isShow = categoriesState.isShowCategories) {
+                viewModel.onEvent(OverviewEvent.OnToggleCategoryPanel)
+            }
 
-            // Categories
-            LazyRow() {
+            AnimatedVisibility(
+                visible = categoriesState.isShowCategories,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically()
+            ) {
+                // Categories
+                LazyRow() {
 
-                items(categoriesState.categories) { category ->
+                    items(categoriesState.categories) { category ->
 
-                    CategoryItem(category = category) {
-                        viewModel.onEvent(OverviewEvent.OnCategoryClick(it))
+                        CategoryItem(category = category) {
+                            viewModel.onEvent(OverviewEvent.OnCategoryClick(it))
+                        }
                     }
                 }
             }
@@ -136,14 +146,5 @@ fun OverviewScreen(
                 }
             }
         }
-
-        /*  // Grid
-          LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
-
-              items(mealsState.meals) { meal ->
-
-                  MealItem(meal = meal, onClickCategory = {})
-              }
-          })*/
     }
 }

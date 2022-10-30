@@ -5,5 +5,5 @@ import com.uxstate.yummies.domain.model.Category
 data class StateCategories(
     val isLoading: Boolean = false,
     val categories: List<Category> = emptyList(),
-    val isShowCategories:Boolean = false
+    val isShowCategories: Boolean = false
 )
