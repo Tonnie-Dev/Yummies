@@ -10,11 +10,11 @@ import com.uxstate.yummies.util.Constants.SEARCH_TRIGGER_DELAY
 import com.uxstate.yummies.util.Resource
 import com.uxstate.yummies.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(private val container: UseCaseContainer) : ViewModel() {
@@ -69,19 +69,25 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
             is OverviewEvent.OnCategoryClick -> {
 
                 // collect flow meal item
-                container.getMealsByCategoryUseCase(event.category).onEach {
-                    _stateMeals.value = _stateMeals.value.copy(meals = it)
-                }.launchIn(viewModelScope)
+                container.getMealsByCategoryUseCase(event.category)
+                        .onEach {
+                            _stateMeals.value = _stateMeals.value.copy(meals = it)
+                        }
+                        .launchIn(viewModelScope)
             }
 
             is OverviewEvent.OnRefresh -> {
 
                 getMeals(fetchFromRemote = true)
             }
-          is OverviewEvent.OnToggleCategoryPanel -> {
+            is OverviewEvent.OnToggleCategoryPanel -> {
 
+                _stateCategories.value =
+                    _stateCategories.value.copy(
+                            isShowCategories = !_stateCategories.value.isShowCategories
+                    )
 
-          }
+            }
         }
     }
 
@@ -93,35 +99,36 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         viewModelScope.launch {
 
             container.getMealsUseCase(
-                query = query,
-                fetchFromRemote = fetchFromRemote
+                    query = query,
+                    fetchFromRemote = fetchFromRemote
             )
-                .collectLatest {
+                    .collectLatest {
 
-                    result ->
+                        result ->
 
-                    when (result) {
-                        is Resource.Loading -> {
+                        when (result) {
+                            is Resource.Loading -> {
 
-                            _stateMeals.value = _stateMeals.value.copy(isLoading = result.isLoading)
-                        }
-                        is Resource.Success -> {
+                                _stateMeals.value =
+                                    _stateMeals.value.copy(isLoading = result.isLoading)
+                            }
+                            is Resource.Success -> {
 
-                            result.data?.let {
+                                result.data?.let {
 
-                                _stateMeals.value = _stateMeals.value.copy(meals = it)
+                                    _stateMeals.value = _stateMeals.value.copy(meals = it)
+                                }
+                            }
+                            is Resource.Error -> {
+
+                                _uiEvent.emit(
+                                        UiEvent.ShowSnackbar(
+                                                result.errorMessage ?: "Unknown Error"
+                                        )
+                                )
                             }
                         }
-                        is Resource.Error -> {
-
-                            _uiEvent.emit(
-                                UiEvent.ShowSnackbar(
-                                    result.errorMessage ?: "Unknown Error"
-                                )
-                            )
-                        }
                     }
-                }
         }
     }
 
@@ -130,30 +137,30 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         viewModelScope.launch {
 
             container.getCategoriesUseCase()
-                .collectLatest {
+                    .collectLatest {
 
-                    result ->
+                        result ->
 
-                    when (result) {
+                        when (result) {
 
-                        is Resource.Loading -> {
+                            is Resource.Loading -> {
 
-                            _stateCategories.value =
-                                _stateCategories.value.copy(isLoading = result.isLoading)
-                        }
-                        is Resource.Error -> {
-                            val errorMessage = result.errorMessage ?: "Unknown Error"
-                            _uiEvent.emit(UiEvent.ShowSnackbar(errorMessage))
-                        }
-                        is Resource.Success -> {
-
-                            result.data?.let {
                                 _stateCategories.value =
-                                    _stateCategories.value.copy(categories = it)
+                                    _stateCategories.value.copy(isLoading = result.isLoading)
+                            }
+                            is Resource.Error -> {
+                                val errorMessage = result.errorMessage ?: "Unknown Error"
+                                _uiEvent.emit(UiEvent.ShowSnackbar(errorMessage))
+                            }
+                            is Resource.Success -> {
+
+                                result.data?.let {
+                                    _stateCategories.value =
+                                        _stateCategories.value.copy(categories = it)
+                                }
                             }
                         }
                     }
-                }
         }
     }
 }
