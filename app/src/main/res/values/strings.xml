@@ -9,4 +9,5 @@
     <string name="recipes_header_text">Recipes</string>
     <string name="ingredients_text_label">Ingredients</string>
     <string name="origin_text_label">Origin</string>
+    <string name="save_button_label">Save</string>
 </resources>
