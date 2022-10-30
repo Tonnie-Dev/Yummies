@@ -78,6 +78,10 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
                 getMeals(fetchFromRemote = true)
             }
+          is OverviewEvent.OnToggleCategoryPanel -> {
+
+
+          }
         }
     }
 
