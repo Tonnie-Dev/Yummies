@@ -1,0 +1,69 @@
+package com.uxstate.yummies.presentation.screens.details_screen.components
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.uxstate.yummies.domain.model.Meal
+import com.uxstate.yummies.presentation.core_components.HeaderTextItem
+import com.uxstate.yummies.util.LocalSpacing
+
+@Composable
+fun ImageDetailsPanel(meal: Meal, onStar: () -> Unit, modifier: Modifier = Modifier) {
+
+    val spacing = LocalSpacing.current
+    Card(modifier = modifier) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            HeaderTextItem(text = meal.name, style = MaterialTheme.typography.h4)
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = meal.origin,
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.onSurface,
+                    modifier = Modifier.padding(
+                        spacing.spaceSmall
+                    )
+                )
+                IconButton(
+                    onClick = { /*TODO*/ },
+                    modifier = Modifier.padding(spacing.spaceExtraSmall)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "",
+                        tint = if (meal.isFavorite) MaterialTheme.colors.primary
+                        else Color.Gray.copy(ContentAlpha.disabled),
+                        modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ImageDetailsPanelPreview() {
+    ImageDetailsPanel(
+        meal = Meal(
+            id = 0,
+            name = "Chapoo Dododo",
+            category = "",
+            origin = "Jamaica",
+            directions = "",
+            imageUrl = "",
+            ingredients = listOf(),
+            units = listOf(),
+            isFavorite = false
+        ),
+        onStar = {}
+    )
+}

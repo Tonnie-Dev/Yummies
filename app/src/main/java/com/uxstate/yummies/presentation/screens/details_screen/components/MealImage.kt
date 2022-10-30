@@ -19,29 +19,30 @@ fun MealImage(meal: Meal) {
 
     val spacing = LocalSpacing.current
     val painter = rememberAsyncImagePainter(
-            model = ImageRequest.Builder(LocalContext.current)
-                    .crossfade(true)
-                    .data(meal.imageUrl)
-                    .error(R.drawable.ic_meal_error)
-                    .placeholder(R.drawable.loading_animation)
-                    .build()
+        model = ImageRequest.Builder(LocalContext.current)
+            .crossfade(true)
+            .data(meal.imageUrl)
+            .error(R.drawable.ic_meal_error)
+            .placeholder(R.drawable.loading_animation)
+            .build()
 
     )
 
     Image(
-            painter = painter,
-            contentDescription = meal.name,
-            modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(3f / 2f)
-                    .padding(spacing.spaceSmall)
+        painter = painter,
+        contentDescription = meal.name,
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(3f / 2f)
+            .padding(spacing.spaceSmall)
     )
 }
 
 @Preview
 @Composable
 fun MealImagePreview() {
-    MealImage(meal = Meal(
+    MealImage(
+        meal = Meal(
             id = 0,
             name = "",
             category = "",
@@ -51,5 +52,6 @@ fun MealImagePreview() {
             ingredients = listOf(),
             units = listOf(),
             isFavorite = false
-    ))
+        )
+    )
 }
