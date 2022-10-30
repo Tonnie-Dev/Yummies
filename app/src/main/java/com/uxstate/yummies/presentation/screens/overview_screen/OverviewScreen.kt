@@ -1,15 +1,20 @@
 package com.uxstate.yummies.presentation.screens.overview_screen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -24,6 +29,7 @@ import com.uxstate.yummies.presentation.screens.overview_screen.components.Categ
 import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
+import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
 
@@ -53,16 +59,35 @@ fun OverviewScreen(
         ) {
 
             // Search Box
-            SearchBoxItem(
-                query = mealsState.searchQuery,
-                onSearchTextChange = {
-                    viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
-                }, onClearText = {
 
-                viewModel.onEvent(OverviewEvent.OnClearText)
+            Surface(
+                modifier = Modifier
+                    .padding(spacing.spaceSmall)
+                    .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
+                elevation = spacing.spaceSmall
+
+            ) {
+
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .border(
+                            width = spacing.spaceDoubleDp,
+                            color = MaterialTheme.colors.primary
+                        )
+
+                ) {
+                    SearchBoxItem(
+                        query = mealsState.searchQuery,
+                        onSearchTextChange = {
+                            viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+                        }, onClearText = {
+
+                        viewModel.onEvent(OverviewEvent.OnClearText)
+                    }
+                    )
+                }
             }
-            )
-
             // Header 1
             HeaderTextItem(text = stringResource(R.string.categories_header_text))
 
@@ -80,36 +105,45 @@ fun OverviewScreen(
             // Header 2
             HeaderTextItem(text = stringResource(R.string.recipes_header_text))
 
-            // apply swipe refresh view
-            SwipeRefresh(
-                state = swipeRefreshState,
-                onRefresh = {
-                    viewModel.onEvent(event = OverviewEvent.OnRefresh)
-                }
-            ) {
+            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
 
-                // content to be refreshed
-                LazyColumn(
-                    contentPadding =
-                    PaddingValues(vertical = spacing.spaceMedium),
-                    content = {
+                if (mealsState.isLoading) {
 
-                        items(mealsState.meals) { meal ->
+                    CircularProgressIndicator()
+                } else {
 
-                            MealCard(meal = meal, onClickMeal = {})
+                    // apply swipe refresh view
+                    SwipeRefresh(
+                        state = swipeRefreshState,
+                        onRefresh = {
+                            viewModel.onEvent(event = OverviewEvent.OnRefresh)
                         }
+                    ) {
+
+                        // content to be refreshed
+                        LazyColumn(
+                            contentPadding =
+                            PaddingValues(vertical = spacing.spaceMedium),
+                            content = {
+
+                                items(mealsState.meals) { meal ->
+
+                                    MealCard(meal = meal, onClickMeal = {})
+                                }
+                            }
+                        )
                     }
-                )
+                }
             }
         }
 
-            /*  // Grid
-              LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
+        /*  // Grid
+          LazyVerticalGrid(columns = GridCells.Fixed(2), content = {
 
-                  items(mealsState.meals) { meal ->
+              items(mealsState.meals) { meal ->
 
-                      MealItem(meal = meal, onClickCategory = {})
-                  }
-              })*/
+                  MealItem(meal = meal, onClickCategory = {})
+              }
+          })*/
     }
 }
