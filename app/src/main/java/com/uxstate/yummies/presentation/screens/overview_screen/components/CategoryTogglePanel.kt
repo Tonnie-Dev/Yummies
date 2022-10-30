@@ -18,7 +18,7 @@ import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
-fun CategoryToggleButton(modifier: Modifier = Modifier) {
+fun CategoryTogglePanel(modifier: Modifier = Modifier) {
 
     val spacing = LocalSpacing.current
     var isShowCategories by remember { mutableStateOf(false) }
@@ -50,6 +50,6 @@ fun CategoryToggleButton(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun CategoryToggleButtonPrev() {
-    CategoryToggleButton()
+fun CategoryTogglePanelPrev() {
+    CategoryTogglePanel()
 }
