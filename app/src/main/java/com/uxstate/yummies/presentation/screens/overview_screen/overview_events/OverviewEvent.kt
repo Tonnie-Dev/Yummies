@@ -6,4 +6,5 @@ sealed class OverviewEvent() {
     object OnRefresh : OverviewEvent()
     object OnClearText : OverviewEvent()
     data class OnCategoryClick(val category: String) : OverviewEvent()
+    object OnToggleCategoryPanel: OverviewEvent()
 }
