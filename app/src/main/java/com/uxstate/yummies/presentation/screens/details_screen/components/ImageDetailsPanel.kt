@@ -5,6 +5,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -17,13 +18,16 @@ fun ImageDetailsPanel(meal: Meal, onStar: () -> Unit, modifier: Modifier = Modif
 
     val spacing = LocalSpacing.current
     Card(modifier = modifier) {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            HeaderTextItem(text = meal.name, style = MaterialTheme.typography.h4)
 
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        Row(
+
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth().padding(spacing.spaceSmall)
+        ) {
+
+            Column() {
+                HeaderTextItem(text = meal.name, style = MaterialTheme.typography.h4)
                 Text(
                     text = meal.origin,
                     style = MaterialTheme.typography.h6,
@@ -32,18 +36,19 @@ fun ImageDetailsPanel(meal: Meal, onStar: () -> Unit, modifier: Modifier = Modif
                         spacing.spaceSmall
                     )
                 )
-                IconButton(
-                    onClick = { /*TODO*/ },
-                    modifier = Modifier.padding(spacing.spaceExtraSmall)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "",
-                        tint = if (meal.isFavorite) MaterialTheme.colors.primary
-                        else Color.Gray.copy(ContentAlpha.disabled),
-                        modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
-                    )
-                }
+            }
+
+            IconButton(
+                onClick = { /*TODO*/ },
+                modifier = Modifier.padding(spacing.spaceExtraSmall)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "",
+                    tint = if (meal.isFavorite) MaterialTheme.colors.primary
+                    else Color.Gray.copy(ContentAlpha.disabled),
+                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
+                )
             }
         }
     }
