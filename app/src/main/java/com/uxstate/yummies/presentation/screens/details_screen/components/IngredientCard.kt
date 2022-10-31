@@ -17,7 +17,7 @@ fun IngredientCard(meal: Meal, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            
+
         }
 
     }
