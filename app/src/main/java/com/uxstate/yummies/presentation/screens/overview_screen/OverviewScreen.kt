@@ -140,6 +140,7 @@ fun OverviewScreen(
                                     MealCard(meal = meal, onClickMeal = {
 
                                         navigator.navigate(DetailsScreenDestination(it))
+                                        
                                     })
                                 }
                             }
