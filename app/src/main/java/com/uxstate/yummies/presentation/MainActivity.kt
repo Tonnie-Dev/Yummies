@@ -19,13 +19,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             YummiesTheme {
 
-// A surface container using the 'background' color from the theme
+                DestinationsNavHost(navGraph = NavGraphs.root)
+
+
+
+                
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                 }
-                DestinationsNavHost(navGraph = NavGraphs.root)
+
             }
         }
     }
