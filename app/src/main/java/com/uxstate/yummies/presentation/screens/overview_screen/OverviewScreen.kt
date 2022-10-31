@@ -26,7 +26,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
-import com.uxstate.yummies.presentation.screens.destinations.DetailsScreensDestination
+import com.uxstate.yummies.presentation.screens.destinations.ScreenThreeDestination
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryTogglePanel
 import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
@@ -35,10 +35,8 @@ import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.
 import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
-
-@RootNavGraph(start = true)
 @Destination
-
+@RootNavGraph(start = true)
 @Composable
 fun OverviewScreen(
     viewModel: OverviewViewModel = hiltViewModel(),
@@ -141,6 +139,7 @@ fun OverviewScreen(
 
                                     MealCard(meal = meal, onClickMeal = {
 
+                                        navigator.navigate(ScreenThreeDestination(it))
                                     })
                                 }
                             }
