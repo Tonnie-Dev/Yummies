@@ -1,5 +1,9 @@
 package com.uxstate.yummies.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Meal(
     val id: Int,
     val name: String,
@@ -10,7 +14,7 @@ data class Meal(
     val ingredients: List<String>,
     val units: List<String>,
     val isFavorite: Boolean
-) {
+) : Parcelable {
 
     val ingredientsCount: Int
         get() = ingredients.size
