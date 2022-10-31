@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
@@ -30,11 +31,13 @@ fun MealImage(meal: Meal) {
 
     Image(
         painter = painter,
+
         contentDescription = meal.name,
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(3f / 2f)
-            .padding(spacing.spaceSmall)
+            .padding(spacing.spaceSmall),
+        contentScale = ContentScale.Crop
     )
 }
 
