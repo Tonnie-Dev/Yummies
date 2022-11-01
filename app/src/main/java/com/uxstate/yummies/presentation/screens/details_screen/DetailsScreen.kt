@@ -1,10 +1,8 @@
 package com.uxstate.yummies.presentation.screens.details_screen
 
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetValue
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.rememberBottomSheetState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import com.ramcosta.composedestinations.annotation.Destination
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.screens.details_screen.components.CookingDirectionsBottomSheet
@@ -15,11 +13,17 @@ import com.uxstate.yummies.presentation.screens.details_screen.components.SheetI
 @Composable
 fun DetailsScreen(meal: Meal) {
 
+    // bottom sheet state with initial value
     val sheetState = rememberBottomSheetState(
-            initialValue = BottomSheetValue.Collapsed
+        initialValue = BottomSheetValue.Collapsed
     )
 
-    
+    // scaffold state with bottom sheet state
+    val scaffoldState = rememberBottomSheetScaffoldState(
+        bottomSheetState = sheetState
+    )
+    // this scope is aware of the composition lifecycle
+    val coroutineScope = rememberCoroutineScope()
 
     BottomSheetScaffold(sheetContent = {
 
