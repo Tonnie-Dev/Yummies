@@ -16,22 +16,5 @@ import com.uxstate.yummies.util.LocalSpacing
 @Composable
 fun DetailsScreen(meal: Meal) {
 
-    val spacing = LocalSpacing.current
-    Column {
 
-        // Meal Image
-        MealImage(meal = meal)
-
-        // Image Details
-        ImageDetailsPanel(meal = meal, onStar = { /*TODO*/ })
-
-        // ingredient
-        LazyColumn(contentPadding = PaddingValues(spacing.spaceSmall)) {
-
-            itemsIndexed(meal.ingredients) { i, ing ->
-
-                IngredientCard(ingredient = ing, measure = meal.units[i])
-            }
-        }
-    }
 }
