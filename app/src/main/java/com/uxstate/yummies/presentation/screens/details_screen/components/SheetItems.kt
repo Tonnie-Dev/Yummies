@@ -9,7 +9,7 @@ import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
-fun SheetItems(meal:Meal) {
+fun SheetItems(meal: Meal) {
     val spacing = LocalSpacing.current
     Column {
 
