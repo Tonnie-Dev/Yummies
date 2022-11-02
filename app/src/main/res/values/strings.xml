@@ -11,4 +11,5 @@
     <string name="origin_text_label">Origin</string>
     <string name="save_button_label">Save</string>
     <string name="ingredient_content_desc">Ingredient</string>
+    <string name="back_label">Back</string>
 </resources>

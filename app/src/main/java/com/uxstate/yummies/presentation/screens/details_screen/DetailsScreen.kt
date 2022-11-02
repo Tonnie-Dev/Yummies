@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.screens.details_screen.components.CookingDirectionsBottomSheet
 import com.uxstate.yummies.presentation.screens.details_screen.components.SheetItems
@@ -14,7 +15,7 @@ import com.uxstate.yummies.util.LocalSpacing
 @OptIn(ExperimentalMaterialApi::class)
 @Destination
 @Composable
-fun DetailsScreen(meal: Meal) {
+fun DetailsScreen(meal: Meal, navigator: DestinationsNavigator) {
 
     val spacing = LocalSpacing.current
     // bottom sheet state with initial value
@@ -40,6 +41,8 @@ fun DetailsScreen(meal: Meal) {
     ) {
 
         // underlying sheet
-        SheetItems(meal = meal)
+        SheetItems(meal = meal) {
+            navigator.navigateUp()
+        }
     }
 }
