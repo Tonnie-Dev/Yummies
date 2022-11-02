@@ -177,4 +177,8 @@ class YummiesRepositoryImpl @Inject constructor(
                 meals.map { it.toModel() }
             }
     }
+
+    override suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean) {
+        dao.updateStarStatus(meal.id, newStarStatus)
+    }
 }
