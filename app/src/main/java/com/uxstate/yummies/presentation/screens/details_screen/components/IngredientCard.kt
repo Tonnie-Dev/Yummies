@@ -19,7 +19,10 @@ import com.uxstate.yummies.util.LocalSpacing
 fun IngredientCard(ingredient: String, measure: String, modifier: Modifier = Modifier) {
 
     val spacing = LocalSpacing.current
-    Card(modifier = modifier) {
+    Card(
+
+        modifier = modifier.padding(vertical = spacing.spaceExtraSmall)
+    ) {
 
         Row(
             modifier = Modifier
@@ -40,7 +43,7 @@ fun IngredientCard(ingredient: String, measure: String, modifier: Modifier = Mod
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 modifier = Modifier
-                    .width(spacing.spaceOneHundredFifty)
+                    .width(spacing.spaceOneHundred + spacing.spaceLarge)
 
             )
             Text(
@@ -49,7 +52,7 @@ fun IngredientCard(ingredient: String, measure: String, modifier: Modifier = Mod
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 modifier = Modifier
-                    .width(spacing.spaceExtraLarge)
+                    .width(spacing.spaceOneHundred)
 
             )
         }
