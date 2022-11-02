@@ -1,8 +1,10 @@
 package com.uxstate.yummies.presentation.screens.details_screen
 
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.screens.details_screen.components.CookingDirectionsBottomSheet
@@ -33,7 +35,7 @@ fun DetailsScreen(meal: Meal) {
         sheetContent = {
 
             // Bottom sheet
-            CookingDirectionsBottomSheet(meal = meal)
+            CookingDirectionsBottomSheet(meal = meal, modifier = Modifier.fillMaxHeight(2f / 3f))
         }
     ) {
 

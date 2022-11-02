@@ -21,12 +21,12 @@ import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
-fun CookingDirectionsBottomSheet(meal: Meal) {
+fun CookingDirectionsBottomSheet(meal: Meal, modifier: Modifier = Modifier) {
 
     val spacing = LocalSpacing.current
     Card(
         elevation = spacing.spaceSmall,
-        modifier = Modifier.clip(
+        modifier = modifier.clip(
             RoundedCornerShape(
                 topStart = spacing.spaceLarge,
                 topEnd = spacing.spaceLarge
