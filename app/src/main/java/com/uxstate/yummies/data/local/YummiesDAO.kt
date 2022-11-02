@@ -17,7 +17,7 @@ interface YummiesDAO {
     suspend fun insertCategories(categories: List<CategoryEntity>)
 
     @Query(
-        """
+            """
         SELECT * FROM meals_table
 WHERE 
 LOWER(name) LIKE '%' || LOWER (:query)|| '%'
@@ -37,4 +37,7 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
 
     @Query("SELECT * FROM meals_table WHERE category LIKE :category")
     fun getMealsByCategory(category: String): Flow<List<MealEntity>>
+
+    @Query("UPDATE meals_table SET isFavorite =:newStarStatus WHERE id =:id")
+    suspend fun updateStarStatus(id: Int, newStarStatus: Boolean)
 }
