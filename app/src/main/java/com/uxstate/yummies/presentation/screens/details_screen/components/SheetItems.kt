@@ -22,13 +22,10 @@ fun SheetItems(meal: Meal) {
         // Image Details
         ImageDetailsPanel(meal = meal, onStar = { /*TODO*/ })
 
+        HeaderTextItem(text = stringResource(id = R.string.ingredients_text_label))
         // ingredient
         LazyColumn(contentPadding = PaddingValues(spacing.spaceSmall)) {
 
-            item {
-
-                HeaderTextItem(text = stringResource(id = R.string.ingredients_text_label))
-            }
             itemsIndexed(meal.ingredients) { i, ing ->
 
                 IngredientCard(ingredient = ing, measure = meal.units[i])
