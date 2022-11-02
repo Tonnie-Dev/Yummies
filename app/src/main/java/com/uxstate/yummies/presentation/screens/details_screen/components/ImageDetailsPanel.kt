@@ -39,7 +39,7 @@ fun ImageDetailsPanel(meal: Meal, onStar: () -> Unit, modifier: Modifier = Modif
             }
 
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = onStar,
                 modifier = Modifier.padding(spacing.spaceExtraSmall)
             ) {
                 Icon(

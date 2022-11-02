@@ -179,6 +179,7 @@ class YummiesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean) {
+        Timber.i("UpdateStarStatus for ${meal.name} with: $newStarStatus")
         dao.updateStarStatus(meal.id, newStarStatus)
     }
 }

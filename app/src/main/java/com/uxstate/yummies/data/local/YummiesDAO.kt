@@ -17,7 +17,7 @@ interface YummiesDAO {
     suspend fun insertCategories(categories: List<CategoryEntity>)
 
     @Query(
-            """
+        """
         SELECT * FROM meals_table
 WHERE 
 LOWER(name) LIKE '%' || LOWER (:query)|| '%'

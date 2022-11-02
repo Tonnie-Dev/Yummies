@@ -10,5 +10,5 @@ interface YummiesRepository {
     fun fetchMealItems(query: String, fetchFromRemote: Boolean): Flow<Resource<List<Meal>>>
     fun fetchCategoriesItems(): Flow<Resource<List<Category>>>
     fun getWordByCategory(category: String): Flow<List<Meal>>
-    suspend fun updateStarStatus(meal: Meal, newStarStatus:Boolean)
+    suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean)
 }
