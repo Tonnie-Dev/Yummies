@@ -60,10 +60,10 @@ fun CookingDirectionsBottomSheet(meal: Meal, modifier: Modifier = Modifier) {
             }
 
             val input = meal.directions
-            val formattedDirections = input.replace(Regex("\\.\\s?"), "\\.\n\n")
+            val formattedDirections = input.replace(Regex("\\.\\s?"), "\\.\n\n➼")
 
             Text(
-                text = ("\n $formattedDirections").trimIndent(),
+                text = ("\n➼$formattedDirections").trimIndent(),
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .padding(vertical = spacing.spaceSmall)
