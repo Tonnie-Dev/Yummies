@@ -13,4 +13,4 @@ data class StarredMealsEntity( @PrimaryKey(autoGenerate = false)
                                val imageUrl: String,
                                val ingredients: List<String>,
                                val units: List<String>,
-                               val isFavorite: Boolean) 
+                               val isFavorite: Boolean)
