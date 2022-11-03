@@ -4,6 +4,7 @@ import com.squareup.moshi.JsonDataException
 import com.uxstate.yummies.data.local.YummiesDatabase
 import com.uxstate.yummies.data.mapper.toEntity
 import com.uxstate.yummies.data.mapper.toModel
+import com.uxstate.yummies.data.mapper.toStarredEntity
 import com.uxstate.yummies.data.remote.YummiesAPI
 import com.uxstate.yummies.domain.model.Category
 import com.uxstate.yummies.domain.model.Meal
@@ -180,7 +181,7 @@ class YummiesRepositoryImpl @Inject constructor(
             }
     }
     override suspend fun insertStarredMeal(meal: Meal) {
-        dao.insertStarredMeal(meal = meal)
+        dao.insertStarredMeal(meal = meal.toStarredEntity())
     }
     override suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean) {
         Timber.i("UpdateStarStatus for ${meal.name} with: $newStarStatus")
@@ -188,7 +189,7 @@ class YummiesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun removeFromStarredMeals(meal: Meal) {
-        TODO("Not yet implemented")
+        dao.removeFromStarredMeals(meal = meal.toStarredEntity())
     }
 
 
