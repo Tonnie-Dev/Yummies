@@ -30,14 +30,45 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
 
                 viewModelScope.launch {
 
+                   val parsedMeal = event.meal
+                                      val matchedLiveMeal = _mealsList.value.find { it.id == parsedMeal.id }!!
+                                      container.updateStarUseCase(
+                                          meal = event.meal,
+                                          newStarStatus = !matchedLiveMeal.isFavorite
+                                      )
+
+                    //update DB 1
+                    container.updateStarUseCase(
+                            meal =matchedLiveMeal, newStarStatus = true
+                    )
+
+                    //insert DB 2
+                    container.starUseCase(event.meal)
+
+                }
+            }
+
+            is DetailsScreenEvent.UnStarMeal -> {
+
+                viewModelScope.launch {
                     val parsedMeal = event.meal
                     val matchedLiveMeal = _mealsList.value.find { it.id == parsedMeal.id }!!
                     container.updateStarUseCase(
-                        meal = event.meal,
-                        newStarStatus = !matchedLiveMeal.isFavorite
+                            meal = event.meal,
+                            newStarStatus = !matchedLiveMeal.isFavorite
                     )
+
+                    //update DB 1
+                    container.updateStarUseCase(
+                            meal =matchedLiveMeal, newStarStatus = false
+                    )
+
+
+                    //insert DB 2
+                    container.unStarUseCase(event.meal)
                 }
             }
+
         }
     }
 
