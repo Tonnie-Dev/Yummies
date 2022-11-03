@@ -181,6 +181,9 @@ class YummiesRepositoryImpl @Inject constructor(
     override suspend fun insertStarredMeal(meal: Meal) {
         dao.insertStarredMeal(meal = meal.toStarredEntity())
     }
+
+
+
     override suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean) {
         Timber.i("UpdateStarStatus for ${meal.name} with: $newStarStatus")
         dao.updateStarStatus(meal.id, newStarStatus)
@@ -188,5 +191,9 @@ class YummiesRepositoryImpl @Inject constructor(
 
     override suspend fun removeFromStarredMeals(meal: Meal) {
         dao.removeFromStarredMeals(meal = meal.toStarredEntity())
+    }
+
+    override suspend fun checkStarredStatus(meal: Meal): Boolean {
+       return dao.checkStarStatus(meal.id)
     }
 }
