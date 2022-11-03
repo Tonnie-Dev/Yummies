@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface YummiesDAO {
 
-    //MEALS dao functions
+    // MEALS dao functions
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMeals(meals: List<MealEntity>)
 
@@ -27,7 +27,6 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     )
     suspend fun getMealItems(query: String): List<MealEntity>
 
-
     @Query("SELECT * FROM meals_table WHERE category LIKE :category")
     fun getMealsByCategory(category: String): Flow<List<MealEntity>>
 
@@ -37,7 +36,7 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     @Query("DELETE FROM meals_table")
     suspend fun clearMeals()
 
-    //CATEGORIES dao functions
+    // CATEGORIES dao functions
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCategories(categories: List<CategoryEntity>)
 
@@ -47,19 +46,19 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     @Query("DELETE FROM categories_table")
     suspend fun clearCategories()
 
-    //STAR meals dao functions
+    // STAR meals dao functions
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertStarredMeal(meal:StarredMealEntity)
+    suspend fun insertStarredMeal(meal: StarredMealEntity)
 
-    @Query("SELECT 1 FROM starred_meals_table WHERE id =:id")
-    suspend fun getStarredMealById(id: Int):StarredMealEntity?
+    @Query("SELECT * FROM starred_meals_table WHERE id =:id")
+    suspend fun getStarredMealById(id: Int): StarredMealEntity?
 
     @Query("SELECT EXISTS (SELECT 1 FROM starred_meals_table WHERE id =:id)")
-    suspend fun checkStarStatus (id: Int):Boolean
+    suspend fun checkStarStatus(id: Int): Boolean
 
     @Delete
     suspend fun removeFromStarredMeals(meal: StarredMealEntity)
 
     @Query("SELECT * FROM starred_meals_table")
-    fun getAllStarredMeals():Flow<List<StarredMealEntity>>
+    fun getAllStarredMeals(): Flow<List<StarredMealEntity>>
 }

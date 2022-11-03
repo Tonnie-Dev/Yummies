@@ -5,7 +5,7 @@ import com.uxstate.yummies.domain.repository.YummiesRepository
 
 class UnStarUseCase(private val repository: YummiesRepository) {
 
-    suspend operator fun invoke(meal:Meal){
+    suspend operator fun invoke(meal: Meal) {
 
         repository.removeFromStarredMeals(meal)
     }

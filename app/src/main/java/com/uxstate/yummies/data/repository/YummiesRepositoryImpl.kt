@@ -170,8 +170,6 @@ class YummiesRepositoryImpl @Inject constructor(
         emit(Resource.Loading(isLoading = false))
     }
 
-
-
     override fun getWordByCategory(category: String): Flow<List<Meal>> {
         return dao.getMealsByCategory(category)
             .map {
@@ -191,7 +189,4 @@ class YummiesRepositoryImpl @Inject constructor(
     override suspend fun removeFromStarredMeals(meal: Meal) {
         dao.removeFromStarredMeals(meal = meal.toStarredEntity())
     }
-
-
-
 }

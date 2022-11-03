@@ -8,7 +8,11 @@ import com.uxstate.yummies.data.local.entities.MealEntity
 import com.uxstate.yummies.data.local.entities.StarredMealEntity
 import com.uxstate.yummies.data.local.type_converters.Converters
 
-@Database(entities = [CategoryEntity::class, MealEntity::class, StarredMealEntity::class], version = 1, exportSchema = true)
+@Database(
+    entities = [CategoryEntity::class, MealEntity::class, StarredMealEntity::class],
+    version = 1,
+    exportSchema = true
+)
 @TypeConverters(Converters::class)
 abstract class YummiesDatabase : RoomDatabase() {
 

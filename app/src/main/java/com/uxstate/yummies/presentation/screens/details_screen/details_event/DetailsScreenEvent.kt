@@ -5,4 +5,5 @@ import com.uxstate.yummies.domain.model.Meal
 sealed class DetailsScreenEvent {
 
     data class OnStarMeal(val meal: Meal) : DetailsScreenEvent()
+    data class UnStarMeal(val meal: Meal) : DetailsScreenEvent()
 }

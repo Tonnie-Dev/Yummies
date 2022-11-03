@@ -90,18 +90,18 @@ fun CategoryDTO.toEntity(): CategoryEntity {
     )
 }
 
-//model to StarredMealEntity entity
-fun Meal.toStarredEntity():StarredMealEntity {
+// model to StarredMealEntity entity
+fun Meal.toStarredEntity(): StarredMealEntity {
     return StarredMealEntity(
-            id = this.id,
-            name = this.name,
-            category = this.category,
-            origin = this.origin,
-            directions = this.directions,
-            imageUrl = this.imageUrl,
-            ingredients = this.ingredients,
-            units = this.units,
-            isFavorite = true
+        id = this.id,
+        name = this.name,
+        category = this.category,
+        origin = this.origin,
+        directions = this.directions,
+        imageUrl = this.imageUrl,
+        ingredients = this.ingredients,
+        units = this.units,
+        isFavorite = true
     )
 }
 
