@@ -182,4 +182,6 @@ class YummiesRepositoryImpl @Inject constructor(
         Timber.i("UpdateStarStatus for ${meal.name} with: $newStarStatus")
         dao.updateStarStatus(meal.id, newStarStatus)
     }
+
+
 }
