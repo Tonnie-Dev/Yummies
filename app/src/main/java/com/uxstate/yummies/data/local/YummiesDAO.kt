@@ -49,4 +49,10 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     //STAR meals dao functions
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStarredMeal(meal:StarredMealEntity)
+
+    @Query("SELECT 1 FROM starred_meals_table WHERE id =:id")
+    suspend fun getStarredMealById(id: Int):StarredMealEntity?
+
+    @Query("SELECT EXISTS (SELECT 1 FROM starred_meals_table WHERE id =:id)")
+    suspend fun checkStarStatus (id: Int):Boolean
 }

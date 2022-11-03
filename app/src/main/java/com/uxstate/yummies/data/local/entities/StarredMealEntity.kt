@@ -3,7 +3,7 @@ package com.uxstate.yummies.data.local.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "starred_meals")
+@Entity(tableName = "starred_meals_table")
 data class StarredMealEntity(@PrimaryKey(autoGenerate = false)
                                val id: Int,
                              val name: String,
