@@ -102,7 +102,8 @@ object AppModule {
             getMealsByCategoryUseCase = GetMealsByCategoryUseCase(repository = repository),
             updateStarUseCase = UpdateStarUseCase(repository = repository),
             starUseCase = StarUseCase(repository = repository),
-            unStarUseCase = UnStarUseCase(repository = repository)
+            unStarUseCase = UnStarUseCase(repository = repository),
+                checkStarredStatusUseCase = CheckStarredStatusUseCase(repository)
         )
     }
 }
