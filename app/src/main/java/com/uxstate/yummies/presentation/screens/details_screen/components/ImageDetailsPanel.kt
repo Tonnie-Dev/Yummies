@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.util.LocalSpacing
+import timber.log.Timber
 
 @Composable
 fun ImageDetailsPanel(
@@ -50,7 +51,7 @@ fun ImageDetailsPanel(
 
             if (isStarred) {
 
-                
+                Timber.i("Inside If-Block")
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
@@ -71,6 +72,8 @@ fun ImageDetailsPanel(
 
                 }*/
             } else {
+
+                Timber.i("Inside If-Block")
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",

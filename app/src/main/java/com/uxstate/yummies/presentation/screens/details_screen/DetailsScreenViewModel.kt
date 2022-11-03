@@ -17,6 +17,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
     ViewModel() {
 
     private val _mealsList = MutableStateFlow<List<Meal>>(emptyList())
+    private val _currentMealAsPerDatabase = MutableStateFlow(false)
 
     init {
         getMealsList()
