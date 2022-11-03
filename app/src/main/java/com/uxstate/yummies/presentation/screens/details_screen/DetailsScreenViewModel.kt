@@ -7,10 +7,11 @@ import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.presentation.screens.details_screen.details_event.DetailsScreenEvent
 import com.uxstate.yummies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(private val container: UseCaseContainer) :
@@ -18,6 +19,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
 
     private val _mealsList = MutableStateFlow<List<Meal>>(emptyList())
     private val _currentMealAsPerDatabase = MutableStateFlow(false)
+    val currentMealAsPerDatabase = _currentMealAsPerDatabase.asStateFlow()
 
     init {
         getMealsList()
@@ -36,7 +38,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
 
                     // update DB 1
                     container.updateStarUseCase(
-                        meal = matchedLiveMeal, newStarStatus = true
+                            meal = matchedLiveMeal, newStarStatus = true
                     )
 
                     // insert DB 2
@@ -52,7 +54,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
 
                     // update DB 1
                     container.updateStarUseCase(
-                        meal = matchedLiveMeal, newStarStatus = false
+                            meal = matchedLiveMeal, newStarStatus = false
                     )
 
                     // insert DB 2
@@ -67,19 +69,29 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
         viewModelScope.launch {
 
             container.getMealsUseCase(query = "", fetchFromRemote = false)
-                .collectLatest { result ->
-                    when (result) {
+                    .collectLatest { result ->
+                        when (result) {
 
-                        is Resource.Success -> {
+                            is Resource.Success -> {
 
-                            result.data?.let {
+                                result.data?.let {
 
-                                _mealsList.value = it
+                                    _mealsList.value = it
+                                }
                             }
+                            else -> Unit
                         }
-                        else -> Unit
                     }
-                }
         }
+    }
+
+    fun checkStarredStatus(meal: Meal) {
+
+        viewModelScope.launch {
+
+            _currentMealAsPerDatabase.value = container.checkStarredStatusUseCase(meal)
+        }
+
+
     }
 }

@@ -20,11 +20,12 @@ fun ImageDetailsPanel(
     meal: Meal,
     onStar: () -> Unit,
     unStar: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isMealStarred:Boolean
 ) {
 
     val spacing = LocalSpacing.current
-    var isStarred by remember { mutableStateOf(meal.isFavorite) }
+    var isStarred by remember { mutableStateOf(isMealStarred) }
 
     Card(modifier = modifier) {
 
@@ -113,6 +114,7 @@ fun ImageDetailsPanelPreview() {
             isFavorite = false
         ),
         onStar = {},
-        unStar = {}
+        unStar = {},
+            isMealStarred = false
     )
 }
