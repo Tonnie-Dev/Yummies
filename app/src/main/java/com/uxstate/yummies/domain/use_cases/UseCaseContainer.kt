@@ -6,5 +6,6 @@ data class UseCaseContainer(
     val getMealsByCategoryUseCase: GetMealsByCategoryUseCase,
     val updateStarUseCase: UpdateStarUseCase,
     val starUseCase: StarUseCase,
-    val unStarUseCase: UnStarUseCase
+    val unStarUseCase: UnStarUseCase,
+    val checkStarredStatusUseCase: CheckStarredStatusUseCase
 )
