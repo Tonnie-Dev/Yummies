@@ -7,10 +7,10 @@ import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.presentation.screens.details_screen.details_event.DetailsScreenEvent
 import com.uxstate.yummies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(private val container: UseCaseContainer) :
@@ -30,36 +30,35 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
 
                 viewModelScope.launch {
 
+                    val parsedMeal = event.meal
+                    val matchedLiveMeal = _mealsList.value.find { it.id == parsedMeal.id }!!
                     container.updateStarUseCase(
-                            meal = event.meal,
-                            newStarStatus = !event.meal.isFavorite
+                        meal = event.meal,
+                        newStarStatus = !matchedLiveMeal.isFavorite
                     )
                 }
             }
         }
     }
 
-
     private fun getMealsList() {
 
         viewModelScope.launch {
 
-            val list = container.getMealsUseCase(query = "", fetchFromRemote = false)
-                    .collectLatest { result ->
-                        when (result) {
+            container.getMealsUseCase(query = "", fetchFromRemote = false)
+                .collectLatest { result ->
+                    when (result) {
 
-                            is Resource.Success -> {
+                        is Resource.Success -> {
 
-                                result.data?.let {
+                            result.data?.let {
 
-                                    _mealsList.value = it
-                                }
+                                _mealsList.value = it
                             }
-                            else -> Unit
                         }
-
+                        else -> Unit
                     }
+                }
         }
-
     }
 }

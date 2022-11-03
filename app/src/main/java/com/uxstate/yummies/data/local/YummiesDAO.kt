@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.uxstate.yummies.data.local.entity.CategoryEntity
-import com.uxstate.yummies.data.local.entity.MealEntity
+import com.uxstate.yummies.data.local.entities.CategoryEntity
+import com.uxstate.yummies.data.local.entities.MealEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

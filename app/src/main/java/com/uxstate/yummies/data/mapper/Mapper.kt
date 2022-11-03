@@ -1,7 +1,7 @@
 package com.uxstate.yummies.data.mapper
 
-import com.uxstate.yummies.data.local.entity.CategoryEntity
-import com.uxstate.yummies.data.local.entity.MealEntity
+import com.uxstate.yummies.data.local.entities.CategoryEntity
+import com.uxstate.yummies.data.local.entities.MealEntity
 import com.uxstate.yummies.data.remote.dto.CategoryDTO
 import com.uxstate.yummies.data.remote.dto.MealDTO
 import com.uxstate.yummies.domain.model.Category

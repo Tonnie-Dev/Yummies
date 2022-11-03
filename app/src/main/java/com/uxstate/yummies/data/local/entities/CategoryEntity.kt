@@ -1,4 +1,4 @@
-package com.uxstate.yummies.data.local.entity
+package com.uxstate.yummies.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
