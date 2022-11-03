@@ -1,6 +1,7 @@
 package com.uxstate.yummies.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -55,4 +56,7 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
 
     @Query("SELECT EXISTS (SELECT 1 FROM starred_meals_table WHERE id =:id)")
     suspend fun checkStarStatus (id: Int):Boolean
+
+    @Delete
+    suspend fun removeFromStarredMeals(meal: StarredMealEntity)
 }
