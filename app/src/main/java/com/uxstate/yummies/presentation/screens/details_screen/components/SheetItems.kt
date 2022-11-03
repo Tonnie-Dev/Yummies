@@ -12,7 +12,12 @@ import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
-fun SheetItems(meal: Meal, onClickBackArrow: () -> Unit, onStarClick: () -> Unit) {
+fun SheetItems(
+    meal: Meal,
+    onClickBackArrow: () -> Unit,
+    onStarClick: () -> Unit,
+    unStarClick: () -> Unit
+) {
     val spacing = LocalSpacing.current
     Column {
 
@@ -20,7 +25,7 @@ fun SheetItems(meal: Meal, onClickBackArrow: () -> Unit, onStarClick: () -> Unit
         MealImage(meal = meal, onClickBackArrow = onClickBackArrow)
 
         // Image Details
-        ImageDetailsPanel(meal = meal, onStar = onStarClick)
+        ImageDetailsPanel(meal = meal, onStar = onStarClick, unStar = unStarClick)
 
         HeaderTextItem(text = stringResource(id = R.string.ingredients_text_label))
         // ingredient

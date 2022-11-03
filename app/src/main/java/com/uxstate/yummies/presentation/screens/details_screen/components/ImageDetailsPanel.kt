@@ -1,5 +1,6 @@
 package com.uxstate.yummies.presentation.screens.details_screen.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -28,65 +29,67 @@ fun ImageDetailsPanel(
 
         Row(
 
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(spacing.spaceSmall)
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(spacing.spaceSmall)
         ) {
 
             Column() {
                 HeaderTextItem(text = meal.name, style = MaterialTheme.typography.h4)
                 Text(
-                        text = meal.origin,
-                        style = MaterialTheme.typography.h6,
-                        color = MaterialTheme.colors.onSurface,
-                        modifier = Modifier.padding(
-                                spacing.spaceSmall
-                        )
+                    text = meal.origin,
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.onSurface,
+                    modifier = Modifier.padding(
+                        spacing.spaceSmall
+                    )
                 )
             }
 
             if (isStarred) {
-                IconButton(
-                        onClick = {
-                            onStar()
-                            isStarred = !isStarred
 
-                        },
-                        modifier = Modifier.padding(spacing.spaceExtraSmall)
+                
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "",
+                    tint = MaterialTheme.colors.primary,
+                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
+
+                        onStar()
+                        isStarred = !isStarred
+                    }
+                )
+              /*  IconButton(
+                    onClick = {
+                        onStar()
+                        isStarred = !isStarred
+                    },
+                    modifier = Modifier.padding(spacing.spaceExtraSmall)
                 ) {
-                    Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = "",
-                            tint = if (isStarred) MaterialTheme.colors.primary
-                            else Color.Gray.copy(ContentAlpha.disabled),
-                            modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
-                    )
-                }
+
+                }*/
             } else {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = "",
+                    tint = Color.Gray.copy(ContentAlpha.disabled),
+                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
-                IconButton(
-                        onClick = {
-                            unStar()
-                            isStarred = !isStarred
+                        unStar()
+                        isStarred = !isStarred
+                    }
+                )
+                /*IconButton(
+                    onClick = {
 
-                        },
-                        modifier = Modifier.padding(spacing.spaceExtraSmall)
+                    },
+                    modifier = Modifier.padding(spacing.spaceExtraSmall)
                 ) {
-                    Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = "",
-                            tint = if (isStarred) MaterialTheme.colors.primary
-                            else Color.Gray.copy(ContentAlpha.disabled),
-                            modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
-                    )
-                }
 
-
+                }*/
             }
-
-
         }
     }
 }
@@ -95,18 +98,18 @@ fun ImageDetailsPanel(
 @Composable
 fun ImageDetailsPanelPreview() {
     ImageDetailsPanel(
-            meal = Meal(
-                    id = 0,
-                    name = "Chapoo Dododo",
-                    category = "",
-                    origin = "Jamaica",
-                    directions = "",
-                    imageUrl = "",
-                    ingredients = listOf(),
-                    units = listOf(),
-                    isFavorite = false
-            ),
-            onStar = {},
-            unStar = {}
+        meal = Meal(
+            id = 0,
+            name = "Chapoo Dododo",
+            category = "",
+            origin = "Jamaica",
+            directions = "",
+            imageUrl = "",
+            ingredients = listOf(),
+            units = listOf(),
+            isFavorite = false
+        ),
+        onStar = {},
+        unStar = {}
     )
 }

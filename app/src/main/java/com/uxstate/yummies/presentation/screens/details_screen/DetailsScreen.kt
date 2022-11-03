@@ -57,6 +57,11 @@ fun DetailsScreen(
             onStarClick = {
                 viewModel.onEvent(event = DetailsScreenEvent.OnStarMeal(meal = meal))
             },
+
+            unStarClick = {
+
+                viewModel.onEvent(event = DetailsScreenEvent.UnStarMeal(meal))
+            }
         )
     }
 }
