@@ -18,5 +18,5 @@ interface YummiesRepository {
     // Starred Meals function
     suspend fun removeFromStarredMeals(meal: Meal)
     suspend fun insertStarredMeal(meal: Meal)
-    suspend fun checkStarredStatus(meal: Meal):Boolean
+    suspend fun checkStarredStatus(meal: Meal): Boolean
 }

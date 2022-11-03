@@ -16,7 +16,8 @@ fun SheetItems(
     meal: Meal,
     onClickBackArrow: () -> Unit,
     onStarClick: () -> Unit,
-    unStarClick: () -> Unit
+    unStarClick: () -> Unit,
+    isMealStarred: Boolean
 ) {
     val spacing = LocalSpacing.current
     Column {
@@ -25,7 +26,12 @@ fun SheetItems(
         MealImage(meal = meal, onClickBackArrow = onClickBackArrow)
 
         // Image Details
-        ImageDetailsPanel(meal = meal, onStar = onStarClick, unStar = unStarClick)
+        ImageDetailsPanel(
+            meal = meal,
+            onStar = onStarClick,
+            unStar = unStarClick,
+            isMealStarred = isMealStarred
+        )
 
         HeaderTextItem(text = stringResource(id = R.string.ingredients_text_label))
         // ingredient

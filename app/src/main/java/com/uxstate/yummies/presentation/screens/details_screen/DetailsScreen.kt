@@ -2,8 +2,7 @@ package com.uxstate.yummies.presentation.screens.details_screen
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ramcosta.composedestinations.annotation.Destination
@@ -23,6 +22,11 @@ fun DetailsScreen(
     viewModel: DetailsScreenViewModel = hiltViewModel()
 ) {
 
+    LaunchedEffect(key1 = meal, block = {
+
+        viewModel.checkStarredStatus(meal)
+    })
+    val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
     val spacing = LocalSpacing.current
 
     // bottom sheet state with initial value
@@ -54,6 +58,7 @@ fun DetailsScreen(
         SheetItems(
             meal = meal,
             onClickBackArrow = { navigator.navigateUp() },
+            isMealStarred = isMealStarred,
             onStarClick = {
                 viewModel.onEvent(event = DetailsScreenEvent.OnStarMeal(meal = meal))
             },
@@ -62,6 +67,7 @@ fun DetailsScreen(
 
                 viewModel.onEvent(event = DetailsScreenEvent.UnStarMeal(meal))
             }
+
         )
     }
 }

@@ -103,7 +103,7 @@ object AppModule {
             updateStarUseCase = UpdateStarUseCase(repository = repository),
             starUseCase = StarUseCase(repository = repository),
             unStarUseCase = UnStarUseCase(repository = repository),
-                checkStarredStatusUseCase = CheckStarredStatusUseCase(repository)
+            checkStarredStatusUseCase = CheckStarredStatusUseCase(repository)
         )
     }
 }

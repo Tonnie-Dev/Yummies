@@ -21,7 +21,7 @@ fun ImageDetailsPanel(
     onStar: () -> Unit,
     unStar: () -> Unit,
     modifier: Modifier = Modifier,
-    isMealStarred:Boolean
+    isMealStarred: Boolean
 ) {
 
     val spacing = LocalSpacing.current
@@ -115,6 +115,6 @@ fun ImageDetailsPanelPreview() {
         ),
         onStar = {},
         unStar = {},
-            isMealStarred = false
+        isMealStarred = false
     )
 }
