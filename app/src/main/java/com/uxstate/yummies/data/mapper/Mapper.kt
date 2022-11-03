@@ -2,6 +2,7 @@ package com.uxstate.yummies.data.mapper
 
 import com.uxstate.yummies.data.local.entities.CategoryEntity
 import com.uxstate.yummies.data.local.entities.MealEntity
+import com.uxstate.yummies.data.local.entities.StarredMealEntity
 import com.uxstate.yummies.data.remote.dto.CategoryDTO
 import com.uxstate.yummies.data.remote.dto.MealDTO
 import com.uxstate.yummies.domain.model.Category
@@ -89,7 +90,22 @@ fun CategoryDTO.toEntity(): CategoryEntity {
     )
 }
 
-// help function 1
+//model to StarredMealEntity entity
+fun Meal.toStarredEntity():StarredMealEntity {
+    return StarredMealEntity(
+            id = this.id,
+            name = this.name,
+            category = this.category,
+            origin = this.origin,
+            directions = this.directions,
+            imageUrl = this.imageUrl,
+            ingredients = this.ingredients,
+            units = this.units,
+            isFavorite = true
+    )
+}
+
+// helper function 1
 fun combineStrIngredientsToList(mealDTO: MealDTO): List<String> {
 
     val ing1 = mealDTO.strIngredient1 ?: ""
