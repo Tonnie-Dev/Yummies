@@ -169,6 +169,8 @@ class YummiesRepositoryImpl @Inject constructor(
         emit(Resource.Loading(isLoading = false))
     }
 
+
+
     override fun getWordByCategory(category: String): Flow<List<Meal>> {
         return dao.getMealsByCategory(category)
             .map {
@@ -177,11 +179,18 @@ class YummiesRepositoryImpl @Inject constructor(
                 meals.map { it.toModel() }
             }
     }
-
+    override suspend fun insertStarredMeal(meal: Meal) {
+        dao.insertStarredMeal(meal = meal)
+    }
     override suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean) {
         Timber.i("UpdateStarStatus for ${meal.name} with: $newStarStatus")
         dao.updateStarStatus(meal.id, newStarStatus)
     }
+
+    override suspend fun removeFromStarredMeals(meal: Meal) {
+        TODO("Not yet implemented")
+    }
+
 
 
 }
