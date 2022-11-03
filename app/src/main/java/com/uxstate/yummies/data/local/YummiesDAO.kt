@@ -59,4 +59,7 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
 
     @Delete
     suspend fun removeFromStarredMeals(meal: StarredMealEntity)
+
+    @Query("SELECT * FROM starred_meals_table")
+    fun getAllStarredMeals():Flow<List<StarredMealEntity>>
 }
