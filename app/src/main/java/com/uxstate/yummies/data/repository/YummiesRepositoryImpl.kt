@@ -191,7 +191,7 @@ class YummiesRepositoryImpl @Inject constructor(
         dao.removeFromStarredMeals(meal = meal.toStarredEntity())
     }
 
-    override suspend fun checkStarredStatus(meal: Meal): Boolean {
+    override  fun checkStarredStatus(meal: Meal): Flow<Boolean> {
         return dao.checkStarStatus(meal.id)
     }
 }

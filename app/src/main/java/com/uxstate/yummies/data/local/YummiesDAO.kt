@@ -54,7 +54,7 @@ LOWER(name) LIKE '%' || LOWER (:query)|| '%'
     suspend fun getStarredMealById(id: Int): StarredMealEntity?
 
     @Query("SELECT EXISTS (SELECT 1 FROM starred_meals_table WHERE id =:id)")
-    suspend fun checkStarStatus(id: Int): Boolean
+    fun checkStarStatus(id: Int): Flow<Boolean>
 
     @Delete
     suspend fun removeFromStarredMeals(meal: StarredMealEntity)
