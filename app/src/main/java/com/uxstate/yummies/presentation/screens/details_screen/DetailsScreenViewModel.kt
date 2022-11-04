@@ -8,10 +8,9 @@ import com.uxstate.yummies.presentation.screens.details_screen.details_event.Det
 import com.uxstate.yummies.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class DetailsScreenViewModel @Inject constructor(private val container: UseCaseContainer) :
@@ -87,9 +86,9 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
 
     fun checkStarredStatus(meal: Meal) {
 
-        viewModelScope.launch {
-
-            _currentMealAsPerDatabase.value = container.checkStarredStatusUseCase(meal)
-        }
+        container.checkStarredStatusUseCase(meal).onEach {
+            Timber.i("Inside checkStarredStatus - value is: $it")
+            _currentMealAsPerDatabase.value = it
+        }.launchIn(viewModelScope)
     }
 }
