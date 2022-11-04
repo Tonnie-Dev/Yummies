@@ -2,6 +2,7 @@ package com.uxstate.yummies.presentation.screens.overview_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
 import com.uxstate.yummies.presentation.screens.overview_screen.states.StateCategories
@@ -27,6 +28,9 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
 
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
+
+    private val _starredStatus = MutableStateFlow(false)
+    val starredStatus =_starredStatus.asStateFlow()
 
     var searchJob: Job? = null
 
@@ -161,5 +165,13 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                     }
                 }
         }
+    }
+
+    fun checkStarredStatus(meal:Meal){
+
+        container.checkStarredStatusUseCase(meal).onEach {
+
+            _starredStatus.value = it
+        }.launchIn(viewModelScope)
     }
 }
