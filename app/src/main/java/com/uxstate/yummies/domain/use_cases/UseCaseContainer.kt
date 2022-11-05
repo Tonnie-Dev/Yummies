@@ -7,5 +7,6 @@ data class UseCaseContainer(
     val updateStarUseCase: UpdateStarUseCase,
     val starUseCase: StarUseCase,
     val unStarUseCase: UnStarUseCase,
-    val checkStarredStatusUseCase: CheckStarredStatusUseCase
+    val checkStarredStatusUseCase: CheckStarredStatusUseCase,
+    val getStarredMeals: GetStarredMeals
 )
