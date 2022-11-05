@@ -11,7 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -33,7 +33,7 @@ import com.uxstate.yummies.util.LocalSpacing
 fun MealCard(
     meal: Meal,
     onClickMeal: (meal: Meal) -> Unit,
-
+    isStarred: Boolean,
     modifier: Modifier = Modifier
 ) {
     val spacing = LocalSpacing.current
@@ -106,7 +106,7 @@ fun MealCard(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
-                    tint = if (meal.isFavorite) MaterialTheme.colors.primary
+                    tint = if (isStarred) MaterialTheme.colors.primary
                     else Color.Gray.copy(ContentAlpha.disabled),
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
                 )
@@ -151,6 +151,8 @@ fun MealCardPreview() {
             isFavorite = true
         ),
         onClickMeal = { /*TODO*/ },
+
+        isStarred = false
 
     )
 }

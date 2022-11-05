@@ -35,7 +35,6 @@ import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.
 import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
-import kotlinx.coroutines.flow.MutableStateFlow
 import timber.log.Timber
 
 @Destination
@@ -45,9 +44,9 @@ fun OverviewScreen(
     viewModel: OverviewViewModel = hiltViewModel(),
     navigator: DestinationsNavigator
 ) {
-    val isMealStarred by viewModel.starredStatus.collectAsState()
+    val starredMeals by viewModel.starredMeals.collectAsState()
 
-
+    Timber.i("Received meals are: $starredMeals")
     val mealsState by viewModel.stateMeals.collectAsState()
     val categoriesState by viewModel.stateCategory.collectAsState()
     val swipeRefreshState = rememberSwipeRefreshState(
@@ -138,18 +137,21 @@ fun OverviewScreen(
                         // content to be refreshed
                         LazyColumn(
                             contentPadding =
-                            PaddingValues(vertical = spacing.spaceMedium),
-                            content = {
+                            PaddingValues(vertical = spacing.spaceMedium)
+                        ) {
 
-                                items(mealsState.meals) { meal ->
-
-                                    Timber.i("Status on Overview is ${meal.isFavorite}")
-                                    MealCard(meal = meal, onClickMeal = {
+                            items(mealsState.meals) { meal ->
+                                Timber.i("Received meals are: $starredMeals")
+                                Timber.i("Status on Overview is ${meal.isFavorite}")
+                                MealCard(
+                                    meal = meal,
+                                    onClickMeal = {
                                         navigator.navigate(DetailsScreenDestination(it))
-                                    })
-                                }
+                                    },
+                                    isStarred = starredMeals.contains(meal)
+                                )
                             }
-                        )
+                        }
                     }
                 }
             }

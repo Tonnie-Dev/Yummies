@@ -104,7 +104,7 @@ object AppModule {
             starUseCase = StarUseCase(repository = repository),
             unStarUseCase = UnStarUseCase(repository = repository),
             checkStarredStatusUseCase = CheckStarredStatusUseCase(repository),
-                getStarredMeals = GetStarredMeals(repository = repository)
+            getStarredMeals = GetStarredMeals(repository = repository)
         )
     }
 }

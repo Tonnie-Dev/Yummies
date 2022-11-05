@@ -10,5 +10,4 @@ class GetStarredMeals(private val repository: YummiesRepository) {
 
         return repository.getStarredMeals()
     }
-
 }

@@ -41,6 +41,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     init {
         getCategories()
         getMeals()
+        getStarredMeals()
     }
 
     fun onEvent(event: OverviewEvent) {
@@ -178,14 +179,12 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         }
     }
 
+    private fun getStarredMeals() {
 
-   private fun getStarredMeals() {
+        container.getStarredMeals().onEach {
 
-       container.getStarredMeals().onEach {
-
-           _starredMeals.value = it
-       }
-
+            _starredMeals.value = it
+        }
     }
     private fun checkStarredStatus(meal: Meal) {
 

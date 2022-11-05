@@ -105,19 +105,19 @@ fun Meal.toStarredEntity(): StarredMealEntity {
     )
 }
 
-//entity to Meal Model class
-fun StarredMealEntity.toModel():Meal {
+// entity to Meal Model class
+fun StarredMealEntity.toModel(): Meal {
 
     return Meal(
-            id = this.id,
-            name = this.name,
-            category = this.category,
-            origin = this.origin,
-            directions = this.directions,
-            imageUrl = this.imageUrl,
-            ingredients = this.ingredients,
-            units = this.units,
-            isFavorite = false
+        id = this.id,
+        name = this.name,
+        category = this.category,
+        origin = this.origin,
+        directions = this.directions,
+        imageUrl = this.imageUrl,
+        ingredients = this.ingredients,
+        units = this.units,
+        isFavorite = false
     )
 }
 
