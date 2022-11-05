@@ -33,7 +33,8 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     private val _starredStatus = MutableStateFlow(false)
     val starredStatus = _starredStatus.asStateFlow()
 
-    private val _savedMeals = MutableStateFlow<List<Meal>>(emptyList())
+    private val _starredMeals = MutableStateFlow<List<Meal>>(emptyList())
+    val starredMeals = _starredMeals.asStateFlow()
 
     var searchJob: Job? = null
 
@@ -177,6 +178,15 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         }
     }
 
+
+   private fun getStarredMeals() {
+
+       container.getStarredMeals().onEach {
+
+           _starredMeals.value = it
+       }
+
+    }
     private fun checkStarredStatus(meal: Meal) {
 
         container.checkStarredStatusUseCase(meal).onEach {
