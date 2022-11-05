@@ -196,6 +196,8 @@ class YummiesRepositoryImpl @Inject constructor(
     }
 
     override fun getStarredMeals(): Flow<List<Meal>> {
-        return dao.getAllStarredMeals()
+        return dao.getAllStarredMeals().map {
+             meals -> meals.map { it.toModel() }
+        }
     }
 }
