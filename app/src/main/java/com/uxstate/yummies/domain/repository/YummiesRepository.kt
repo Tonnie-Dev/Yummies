@@ -19,4 +19,5 @@ interface YummiesRepository {
     suspend fun removeFromStarredMeals(meal: Meal)
     suspend fun insertStarredMeal(meal: Meal)
     fun checkStarredStatus(meal: Meal): Flow<Boolean>
+    fun getStarredMeals():Flow<List<Meal>>
 }

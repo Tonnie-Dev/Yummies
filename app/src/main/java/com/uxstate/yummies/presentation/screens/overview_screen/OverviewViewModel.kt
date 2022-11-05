@@ -16,6 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(private val container: UseCaseContainer) : ViewModel() {
@@ -30,7 +31,9 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     val uiEvent = _uiEvent.asSharedFlow()
 
     private val _starredStatus = MutableStateFlow(false)
-    val starredStatus =_starredStatus.asStateFlow()
+    val starredStatus = _starredStatus.asStateFlow()
+
+    private val _savedMeals = MutableStateFlow<List<Meal>>(emptyList())
 
     var searchJob: Job? = null
 
@@ -117,9 +120,16 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                         }
                         is Resource.Success -> {
 
-                            result.data?.let {
+                            result.data?.let { meals ->
 
-                                _stateMeals.value = _stateMeals.value.copy(meals = it)
+                                _stateMeals.value = _stateMeals.value.copy(
+                                    meals = meals.map {
+
+                                        checkStarredStatus(it)
+                                        // container.updateStarUseCase(it, _starredStatus.value)
+                                        it.copy(isFavorite = _starredStatus.value)
+                                    }
+                                )
                             }
                         }
                         is Resource.Error -> {
@@ -167,10 +177,11 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         }
     }
 
-    fun checkStarredStatus(meal:Meal){
+    private fun checkStarredStatus(meal: Meal) {
 
         container.checkStarredStatusUseCase(meal).onEach {
 
+            Timber.i("Current value is: $it")
             _starredStatus.value = it
         }.launchIn(viewModelScope)
     }

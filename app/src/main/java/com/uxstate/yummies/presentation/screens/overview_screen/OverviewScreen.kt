@@ -11,7 +11,6 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -36,6 +35,8 @@ import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.
 import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
+import kotlinx.coroutines.flow.MutableStateFlow
+import timber.log.Timber
 
 @Destination
 @RootNavGraph(start = true)
@@ -46,48 +47,48 @@ fun OverviewScreen(
 ) {
     val isMealStarred by viewModel.starredStatus.collectAsState()
 
+
     val mealsState by viewModel.stateMeals.collectAsState()
     val categoriesState by viewModel.stateCategory.collectAsState()
     val swipeRefreshState = rememberSwipeRefreshState(
-            isRefreshing = mealsState.isLoading
+        isRefreshing = mealsState.isLoading
     )
 
     val spacing = LocalSpacing.current
     val uiController = rememberSystemUiController()
     uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
 
-
     Surface {
         Column(
-                modifier = Modifier
-                        .fillMaxSize()
-                        .padding(spacing.spaceSmall)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(spacing.spaceSmall)
         ) {
 
             // Search Box
 
             Surface(
-                    modifier = Modifier
-                            .padding(spacing.spaceSmall)
-                            .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
-                    elevation = spacing.spaceSmall
+                modifier = Modifier
+                    .padding(spacing.spaceSmall)
+                    .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
+                elevation = spacing.spaceSmall
 
             ) {
 
                 Box(
-                        contentAlignment = Alignment.Center,
-                        modifier = Modifier
-                                .border(
-                                        width = spacing.spaceDoubleDp,
-                                        color = MaterialTheme.colors.primary
-                                )
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .border(
+                            width = spacing.spaceDoubleDp,
+                            color = MaterialTheme.colors.primary
+                        )
 
                 ) {
                     SearchBoxItem(
-                            query = mealsState.searchQuery,
-                            onSearchTextChange = {
-                                viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
-                            }, onClearText = {
+                        query = mealsState.searchQuery,
+                        onSearchTextChange = {
+                            viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+                        }, onClearText = {
 
                         viewModel.onEvent(OverviewEvent.OnClearText)
                     }
@@ -100,9 +101,9 @@ fun OverviewScreen(
             }
 
             AnimatedVisibility(
-                    visible = categoriesState.isShowCategories,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
+                visible = categoriesState.isShowCategories,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically()
             ) {
                 // Categories
                 LazyRow() {
@@ -128,31 +129,26 @@ fun OverviewScreen(
 
                     // apply swipe refresh view
                     SwipeRefresh(
-                            state = swipeRefreshState,
-                            onRefresh = {
-                                viewModel.onEvent(event = OverviewEvent.OnRefresh)
-                            }
+                        state = swipeRefreshState,
+                        onRefresh = {
+                            viewModel.onEvent(event = OverviewEvent.OnRefresh)
+                        }
                     ) {
 
                         // content to be refreshed
                         LazyColumn(
-                                contentPadding =
-                                PaddingValues(vertical = spacing.spaceMedium),
-                                content = {
+                            contentPadding =
+                            PaddingValues(vertical = spacing.spaceMedium),
+                            content = {
 
-                                    items(mealsState.meals) { meal ->
+                                items(mealsState.meals) { meal ->
 
-
-                                        LaunchedEffect(key1 = meal, block = {
-
-                                            viewModel.checkStarredStatus(meal)
-                                        })
-                                        MealCard(meal = meal, onClickMeal = {
-
-                                            navigator.navigate(DetailsScreenDestination(it))
-                                        }, isStarred = isMealStarred)
-                                    }
+                                    Timber.i("Status on Overview is ${meal.isFavorite}")
+                                    MealCard(meal = meal, onClickMeal = {
+                                        navigator.navigate(DetailsScreenDestination(it))
+                                    })
                                 }
+                            }
                         )
                     }
                 }
