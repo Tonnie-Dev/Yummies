@@ -194,4 +194,8 @@ class YummiesRepositoryImpl @Inject constructor(
     override fun checkStarredStatus(meal: Meal): Flow<Boolean> {
         return dao.checkStarStatus(meal.id)
     }
+
+    override fun getStarredMeals(): Flow<List<Meal>> {
+        return dao.getAllStarredMeals()
+    }
 }
