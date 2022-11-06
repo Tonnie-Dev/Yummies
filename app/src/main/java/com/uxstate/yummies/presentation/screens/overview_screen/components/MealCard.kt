@@ -106,7 +106,7 @@ fun MealCard(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
-                    tint = if (isStarred) MaterialTheme.colors.primary
+                    tint = if (isStarred) Color(0xFFF26227)
                     else Color.Gray.copy(ContentAlpha.disabled),
                     modifier = Modifier.size(spacing.spaceLarge)
                 )

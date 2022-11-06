@@ -17,7 +17,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-
 @HiltViewModel
 class OverviewViewModel @Inject constructor(private val container: UseCaseContainer) : ViewModel() {
 
@@ -172,7 +171,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     }
 
     private fun getStarredMeals() {
-    
+
         container.getStarredMeals().onEach {
 
             _starredMeals.value = it
