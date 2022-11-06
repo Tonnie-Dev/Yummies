@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
+import com.uxstate.yummies.presentation.ui.theme.starredStarColor
 import com.uxstate.yummies.util.LocalSpacing
 import timber.log.Timber
 
@@ -56,7 +57,7 @@ fun ImageDetailsPanel(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
-                    tint = MaterialTheme.colors.primary,
+                    tint = MaterialTheme.colors.starredStarColor,
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
                         unStar()

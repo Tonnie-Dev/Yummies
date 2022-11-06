@@ -27,6 +27,7 @@ import coil.request.ImageRequest
 import com.uxstate.yummies.R
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.ui.theme.gradientColors
+import com.uxstate.yummies.presentation.ui.theme.starredStarColor
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -106,7 +107,7 @@ fun MealCard(
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
-                    tint = if (isStarred) Color(0xFFF26227)
+                    tint = if (isStarred) MaterialTheme.colors.starredStarColor
                     else Color.Gray.copy(ContentAlpha.disabled),
                     modifier = Modifier.size(spacing.spaceLarge)
                 )

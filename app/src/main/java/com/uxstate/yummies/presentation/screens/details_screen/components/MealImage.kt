@@ -35,10 +35,8 @@ fun MealImage(meal: Meal, onClickBackArrow: () -> Unit) {
     )
 
     Box(contentAlignment = Alignment.TopStart) {
-
         Image(
             painter = painter,
-
             contentDescription = meal.name,
             modifier = Modifier
                 .fillMaxWidth()

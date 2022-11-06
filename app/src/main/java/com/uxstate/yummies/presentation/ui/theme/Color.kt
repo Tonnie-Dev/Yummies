@@ -34,3 +34,7 @@ val Colors.statusBarColor
 val Colors.gradientColors
     get() = if (this.isLight) listOf(Yellow300, Yellow200, Yellow50)
     else listOf(Lime300, Lime200, Lime50)
+
+val Colors.starredStarColor
+    get() = if (this.isLight) Color(0xFFF26227)
+    else Color(0xFFEE8A62)
