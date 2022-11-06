@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.ui.theme.YummiesTheme
 import com.uxstate.yummies.presentation.ui.theme.cardColor
+import com.uxstate.yummies.presentation.ui.theme.starredStarColor
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -30,7 +31,7 @@ fun SearchBoxItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(spacing.spaceSmall),
+            .padding(spacing.spaceExtraSmall),
         elevation = spacing.spaceSmall,
         shape = RoundedCornerShape(spacing.spaceSmall)
     ) {
@@ -64,8 +65,9 @@ fun SearchBoxItem(
             singleLine = true, modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colors.cardColor,
-                focusedIndicatorColor = MaterialTheme.colors.background,
-                unfocusedIndicatorColor = MaterialTheme.colors.background,
+                cursorColor = MaterialTheme.colors.starredStarColor,
+                focusedIndicatorColor = MaterialTheme.colors.cardColor,
+                unfocusedIndicatorColor = MaterialTheme.colors.cardColor,
                 textColor = MaterialTheme.colors.onSurface
             )
         )

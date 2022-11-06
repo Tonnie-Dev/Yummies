@@ -40,4 +40,4 @@ val Colors.starredStarColor
     else Color(0xFFEE8A62)
 
 val Colors.cardColor
-    get() = if (this.isLight)Yellow200 else Lime200
+    get() = if (this.isLight)Yellow300 else Lime300
