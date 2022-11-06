@@ -30,7 +30,7 @@ fun SheetItems(
             meal = meal,
             onStar = onStarClick,
             unStar = unStarClick,
-            isMealStarred = isMealStarred
+            isStarred = isMealStarred
         )
 
         HeaderTextItem(text = stringResource(id = R.string.ingredients_text_label))

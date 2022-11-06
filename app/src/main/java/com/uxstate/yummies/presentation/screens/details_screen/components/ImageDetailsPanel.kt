@@ -21,11 +21,11 @@ fun ImageDetailsPanel(
     onStar: () -> Unit,
     unStar: () -> Unit,
     modifier: Modifier = Modifier,
-    isMealStarred: Boolean
+    isStarred: Boolean
 ) {
 
     val spacing = LocalSpacing.current
-    var isStarred by remember { mutableStateOf(isMealStarred) }
+    var isMealStarred by remember { mutableStateOf(isStarred) }
 
     Card(modifier = modifier) {
 
@@ -60,7 +60,7 @@ fun ImageDetailsPanel(
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
                         onStar()
-                        isStarred = !isStarred
+
                     }
                 )
               /*  IconButton(
@@ -82,7 +82,7 @@ fun ImageDetailsPanel(
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
                         unStar()
-                        isStarred = !isStarred
+
                     }
                 )
                 /*IconButton(
@@ -115,6 +115,6 @@ fun ImageDetailsPanelPreview() {
         ),
         onStar = {},
         unStar = {},
-        isMealStarred = false
+        isStarred = false
     )
 }

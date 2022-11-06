@@ -2,6 +2,7 @@ package com.uxstate.yummies.presentation.screens.details_screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.uxstate.yummies.data.remote.dto.MealsResponseDTO
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import com.uxstate.yummies.presentation.screens.details_screen.details_event.DetailsScreenEvent
@@ -16,9 +17,20 @@ import timber.log.Timber
 class DetailsScreenViewModel @Inject constructor(private val container: UseCaseContainer) :
     ViewModel() {
 
-    private val _mealsList = MutableStateFlow<List<Meal>>(emptyList())
-    private val _currentMealAsPerDatabase = MutableStateFlow(false)
-    val currentMealAsPerDatabase = _currentMealAsPerDatabase.asStateFlow()
+
+    //meal listing status
+
+    private val _starredStatus = MutableStateFlow(false)
+    val starredStatus = _starredStatus.asStateFlow()
+
+    //list of starred meals
+    private val _starredMeals = MutableStateFlow<List<Meal>>(emptyList())
+
+
+
+    //private val _mealsList = MutableStateFlow<List<Meal>>(emptyList())
+    //private val _currentMealAsPerDatabase = MutableStateFlow(false)
+   // val currentMealAsPerDatabase = _currentMealAsPerDatabase.asStateFlow()
 
     init {
         getMealsList()
@@ -63,6 +75,16 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
         }
     }
 
+    private fun getStarredMeals(){
+
+        container.getStarredMeals().onEach {
+
+            _starredMeals.value = it
+        }.launchIn(viewModelScope)
+    }
+
+
+    
     private fun getMealsList() {
 
         viewModelScope.launch {
@@ -84,11 +106,5 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
         }
     }
 
-    fun checkStarredStatus(meal: Meal) {
 
-        container.checkStarredStatusUseCase(meal).onEach {
-            Timber.i("Inside checkStarredStatus - value is: $it")
-            _currentMealAsPerDatabase.value = it
-        }.launchIn(viewModelScope)
-    }
 }
