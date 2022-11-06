@@ -30,9 +30,6 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     private val _uiEvent = MutableSharedFlow<UiEvent>()
     val uiEvent = _uiEvent.asSharedFlow()
 
-    private val _starredStatus = MutableStateFlow(false)
-    val starredStatus = _starredStatus.asStateFlow()
-
     private val _starredMeals = MutableStateFlow<List<Meal>>(emptyList())
     val starredMeals = _starredMeals.asStateFlow()
 
@@ -125,12 +122,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
                             result.data?.let { meals ->
 
                                 _stateMeals.value = _stateMeals.value.copy(
-                                    meals = meals.map {
-
-                                        checkStarredStatus(it)
-                                        // container.updateStarUseCase(it, _starredStatus.value)
-                                        it.copy(isFavorite = _starredStatus.value)
-                                    }
+                                    meals = meals
                                 )
                             }
                         }
@@ -184,14 +176,6 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
         container.getStarredMeals().onEach {
 
             _starredMeals.value = it
-        }.launchIn(viewModelScope)
-    }
-    private fun checkStarredStatus(meal: Meal) {
-
-        container.checkStarredStatusUseCase(meal).onEach {
-
-            Timber.i("Current value is: $it")
-            _starredStatus.value = it
         }.launchIn(viewModelScope)
     }
 }
