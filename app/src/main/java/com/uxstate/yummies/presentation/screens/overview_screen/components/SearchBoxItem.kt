@@ -31,9 +31,9 @@ fun SearchBoxItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(spacing.spaceExtraSmall),
+            .padding(spacing.spaceMedium),
         elevation = spacing.spaceSmall,
-        shape = RoundedCornerShape(spacing.spaceSmall)
+        shape = RoundedCornerShape(spacing.spaceLarge)
     ) {
 
         TextField(

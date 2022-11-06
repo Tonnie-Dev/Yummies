@@ -18,6 +18,7 @@ import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.uxstate.yummies.R
 import com.uxstate.yummies.domain.model.Meal
+import com.uxstate.yummies.presentation.ui.theme.Gray100
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -29,8 +30,8 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean
         backgroundColor = MaterialTheme.colors.surface,
 
         modifier = modifier
-            .fillMaxWidth()
-            .padding(spacing.spaceSmall)
+                .fillMaxWidth()
+                .padding(spacing.spaceSmall)
     ) {
         Box(
             modifier = modifier, contentAlignment = Alignment.BottomCenter
@@ -48,10 +49,10 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean
                 contentDescription = meal.name,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
-                    .clip(RoundedCornerShape(spacing.spaceMedium))
-                    .fillMaxWidth()
-                    .aspectRatio(4f / 3f)
-                    .padding(spacing.spaceLarge)
+                        .clip(RoundedCornerShape(spacing.spaceMedium))
+                        .fillMaxWidth()
+                        .aspectRatio(4f / 3f)
+                        .padding(spacing.spaceLarge)
             )
             IconButton(
                 onClick = { /*TODO*/ },
@@ -69,35 +70,42 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean
             }
 
             Surface(
-                color = Color(0x7F000000),
+                color = Gray100,
                 elevation = spacing.spaceExtraSmall,
                 modifier = Modifier
-                    .align(
-                        Alignment.BottomCenter
-                    )
-                    .fillMaxWidth()
-                    .padding(
-                        spacing.spaceLarge
-                    )
+                        .align(
+                                Alignment.BottomCenter
+                        )
+                        .fillMaxWidth()
+                        .padding(
+                                spacing.spaceLarge
+                        )
             ) {
-                Column() {
 
-                    Text(
-                        text = meal.name,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.h5,
+                Row() {
+                    Column() {
 
-                        modifier = Modifier
-                            .padding(spacing.spaceExtraSmall)
-                    )
-                    Text(
-                        text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
-                        color = Color.White,
-                        modifier = Modifier
-                            .padding(spacing.spaceExtraSmall)
-                    )
+                        Text(
+                                text = meal.name,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.h5,
+
+                                modifier = Modifier
+                                        .padding(spacing.spaceExtraSmall)
+                        )
+                        Text(
+                                text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
+                                color = Color.White,
+                                modifier = Modifier
+                                        .padding(spacing.spaceExtraSmall)
+                        )
+                    }
+                    Column() {
+
+                    }
                 }
+
             }
         }
     }
