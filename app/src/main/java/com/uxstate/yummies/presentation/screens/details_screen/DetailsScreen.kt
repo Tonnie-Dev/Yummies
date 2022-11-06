@@ -22,11 +22,12 @@ fun DetailsScreen(
     viewModel: DetailsScreenViewModel = hiltViewModel()
 ) {
 
-    LaunchedEffect(key1 = meal, block = {
+    val starredStatus by viewModel.starredStatus.collectAsState()
+    LaunchedEffect(true, block = {
 
         viewModel.checkStarredStatus(meal)
     })
-    val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
+   // val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
     val spacing = LocalSpacing.current
 
     // bottom sheet state with initial value
@@ -58,7 +59,7 @@ fun DetailsScreen(
         SheetItems(
             meal = meal,
             onClickBackArrow = { navigator.navigateUp() },
-            isMealStarred = isMealStarred,
+            isMealStarred = starredStatus,
             onStarClick = {
                 viewModel.onEvent(event = DetailsScreenEvent.OnStarMeal(meal = meal))
             },

@@ -18,8 +18,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
     ViewModel() {
 
 
-    //meal listing status
-
+    //meal starred status
     private val _starredStatus = MutableStateFlow(false)
     val starredStatus = _starredStatus.asStateFlow()
 
@@ -27,13 +26,8 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
     private val _starredMeals = MutableStateFlow<List<Meal>>(emptyList())
 
 
-
-    //private val _mealsList = MutableStateFlow<List<Meal>>(emptyList())
-    //private val _currentMealAsPerDatabase = MutableStateFlow(false)
-   // val currentMealAsPerDatabase = _currentMealAsPerDatabase.asStateFlow()
-
     init {
-        getMealsList()
+        getStarredMeals()
     }
 
     fun onEvent(event: DetailsScreenEvent) {
@@ -43,32 +37,17 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
             is DetailsScreenEvent.OnStarMeal -> {
 
                 viewModelScope.launch {
-
-                    val parsedMeal = event.meal
-                    val matchedLiveMeal = _mealsList.value.find { it.id == parsedMeal.id }!!
-
-                    // update DB 1
-                    container.updateStarUseCase(
-                        meal = matchedLiveMeal, newStarStatus = true
-                    )
-
                     // insert DB 2
                     container.starUseCase(event.meal)
+
                 }
             }
 
             is DetailsScreenEvent.UnStarMeal -> {
 
                 viewModelScope.launch {
-                    val parsedMeal = event.meal
-                    val matchedLiveMeal = _mealsList.value.find { it.id == parsedMeal.id }!!
 
-                    // update DB 1
-                    container.updateStarUseCase(
-                        meal = matchedLiveMeal, newStarStatus = false
-                    )
-
-                    // insert DB 2
+                    // remove from DB 2
                     container.unStarUseCase(event.meal)
                 }
             }
@@ -83,28 +62,15 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
         }.launchIn(viewModelScope)
     }
 
+    fun checkStarredStatus(meal: Meal) {
 
-    
-    private fun getMealsList() {
-
-        viewModelScope.launch {
-
-            container.getMealsUseCase(query = "", fetchFromRemote = false)
-                .collectLatest { result ->
-                    when (result) {
-
-                        is Resource.Success -> {
-
-                            result.data?.let {
-
-                                _mealsList.value = it
-                            }
-                        }
-                        else -> Unit
-                    }
-                }
-        }
+        container.checkStarredStatusUseCase(meal).onEach {
+            Timber.i("Inside checkStarredStatus - value is: $it")
+            _starredStatus.value = it
+        }.launchIn(viewModelScope)
     }
+
+   
 
 
 }
