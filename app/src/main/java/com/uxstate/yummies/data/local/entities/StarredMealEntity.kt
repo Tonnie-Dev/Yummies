@@ -13,6 +13,5 @@ data class StarredMealEntity(
     val directions: String,
     val imageUrl: String,
     val ingredients: List<String>,
-    val units: List<String>,
-    val isFavorite: Boolean
+    val units: List<String>
 )
