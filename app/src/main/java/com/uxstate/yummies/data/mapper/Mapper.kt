@@ -20,8 +20,7 @@ fun MealDTO.toModel(): Meal {
         directions = this.strInstructions,
         imageUrl = this.strMeal,
         ingredients = combineStrIngredientsToList(this),
-        units = combineStrMeasuresToList(this),
-        isFavorite = false
+        units = combineStrMeasuresToList(this)
     )
 }
 
@@ -47,8 +46,7 @@ fun MealEntity.toModel(): Meal {
         directions = this.directions,
         imageUrl = this.imageUrl,
         ingredients = this.ingredients,
-        units = this.units,
-        isFavorite = this.isFavorite
+        units = this.units
     )
 }
 
@@ -74,8 +72,7 @@ fun MealDTO.toEntity(): MealEntity {
         directions = this.strInstructions,
         imageUrl = this.strMealThumb,
         ingredients = combineStrIngredientsToList(this),
-        units = combineStrMeasuresToList(this),
-        isFavorite = false
+        units = combineStrMeasuresToList(this)
     )
 }
 
@@ -100,8 +97,7 @@ fun Meal.toStarredEntity(): StarredMealEntity {
         directions = this.directions,
         imageUrl = this.imageUrl,
         ingredients = this.ingredients,
-        units = this.units,
-        isFavorite = true
+        units = this.units
     )
 }
 
@@ -116,8 +112,7 @@ fun StarredMealEntity.toModel(): Meal {
         directions = this.directions,
         imageUrl = this.imageUrl,
         ingredients = this.ingredients,
-        units = this.units,
-        isFavorite = false
+        units = this.units
     )
 }
 
