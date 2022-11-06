@@ -12,4 +12,5 @@
     <string name="save_button_label">Save</string>
     <string name="ingredient_content_desc">Ingredient</string>
     <string name="back_label">Back</string>
+    <string name="delete_meal">Delete Meal</string>
 </resources>

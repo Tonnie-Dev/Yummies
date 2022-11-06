@@ -1,9 +1,12 @@
 package com.uxstate.yummies.presentation.screens.saved_items_screen.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.rememberAsyncImagePainter
@@ -22,7 +26,7 @@ import com.uxstate.yummies.presentation.ui.theme.Gray100
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
-fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean = true) {
+fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, onDelete:()-> Unit) {
 
     val spacing = LocalSpacing.current
     Card(
@@ -54,20 +58,7 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean
                         .aspectRatio(4f / 3f)
                         .padding(spacing.spaceLarge)
             )
-            IconButton(
-                onClick = { /*TODO*/ },
-                enabled = true,
-                modifier = Modifier.align(Alignment.TopEnd)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_bookmark_filled),
-                    contentDescription = "Bookmark",
-                    modifier = Modifier
-                        .size(spacing.spaceLarge),
 
-                    tint = if (isBookMarked)MaterialTheme.colors.primary else Color.Gray
-                )
-            }
 
             Surface(
                 color = Gray100,
@@ -82,30 +73,37 @@ fun MealBoxItem(meal: Meal, modifier: Modifier = Modifier, isBookMarked: Boolean
                         )
             ) {
 
-                Row() {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Column() {
 
                         Text(
-                                text = meal.name,
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold,
-                                style = MaterialTheme.typography.h5,
+                            text = meal.name,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            style = MaterialTheme.typography.h5,
 
-                                modifier = Modifier
-                                        .padding(spacing.spaceExtraSmall)
+                            modifier = Modifier
+                                .padding(spacing.spaceExtraSmall)
                         )
                         Text(
-                                text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
-                                color = Color.White,
-                                modifier = Modifier
-                                        .padding(spacing.spaceExtraSmall)
+                            text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
+                            color = Color.White,
+                            modifier = Modifier
+                                .padding(spacing.spaceExtraSmall)
                         )
                     }
-                    Column() {
-
-                    }
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = stringResource(R.string.delete_meal),
+                        tint = Color.White,
+                        modifier = Modifier
+                                .size(spacing.spaceLarge)
+                                .clickable { }
+                    )
                 }
-
             }
         }
     }
@@ -124,7 +122,6 @@ fun MealBoxItemPreview() {
             imageUrl = "",
             ingredients = listOf("Onion", "Pepper"),
             units = listOf()
-        ),
-        isBookMarked = true
+        ), onDelete = {}
     )
 }
