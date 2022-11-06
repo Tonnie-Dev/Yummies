@@ -4,22 +4,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Icon
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.uxstate.yummies.R
-import com.uxstate.yummies.presentation.core_components.HeaderTextItem
+import com.uxstate.yummies.presentation.ui.theme.cardColor
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
-fun CategoryTogglePanel(modifier: Modifier = Modifier, isShow: Boolean, onToggle: () -> Unit) {
+fun CategoryTogglePanel(
+    modifier: Modifier = Modifier,
+    isShow: Boolean,
+    onToggle: () -> Unit
+) {
 
     val spacing = LocalSpacing.current
     //  var isShowCategories by remember { mutableStateOf(isShow) }
@@ -28,11 +30,17 @@ fun CategoryTogglePanel(modifier: Modifier = Modifier, isShow: Boolean, onToggle
             .fillMaxWidth()
             .padding(vertical = spacing.spaceExtraSmall),
 
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceAround
     ) {
 
-        HeaderTextItem(text = stringResource(id = R.string.categories_header_text))
-        Button(onClick = onToggle) {
+        Button(
+
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.cardColor
+            ),
+            onClick = onToggle
+
+        ) {
 
             Icon(
                 imageVector = if (isShow)
@@ -46,6 +54,21 @@ fun CategoryTogglePanel(modifier: Modifier = Modifier, isShow: Boolean, onToggle
                 tint = Color.Black
 
             )
+
+            Text(text = "Categories")
+        }
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.cardColor
+            ),
+            onClick = { /*TODO*/ }
+        ) {
+            Icon(
+                imageVector = Icons.Default.Favorite,
+                contentDescription = "Favorite"
+            )
+
+            Text(text = "Favorites")
         }
     }
 }
