@@ -100,7 +100,6 @@ object AppModule {
             getMealsUseCase = GetMealsUseCase(repository = repository),
             getCategoriesUseCase = GetCategoriesUseCase(repository = repository),
             getMealsByCategoryUseCase = GetMealsByCategoryUseCase(repository = repository),
-            updateStarUseCase = UpdateStarUseCase(repository = repository),
             starUseCase = StarUseCase(repository = repository),
             unStarUseCase = UnStarUseCase(repository = repository),
             checkStarredStatusUseCase = CheckStarredStatusUseCase(repository),

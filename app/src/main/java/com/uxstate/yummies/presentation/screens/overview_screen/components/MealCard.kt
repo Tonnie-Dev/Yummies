@@ -148,8 +148,7 @@ fun MealCardPreview() {
             directions = "",
             imageUrl = "",
             ingredients = listOf("A", "B", "C"),
-            units = listOf(),
-            isFavorite = true
+            units = listOf()
         ),
         onClickMeal = { /*TODO*/ },
 

@@ -115,8 +115,7 @@ fun MealBoxItemPreview() {
             directions = "",
             imageUrl = "",
             ingredients = listOf("Onion", "Pepper"),
-            units = listOf(),
-            isFavorite = false
+            units = listOf()
         ),
         isBookMarked = true
     )

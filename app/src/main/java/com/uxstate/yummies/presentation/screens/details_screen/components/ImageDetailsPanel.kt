@@ -93,8 +93,7 @@ fun ImageDetailsPanelPreview() {
             directions = "",
             imageUrl = "",
             ingredients = listOf(),
-            units = listOf(),
-            isFavorite = false
+            units = listOf()
         ),
         onStar = {},
         unStar = {},
