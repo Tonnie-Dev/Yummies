@@ -1,4 +1,4 @@
-package com.uxstate.yummies.presentation.screens.overview_screen.components
+package com.uxstate.yummies.presentation.screens.saved_items_screen.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
