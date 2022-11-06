@@ -5,5 +5,5 @@ import com.uxstate.yummies.presentation.screens.saved_items_screen.SavedScreenEv
 
 sealed class SavedScreenEvent(val meal: Meal) {
 
-  object DeleteMeal:SavedScreenEvent(meal = meal)
+    object DeleteMeal : SavedScreenEvent(meal = meal)
 }

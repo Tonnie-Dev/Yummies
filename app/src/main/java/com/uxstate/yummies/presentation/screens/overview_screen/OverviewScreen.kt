@@ -24,6 +24,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.screens.destinations.DetailsScreenDestination
+import com.uxstate.yummies.presentation.screens.destinations.SavedItemsScreenDestination
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryItem
 import com.uxstate.yummies.presentation.screens.overview_screen.components.CategoryTogglePanel
 import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
@@ -70,30 +71,37 @@ fun OverviewScreen(
                 viewModel.onEvent(OverviewEvent.OnClearText)
             }
             )
-    /*        Surface(
-                modifier = Modifier
-                    .padding(spacing.spaceSmall)
-                    .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
-                elevation = spacing.spaceSmall
+            /*        Surface(
+                        modifier = Modifier
+                            .padding(spacing.spaceSmall)
+                            .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
+                        elevation = spacing.spaceSmall
 
-            ) {
+                    ) {
 
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .border(
-                            width = spacing.spaceDoubleDp,
-                            color = MaterialTheme.colors.primary
-                        )
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .border(
+                                    width = spacing.spaceDoubleDp,
+                                    color = MaterialTheme.colors.primary
+                                )
 
-                ) {
+                        ) {
 
-                }
-            }*/
+                        }
+                    }*/
             // Header 1
-            CategoryTogglePanel(isShow = categoriesState.isShowCategories) {
-                viewModel.onEvent(OverviewEvent.OnToggleCategoryPanel)
-            }
+            CategoryTogglePanel(
+                isShow = categoriesState.isShowCategories,
+                onClickFavorites = {
+                    navigator.navigate(SavedItemsScreenDestination)
+                },
+
+                onClickCategories = {
+                    viewModel.onEvent(OverviewEvent.OnToggleCategoryPanel)
+                }
+            )
 
             AnimatedVisibility(
                 visible = categoriesState.isShowCategories,
@@ -140,8 +148,7 @@ fun OverviewScreen(
 
                             items(mealsState.meals) { meal ->
 
-                                val isStarred = starredMeals.any {
-                                    starredMeal ->
+                                val isStarred = starredMeals.any { starredMeal ->
                                     starredMeal.id == meal.id
                                 }
                                 MealCard(

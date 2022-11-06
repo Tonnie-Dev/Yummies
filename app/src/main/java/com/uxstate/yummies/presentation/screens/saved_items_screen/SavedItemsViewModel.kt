@@ -8,10 +8,9 @@ import androidx.lifecycle.viewModelScope
 import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.domain.use_cases.UseCaseContainer
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-
 
 @HiltViewModel
 class SavedItemsViewModel @Inject constructor(
@@ -43,13 +42,9 @@ class SavedItemsViewModel @Inject constructor(
 
         viewModelScope.launch {
             container.getStarredMeals()
-                    .collectLatest {
-                        savedMeals = it
-                    }
-
-
+                .collectLatest {
+                    savedMeals = it
+                }
         }
-
     }
-
 }

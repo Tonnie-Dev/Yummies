@@ -20,7 +20,8 @@ import com.uxstate.yummies.util.LocalSpacing
 fun CategoryTogglePanel(
     modifier: Modifier = Modifier,
     isShow: Boolean,
-    onToggle: () -> Unit
+    onClickCategories: () -> Unit,
+    onClickFavorites: () -> Unit
 ) {
 
     val spacing = LocalSpacing.current
@@ -38,7 +39,7 @@ fun CategoryTogglePanel(
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colors.cardColor
             ),
-            onClick = onToggle
+            onClick = onClickCategories
 
         ) {
 
@@ -61,7 +62,7 @@ fun CategoryTogglePanel(
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colors.cardColor
             ),
-            onClick = { /*TODO*/ }
+            onClick = { onClickFavorites() }
         ) {
             Icon(
                 imageVector = Icons.Default.Favorite,
@@ -76,5 +77,5 @@ fun CategoryTogglePanel(
 @Preview
 @Composable
 fun CategoryTogglePanelPrev() {
-    CategoryTogglePanel(isShow = true, onToggle = {})
+    CategoryTogglePanel(isShow = true, onClickCategories = {}, onClickFavorites = {})
 }
