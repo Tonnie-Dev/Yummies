@@ -11,7 +11,6 @@ interface YummiesRepository {
     fun fetchMealItems(query: String, fetchFromRemote: Boolean): Flow<Resource<List<Meal>>>
     fun getWordByCategory(category: String): Flow<List<Meal>>
 
-
     // Categories function
     fun fetchCategoriesItems(): Flow<Resource<List<Category>>>
 

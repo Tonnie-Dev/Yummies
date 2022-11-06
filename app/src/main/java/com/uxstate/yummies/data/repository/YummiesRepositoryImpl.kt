@@ -188,7 +188,6 @@ class YummiesRepositoryImpl @Inject constructor(
         Timber.i("removed ${meal.name}")
         dao.removeFromStarredMeals(meal = meal.toStarredEntity())
     }
-   
 
     override fun checkStarredStatus(meal: Meal): Flow<Boolean> {
         dao.checkStarStatus(meal.id).map {
