@@ -15,25 +15,13 @@ import timber.log.Timber
 class DetailsScreenViewModel @Inject constructor(private val container: UseCaseContainer) :
     ViewModel() {
 
-    // meal starred status
-    private val _starredStatus = MutableStateFlow(false)
-    val starredStatus = _starredStatus.asStateFlow()
-
-    // list of starred meals
-    private val _starredMeals = MutableStateFlow<List<Meal>>(emptyList())
-    val starredMeals = _starredMeals.asStateFlow()
-
-    init {
-        getStarredMeals()
-    }
-
     fun onEvent(event: DetailsScreenEvent) {
 
         when (event) {
 
             is DetailsScreenEvent.OnStarMeal -> {
 
-                Timber.i("StarEvent felt")
+
                 viewModelScope.launch {
                     // insert DB 2
                     container.starUseCase(event.meal)
@@ -42,7 +30,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
             }
 
             is DetailsScreenEvent.UnStarMeal -> {
-                Timber.i("UnStarEvent passed")
+
                 viewModelScope.launch {
 
                     // remove from DB 2
@@ -53,19 +41,7 @@ class DetailsScreenViewModel @Inject constructor(private val container: UseCaseC
         }
     }
 
-    private fun getStarredMeals() {
 
-        container.getStarredMeals().onEach {
 
-            _starredMeals.value = it
-        }.launchIn(viewModelScope)
-    }
 
-    fun checkStarredStatus(meal: Meal) {
-        Timber.i("inside checkStarredStatus()")
-        container.checkStarredStatusUseCase(meal).onEach {
-            Timber.i("Inside checkStarredStatus - value is: $it")
-            _starredStatus.value = it
-        }.launchIn(viewModelScope)
-    }
 }

@@ -59,40 +59,22 @@ fun ImageDetailsPanel(
                     tint = MaterialTheme.colors.primary,
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
-                        // onStar()
+                        unStar()
                         isMealStarred = !isMealStarred
                     }
                 )
-              /*  IconButton(
-                    onClick = {
-                        onStar()
-                        isStarred = !isStarred
-                    },
-                    modifier = Modifier.padding(spacing.spaceExtraSmall)
-                ) {
-
-                }*/
             } else {
 
-                Timber.i("Inside Else - NegativeBlock")
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
                     tint = Color.Gray.copy(ContentAlpha.disabled),
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
-                        // unStar()
+                        onStar()
                         isMealStarred = !isMealStarred
                     }
                 )
-                /*IconButton(
-                    onClick = {
-
-                    },
-                    modifier = Modifier.padding(spacing.spaceExtraSmall)
-                ) {
-
-                }*/
             }
         }
     }
