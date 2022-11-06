@@ -104,6 +104,8 @@ fun OverviewScreen(
                 enter = fadeIn() + slideInVertically(),
                 exit = fadeOut() + slideOutVertically()
             ) {
+
+                Timber.i("Received meals are: $starredMeals")
                 // Categories
                 LazyRow() {
 
@@ -148,7 +150,10 @@ fun OverviewScreen(
                                     onClickMeal = {
                                         navigator.navigate(DetailsScreenDestination(it))
                                     },
-                                    isStarred = starredMeals.contains(meal)
+                                    isStarred = starredMeals.any {
+                                        starredMeal ->
+                                        starredMeal.id == meal.id
+                                    }
                                 )
                             }
                         }

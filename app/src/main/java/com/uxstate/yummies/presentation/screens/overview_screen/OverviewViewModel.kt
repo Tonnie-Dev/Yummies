@@ -180,11 +180,11 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     }
 
     private fun getStarredMeals() {
-
+        Timber.i("getStarredMeal called")
         container.getStarredMeals().onEach {
 
             _starredMeals.value = it
-        }
+        }.launchIn(viewModelScope)
     }
     private fun checkStarredStatus(meal: Meal) {
 

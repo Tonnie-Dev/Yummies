@@ -108,7 +108,7 @@ fun MealCard(
                     contentDescription = "",
                     tint = if (isStarred) MaterialTheme.colors.primary
                     else Color.Gray.copy(ContentAlpha.disabled),
-                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium)
+                    modifier = Modifier.size(spacing.spaceLarge)
                 )
             }
 
