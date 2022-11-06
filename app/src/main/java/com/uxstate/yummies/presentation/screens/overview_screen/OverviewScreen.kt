@@ -143,17 +143,22 @@ fun OverviewScreen(
                         ) {
 
                             items(mealsState.meals) { meal ->
-                                Timber.i("Received meals are: $starredMeals")
-                                Timber.i("Status on Overview is ${meal.isFavorite}")
+
+                                val isStarred = starredMeals.any {
+                                    starredMeal ->
+                                    starredMeal.id == meal.id
+                                }
                                 MealCard(
                                     meal = meal,
                                     onClickMeal = {
-                                        navigator.navigate(DetailsScreenDestination(it))
+                                        navigator.navigate(
+                                            DetailsScreenDestination(
+                                                meal = it,
+                                                isStarred = isStarred
+                                            )
+                                        )
                                     },
-                                    isStarred = starredMeals.any {
-                                        starredMeal ->
-                                        starredMeal.id == meal.id
-                                    }
+                                    isStarred = isStarred
                                 )
                             }
                         }

@@ -50,17 +50,17 @@ fun ImageDetailsPanel(
                 )
             }
 
-            if (isStarred) {
+            if (isMealStarred) {
 
-                Timber.i("Inside If-Block")
+                Timber.i("Inside If-Block - truthBlock")
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
                     tint = MaterialTheme.colors.primary,
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
-                        onStar()
-
+                        // onStar()
+                        isMealStarred = !isMealStarred
                     }
                 )
               /*  IconButton(
@@ -74,15 +74,15 @@ fun ImageDetailsPanel(
                 }*/
             } else {
 
-                Timber.i("Inside If-Block")
+                Timber.i("Inside Else - NegativeBlock")
                 Icon(
                     imageVector = Icons.Default.Star,
                     contentDescription = "",
                     tint = Color.Gray.copy(ContentAlpha.disabled),
                     modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
 
-                        unStar()
-
+                        // unStar()
+                        isMealStarred = !isMealStarred
                     }
                 )
                 /*IconButton(

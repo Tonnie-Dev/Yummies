@@ -12,6 +12,7 @@ import com.uxstate.yummies.presentation.screens.details_screen.components.Cookin
 import com.uxstate.yummies.presentation.screens.details_screen.components.SheetItems
 import com.uxstate.yummies.presentation.screens.details_screen.details_event.DetailsScreenEvent
 import com.uxstate.yummies.util.LocalSpacing
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterialApi::class)
 @Destination
@@ -19,15 +20,20 @@ import com.uxstate.yummies.util.LocalSpacing
 fun DetailsScreen(
     meal: Meal,
     navigator: DestinationsNavigator,
+    isStarred: Boolean,
     viewModel: DetailsScreenViewModel = hiltViewModel()
 ) {
+    val starredMealsList by viewModel.starredMeals.collectAsState()
 
-    val starredStatus by viewModel.starredStatus.collectAsState()
-    LaunchedEffect(true, block = {
+    val starredStatus = starredMealsList.any { starredMeal -> starredMeal.id == meal.id }
+
+  /*  LaunchedEffect(meal, block = {
 
         viewModel.checkStarredStatus(meal)
-    })
-   // val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
+        Timber.i("Meal Status is in LaunchedEffect is: $starredStatus")
+    })*/
+
+    // val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
     val spacing = LocalSpacing.current
 
     // bottom sheet state with initial value
@@ -54,12 +60,14 @@ fun DetailsScreen(
             )
         }
     ) {
+        // Timber.i("Starred contents are $starredMealsList")
 
+        Timber.i("Poutine test returns (${meal.id == 52804}), isStarred value: ($starredStatus)")
         // underlying sheet
         SheetItems(
             meal = meal,
             onClickBackArrow = { navigator.navigateUp() },
-            isMealStarred = starredStatus,
+            isMealStarred = isStarred,
             onStarClick = {
                 viewModel.onEvent(event = DetailsScreenEvent.OnStarMeal(meal = meal))
             },

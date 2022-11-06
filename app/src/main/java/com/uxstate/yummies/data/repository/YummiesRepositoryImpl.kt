@@ -179,19 +179,25 @@ class YummiesRepositoryImpl @Inject constructor(
             }
     }
     override suspend fun insertStarredMeal(meal: Meal) {
+        Timber.i("inserted ${meal.name}")
+
         dao.insertStarredMeal(meal = meal.toStarredEntity())
     }
+    override suspend fun removeFromStarredMeals(meal: Meal) {
 
+        Timber.i("removed ${meal.name}")
+        dao.removeFromStarredMeals(meal = meal.toStarredEntity())
+    }
     override suspend fun updateStarStatus(meal: Meal, newStarStatus: Boolean) {
         Timber.i("UpdateStarStatus for ${meal.name} with: $newStarStatus")
         dao.updateStarStatus(meal.id, newStarStatus)
     }
 
-    override suspend fun removeFromStarredMeals(meal: Meal) {
-        dao.removeFromStarredMeals(meal = meal.toStarredEntity())
-    }
-
     override fun checkStarredStatus(meal: Meal): Flow<Boolean> {
+        dao.checkStarStatus(meal.id).map {
+
+            Timber.i("The released starred status is: $it")
+        }
         return dao.checkStarStatus(meal.id)
     }
 
