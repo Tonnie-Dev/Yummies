@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
+
 
 @HiltViewModel
 class OverviewViewModel @Inject constructor(private val container: UseCaseContainer) : ViewModel() {
@@ -172,7 +172,7 @@ class OverviewViewModel @Inject constructor(private val container: UseCaseContai
     }
 
     private fun getStarredMeals() {
-        Timber.i("getStarredMeal called")
+    
         container.getStarredMeals().onEach {
 
             _starredMeals.value = it
