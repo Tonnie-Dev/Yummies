@@ -19,16 +19,26 @@ class SavedItemsViewModel @Inject constructor(
 ) : ViewModel() {
 
     var savedMeals by mutableStateOf<List<Meal>>(emptyList())
-    private set
+        private set
 
     init {
         getSavedMeals()
     }
 
-    fun onEvent (event:SavedScreenEvent){
+    fun onEvent(event: SavedScreenEvent) {
 
-        when (event){}
+        when (event) {
+
+            is SavedScreenEvent.DeleteMeal -> {
+
+                viewModelScope.launch {
+
+                    container.unStarUseCase(event.meal)
+                }
+            }
+        }
     }
+
     private fun getSavedMeals() {
 
         viewModelScope.launch {
