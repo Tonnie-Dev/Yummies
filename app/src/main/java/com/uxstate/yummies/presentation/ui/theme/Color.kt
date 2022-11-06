@@ -38,3 +38,6 @@ val Colors.gradientColors
 val Colors.starredStarColor
     get() = if (this.isLight) Color(0xFFF26227)
     else Color(0xFFEE8A62)
+
+val Colors.cardColor
+    get() = if (this.isLight)Yellow200 else Lime200

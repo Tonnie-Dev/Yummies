@@ -1,8 +1,6 @@
 package com.uxstate.yummies.presentation.screens.overview_screen
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -15,7 +13,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
@@ -32,7 +29,6 @@ import com.uxstate.yummies.presentation.screens.overview_screen.components.Categ
 import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
-import com.uxstate.yummies.presentation.ui.theme.gradientColors
 import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
 import timber.log.Timber
@@ -65,8 +61,16 @@ fun OverviewScreen(
         ) {
 
             // Search Box
+            SearchBoxItem(
+                query = mealsState.searchQuery,
+                onSearchTextChange = {
+                    viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+                }, onClearText = {
 
-            Surface(
+                viewModel.onEvent(OverviewEvent.OnClearText)
+            }
+            )
+    /*        Surface(
                 modifier = Modifier
                     .padding(spacing.spaceSmall)
                     .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
@@ -83,17 +87,9 @@ fun OverviewScreen(
                         )
 
                 ) {
-                    SearchBoxItem(
-                        query = mealsState.searchQuery,
-                        onSearchTextChange = {
-                            viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
-                        }, onClearText = {
 
-                        viewModel.onEvent(OverviewEvent.OnClearText)
-                    }
-                    )
                 }
-            }
+            }*/
             // Header 1
             CategoryTogglePanel(isShow = categoriesState.isShowCategories) {
                 viewModel.onEvent(OverviewEvent.OnToggleCategoryPanel)

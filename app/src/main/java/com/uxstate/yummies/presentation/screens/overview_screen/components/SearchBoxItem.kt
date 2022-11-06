@@ -1,5 +1,6 @@
 package com.uxstate.yummies.presentation.screens.overview_screen.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -12,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.uxstate.yummies.R
+import com.uxstate.yummies.presentation.ui.theme.YummiesTheme
+import com.uxstate.yummies.presentation.ui.theme.cardColor
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -60,7 +63,7 @@ fun SearchBoxItem(
         },
             singleLine = true, modifier = Modifier.fillMaxWidth(),
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colors.primary,
+                backgroundColor = MaterialTheme.colors.cardColor,
                 focusedIndicatorColor = MaterialTheme.colors.background,
                 unfocusedIndicatorColor = MaterialTheme.colors.background,
                 textColor = MaterialTheme.colors.onSurface
@@ -72,6 +75,15 @@ fun SearchBoxItem(
 @Preview
 @Composable
 fun SearchBoxItemPreview() {
+    YummiesTheme() {
+        SearchBoxItem(query = "text", onSearchTextChange = {}, onClearText = {})
+    }
+}
 
-    SearchBoxItem(query = "text", onSearchTextChange = {}, onClearText = {})
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Composable
+fun SearchBoxItemPreviewDark() {
+    YummiesTheme() {
+        SearchBoxItem(query = "text", onSearchTextChange = {}, onClearText = {})
+    }
 }
