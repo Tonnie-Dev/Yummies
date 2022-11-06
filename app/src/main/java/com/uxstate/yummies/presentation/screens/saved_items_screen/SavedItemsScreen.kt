@@ -60,7 +60,9 @@ fun SavedItemsScreen(
 
             items(savedMeals) { meal ->
 
-                MealBoxItem(meal = meal)
+                MealBoxItem(meal = meal) {
+                    viewModel.onEvent(SavedScreenEvent.DeleteMeal)
+                }
             }
         }
     }
