@@ -6,4 +6,5 @@ object Constants {
     const val CONNECT_TIMEOUT = 15L
     const val READ_TIMEOUT = 15L
     const val SEARCH_TRIGGER_DELAY = 500L
+    const val PLACEMENT_ANIM_DURATION = 1000
 }

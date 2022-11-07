@@ -1,5 +1,7 @@
 package com.uxstate.yummies.presentation.screens.saved_items_screen
 
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -21,9 +23,12 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.uxstate.yummies.R
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
+import com.uxstate.yummies.presentation.screens.destinations.DetailsScreenDestination
 import com.uxstate.yummies.presentation.screens.saved_items_screen.components.MealBoxItem
+import com.uxstate.yummies.util.Constants.PLACEMENT_ANIM_DURATION
 import com.uxstate.yummies.util.LocalSpacing
 
+@OptIn(ExperimentalFoundationApi::class)
 @Destination
 @Composable
 fun SavedItemsScreen(
@@ -58,11 +63,29 @@ fun SavedItemsScreen(
     ) { paddingValues ->
         LazyColumn(modifier = Modifier.padding(paddingValues)) {
 
-            items(savedMeals) { meal ->
+            items(items = savedMeals, key = { it.id }) { meal ->
 
-                MealBoxItem(meal = meal) {
-                    viewModel.onEvent(SavedScreenEvent.DeleteMeal)
-                }
+                MealBoxItem(
+                    meal = meal,
+                    onClickMeal = {
+                        navigator.popBackStack()
+                        navigator.navigate(
+                            DetailsScreenDestination(
+                                meal = meal,
+                                isStarred = true
+                            )
+
+                        )
+                    },
+                    onDelete = {
+                        viewModel.onEvent(SavedScreenEvent.DeleteMeal(meal = meal))
+                    },
+                    modifier = Modifier.animateItemPlacement(
+                        animationSpec = tween(
+                            durationMillis = PLACEMENT_ANIM_DURATION
+                        )
+                    )
+                )
             }
         }
     }
