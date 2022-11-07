@@ -10,6 +10,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import com.uxstate.yummies.util.LocalSpacing
 
 @Composable
@@ -31,7 +32,8 @@ fun HeaderTextItem(
         textAlign = textAlignment,
         color = color.copy(alpha = ContentAlpha.medium),
         fontWeight = fontWeight,
-        style = style
+        style = style,
+        overflow = TextOverflow.Ellipsis
 
     )
 }

@@ -14,7 +14,6 @@ import com.uxstate.yummies.domain.model.Meal
 import com.uxstate.yummies.presentation.core_components.HeaderTextItem
 import com.uxstate.yummies.presentation.ui.theme.starredStarColor
 import com.uxstate.yummies.util.LocalSpacing
-import timber.log.Timber
 
 @Composable
 fun ImageDetailsPanel(
@@ -39,8 +38,8 @@ fun ImageDetailsPanel(
                 .padding(spacing.spaceSmall)
         ) {
 
-            Column() {
-                HeaderTextItem(text = meal.name, style = MaterialTheme.typography.h4)
+            Column(Modifier.weight(8.5f)) {
+                HeaderTextItem(text = meal.name, style = MaterialTheme.typography.h5)
                 Text(
                     text = meal.origin,
                     style = MaterialTheme.typography.h6,
@@ -50,32 +49,36 @@ fun ImageDetailsPanel(
                     )
                 )
             }
+            Column(Modifier.weight(1.5f)) {
+                if (isMealStarred) {
 
-            if (isMealStarred) {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "",
+                        tint = MaterialTheme.colors.starredStarColor,
+                        modifier = Modifier
+                            .size(spacing.spaceLarge + spacing.spaceMedium)
+                            .clickable {
 
-                Timber.i("Inside If-Block - truthBlock")
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = "",
-                    tint = MaterialTheme.colors.starredStarColor,
-                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
+                                unStar()
+                                isMealStarred = !isMealStarred
+                            }
+                    )
+                } else {
 
-                        unStar()
-                        isMealStarred = !isMealStarred
-                    }
-                )
-            } else {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = "",
+                        tint = Color.Gray.copy(ContentAlpha.disabled),
+                        modifier = Modifier
+                            .size(spacing.spaceLarge + spacing.spaceMedium)
+                            .clickable {
 
-                Icon(
-                    imageVector = Icons.Default.Star,
-                    contentDescription = "",
-                    tint = Color.Gray.copy(ContentAlpha.disabled),
-                    modifier = Modifier.size(spacing.spaceLarge + spacing.spaceMedium).clickable {
-
-                        onStar()
-                        isMealStarred = !isMealStarred
-                    }
-                )
+                                onStar()
+                                isMealStarred = !isMealStarred
+                            }
+                    )
+                }
             }
         }
     }
