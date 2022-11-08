@@ -58,17 +58,34 @@ It has 3 Screen destinations which use Compose Destination to manage navigation.
 ### Overview Screen 1
 This screen is based on both LazyColumn and LazyRow to present categories 
 and recipes options.
-
+<p align="center">
+<img img width="200" height="400" src="./screenshots/ov_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/ov_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+ 
+</p>
 There is also a search box where you can search a meal by name.
 
 ### Details Screen
 You get here by selecting a specific meal item and the app navigates you
 to the details screen.
 
+<p align="center">
+<img img width="200" height="400" src="./screenshots/det_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/det_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+ 
+</p>
+
 You can now see an image of final cooked meals and ingredients. Pull up
 the bottom sheet to reveal the cooking directions
 ### Saved Items Screens
 You can also view the saved items by clicking Favorites button on the main screen..
+
+<p align="center">
+<img img width="200" height="400" src="./screenshots/fav_scrn_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/fav_scrn_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+ 
+</p>
+
 
 ## API Reference
 Yummies fetches its data from [The Meal Db](https://www.themealdb.com/).
