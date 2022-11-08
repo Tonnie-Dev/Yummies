@@ -1,6 +1,6 @@
 
 
-# Yummies
+# Yummies   :meat_on_bone:
 
 <p align  ="center">
 <img width="100" height="100" src="./screenshots/app_icon.png">
