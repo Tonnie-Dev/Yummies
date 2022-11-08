@@ -147,15 +147,15 @@ libraries mostily from Android Jetpack
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 ## Authors
 
-- [@Tonnie-Dev(https://github.com/Tonnie-Dev
+- [@Tonnie-Dev](https://github.com/Tonnie-Dev)
 
 <a href="https://www.buymeacoffee.com/AgVrgB4N3r" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 Do Reach Out :
 
-  * [Twitter](https://twitter.com/felixkariuki_)
+  * [Twitter](https://twitter.com/Tonnie_Dev)
 
-  * [LinkedIn](https://www.linkedin.com/in/felix-kariuki/)
+  * [LinkedIn](https://www.linkedin.com/in/antony-muchiri/)
 
 
 ## Contributing
