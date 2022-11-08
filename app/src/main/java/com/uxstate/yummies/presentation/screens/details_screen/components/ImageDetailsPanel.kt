@@ -1,5 +1,8 @@
 package com.uxstate.yummies.presentation.screens.details_screen.components
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -49,29 +52,43 @@ fun ImageDetailsPanel(
                     )
                 )
             }
-            Column(Modifier.weight(1.5f)) {
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .weight(1.5f)
+                    .animateContentSize(
+                        animationSpec = tween(
+                            durationMillis = 300,
+                            easing = LinearOutSlowInEasing
+                        )
+                    )
+            ) {
                 if (isMealStarred) {
 
+                    // larger icon
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "",
                         tint = MaterialTheme.colors.starredStarColor,
                         modifier = Modifier
-                            .size(spacing.spaceLarge + spacing.spaceMedium)
+                            .size(spacing.spaceExtraLarge + spacing.spaceSmall)
                             .clickable {
 
                                 unStar()
                                 isMealStarred = !isMealStarred
                             }
+
                     )
                 } else {
-
+                    // smaller icon
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "",
                         tint = Color.Gray.copy(ContentAlpha.disabled),
                         modifier = Modifier
-                            .size(spacing.spaceLarge + spacing.spaceMedium)
+                            .size(spacing.spaceLarge + spacing.spaceMedium + spacing.spaceSmall)
                             .clickable {
 
                                 onStar()
