@@ -13,6 +13,7 @@ and instructions for preparation.
 
 There is also a picture of the finished product which you can aim to match!
 ## Screenshots
+
 <p align="center">
 <img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
 <img img width="200" height="400" src="./screenshots/screen_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
@@ -22,6 +23,7 @@ There is also a picture of the finished product which you can aim to match!
 
 
 ## Deployment
+
 These are the key parameters for Yummies
 
 | Parameter      | Value  |
@@ -36,6 +38,7 @@ You can clone the repository or download or download the Zip file.
 
 
 ## Architecture
+
 Yummies is implemented using Android Clean Architecture with these key highlights:
 
 Uses Model-View-ViewModel (MVVM) pattern with Clean Architecture (data, domain and presentation)
@@ -43,16 +46,18 @@ Uses Model-View-ViewModel (MVVM) pattern with Clean Architecture (data, domain a
 The Data layer features a single repository flanked by  
 a ROOM Database for data persistence and remote data from the API. The API provides
 the remote data which is cached by the repository into the ROOM database for offline operations.
+
 ### Domain Layer
 This layer houses the meal and category models and the use cases which encapsulates
 the complex business logic for the Yummies app.
+
 ### UI Layer
 Displays the Yummies refined data on the screen and facilitates interactions with the users.
 It contains the ViewModel holding the different states for the Yummies App.
 
 It has 3 Screen destinations which use Compose Destination to manage navigation.
 
-#Overview Screen 1
+#### Overview Screen 1
 This screen is based on both LazyColumn and LazyRow to present categories 
 and recipes options.
 
@@ -64,7 +69,8 @@ to the details screen.
 
 You can now see an image of final cooked meals and ingredients. Pull up
 the bottom sheet to reveal the cooking directions
-
+#### Saved Items Screens
+You can also view the saved items by clicking Favorites button on the main screen..
 
 ## API Reference
 Yummies fetches its data from [The Meal Db](https://www.themealdb.com/).
