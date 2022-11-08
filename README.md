@@ -12,6 +12,8 @@ recipes. The app provides a detailed list of ingredients
 and instructions for preparation. 
 
 There is also a picture of the finished product which you can aim to match!
+
+<a href='https://play.google.com/store/apps/details?id=com.uxstate.countriespad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
 ## Screenshots
 
 <p align="center">
