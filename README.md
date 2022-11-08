@@ -1,6 +1,11 @@
 <img width="100" height="100" src="./screenshots/app_icon.png">
 
 ## Screenshots
+<p float="left">
+<img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
+<img img width="200" height="400" src="./screenshots/screen_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
+<img img width="200" height="400" src="./screenshots/screen_3.png">   
+</p>
 # Yummies
 
 Yummies is a wonderful Android app for homemade recipes.
