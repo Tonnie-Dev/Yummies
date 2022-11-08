@@ -1,4 +1,7 @@
+<p float="center">
 <img width="100" height="100" src="./screenshots/app_icon.png">
+</p>
+
 
 ## Screenshots
 <p float="left">
