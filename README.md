@@ -1,6 +1,6 @@
 
 
-# Yummies   :meat_on_bone:
+# Yummies   :meat_on_bone: :plate_with_cutlery: :poultry_leg:
 
 <p align  ="center">
 <img width="100" height="100" src="./screenshots/app_icon.png">
