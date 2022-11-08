@@ -1,7 +1,7 @@
-
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
-
-
+<img width="100" height="100" src=".screenshots/app_icon>
+![Logo](https://github.com/Tonnie-Dev/Yummies/blob/master/screenshots/app_icon.png)
+<img src="./screenshots/welcome_light.png" width="320">&emsp;
+<img img width="200" height="400" src="https://github.com/Tonnie-Dev/CountriesPad/blob/master/media/scr_shot_flags.png">
 ## Screenshots
 # Yummies
 
