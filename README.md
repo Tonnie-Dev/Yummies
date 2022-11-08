@@ -24,7 +24,7 @@ There is also a picture of the finished product which you can aim to match!
 
 ## Deployment
 
-These are the key parameters for Yummies
+These are the key parameters for Yummies:
 
 | Parameter      | Value  |
 |----------------|--------|
@@ -39,37 +39,35 @@ You can clone the repository or download or download the Zip file.
 
 ## Architecture
 
-Yummies is implemented using Android Clean Architecture with these key highlights:
+Yummies is implemented using Android Clean Architecture and follows the Model-View-ViewModel (MVVM) pattern.
 
-Uses Model-View-ViewModel (MVVM) pattern with Clean Architecture (data, domain and presentation)
-### Data Layer
-The Data layer features a single repository flanked by  
+It features these main 3 layers:
+
+**Data Layer** - features a single repository flanked by  
 a ROOM Database for data persistence and remote data from the API. The API provides
 the remote data which is cached by the repository into the ROOM database for offline operations.
 
-### Domain Layer
-This layer houses the meal and category models and the use cases which encapsulates
+**Domain Layer** - this layer houses the meal and category models and the use cases which encapsulates
 the complex business logic for the Yummies app.
 
-### UI Layer
-Displays the Yummies refined data on the screen and facilitates interactions with the users.
+**UI Layer** - displays the Yummies refined data on the screen and facilitates interactions with the users.
 It contains the ViewModel holding the different states for the Yummies App.
 
 It has 3 Screen destinations which use Compose Destination to manage navigation.
 
-#### Overview Screen 1
+### Overview Screen 1
 This screen is based on both LazyColumn and LazyRow to present categories 
 and recipes options.
 
 There is also a search box where you can search a meal by name.
 
-#### Details Screen
+### Details Screen
 You get here by selecting a specific meal item and the app navigates you
 to the details screen.
 
 You can now see an image of final cooked meals and ingredients. Pull up
 the bottom sheet to reveal the cooking directions
-#### Saved Items Screens
+### Saved Items Screens
 You can also view the saved items by clicking Favorites button on the main screen..
 
 ## API Reference
@@ -151,7 +149,7 @@ libraries mostily from Android Jetpack
 
 - [@Tonnie-Dev(https://github.com/Tonnie-Dev
 
-<a href="https://www.buymeacoffee.com/felix.kariuki" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<a href="https://www.buymeacoffee.com/AgVrgB4N3r" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
 
 Do Reach Out :
 
