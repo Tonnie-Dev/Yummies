@@ -1,4 +1,4 @@
-<img width="100" height="100" src="./screenshots/app_icon.png>
+<img width="100" height="100" src="./screenshots/app_icon.png">
 
 ## Screenshots
 # Yummies
