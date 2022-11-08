@@ -1,7 +1,11 @@
+
+
+# Yummies
+
 <p align  ="center">
 <img width="100" height="100" src="./screenshots/app_icon.png">
 </p>
-# Yummies
+
 Yummies is a wonderful Android app for homemade recipes.
 You may quickly search by food categories or specific
 recipes. The app provides a detailed list of ingredients 
@@ -31,37 +35,18 @@ These are the key parameters for Yummies
 You can clone the repository or download or download the Zip file.
 
 
-
-## Tech Stack
-This app is implemented using Clean Architecture MVVM Pattern. It features these other
-libraries mostily from Android Jetpack
-
-### Technologies used:
-
-* [Android KTX](https://developer.android.com/kotlin/ktx) - helps to write more concise, idiomatic Kotlin code.
-* [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern toolkit for building native Android UI
-* [Material Design 3](https://m3.material.io/) - an adaptable system of guidelines, components, and tools that support the best practices of user interface design.
-* [Compose Destinations](https://github.com/raamcosta/compose-destinations) - used to handle all navigations and arguments passing while hiding the complex, non-type-safe and boilerplate code
-* [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) to store and manage UI-related data in a lifecycle conscious way.
-* [Dagger Hilt](https://dagger.dev/hilt/) - used for Dependency Injection.
-* [Coil](https://coil-kt.github.io/coil/) - an image loading library for Android backed by Kotlin Coroutines
-* [Retrofit](https://square.github.io/retrofit/) a REST Client for Android which makes it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice.
-* [Coroutines and Kotlin Flow](https://kotlinlang.org/docs/reference/coroutines-overview.html) - used to manage the local storage i.e. `writing to and reading from the database`. Coroutines help in managing background threads and reduces the need for callbacks.
-* [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
-* [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
-* [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 ## Architecture
 Yummies is implemented using Android Clean Architecture with these key highlights:
 
 Uses Model-View-ViewModel (MVVM) pattern with Clean Architecture (data, domain and presentation)
-## Data Layer
+### Data Layer
 The Data layer features a single repository flanked by  
 a ROOM Database for data persistence and remote data from the API. The API provides
 the remote data which is cached by the repository into the ROOM database for offline operations.
-## Domain Layer
+### Domain Layer
 This layer houses the meal and category models and the use cases which encapsulates
 the complex business logic for the Yummies app.
-## UI Layer
+### UI Layer
 Displays the Yummies refined data on the screen and facilitates interactions with the users.
 It contains the ViewModel holding the different states for the Yummies App.
 
@@ -73,7 +58,7 @@ and recipes options.
 
 There is also a search box where you can search a meal by name.
 
-#Details Screen
+#### Details Screen
 You get here by selecting a specific meal item and the app navigates you
 to the details screen.
 
@@ -134,6 +119,28 @@ This interface function takes no queries returns a CategoriesResponse DTO Object
 | categoryDescription | String |
 | categoryImageUrl    | String |
 |                     |        |
+
+
+
+
+## Tech Stack
+This app is implemented using Clean Architecture MVVM Pattern. It features these other
+libraries mostily from Android Jetpack
+
+### Technologies used:
+
+* [Android KTX](https://developer.android.com/kotlin/ktx) - helps to write more concise, idiomatic Kotlin code.
+* [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern toolkit for building native Android UI
+* [Material Design 3](https://m3.material.io/) - an adaptable system of guidelines, components, and tools that support the best practices of user interface design.
+* [Compose Destinations](https://github.com/raamcosta/compose-destinations) - used to handle all navigations and arguments passing while hiding the complex, non-type-safe and boilerplate code
+* [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) to store and manage UI-related data in a lifecycle conscious way.
+* [Dagger Hilt](https://dagger.dev/hilt/) - used for Dependency Injection.
+* [Coil](https://coil-kt.github.io/coil/) - an image loading library for Android backed by Kotlin Coroutines
+* [Retrofit](https://square.github.io/retrofit/) a REST Client for Android which makes it relatively easy to retrieve and upload JSON (or other structured data) via a REST based webservice.
+* [Coroutines and Kotlin Flow](https://kotlinlang.org/docs/reference/coroutines-overview.html) - used to manage the local storage i.e. `writing to and reading from the database`. Coroutines help in managing background threads and reduces the need for callbacks.
+* [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
+* [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
+* [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
 ## Authors
 
 - [@Tonnie-Dev(https://github.com/Tonnie-Dev
