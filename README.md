@@ -2,26 +2,28 @@
 <img width="100" height="100" src="./screenshots/app_icon.png">
 </p>
 
+# Yummies
+Yummies is a wonderful Android app for homemade recipes.
+You may quickly search by food categories or specific
+recipes. The app provides a detailed list of ingredients 
+and instructions for preparation. 
+
+There is also a picture of the finished product which you can aim to match!
 ## Screenshots
 <p float="left">
 <img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
 <img img width="200" height="400" src="./screenshots/screen_2.png"> &nbsp;&nbsp;&nbsp;&nbsp;   
 <img img width="200" height="400" src="./screenshots/screen_3.png">   
 </p>
-# Yummies
 
-Yummies is a wonderful Android app for homemade recipes.
-You may quickly search by food categories or specific
-recipes. The app provides a detailed list of ingredients 
-and instructions for preparation. There is also a picture
-of the finished product which you can aim to match!
 
 
 ## Deployment
 These are the key parameters for Yummies
 
-| compileSdk     | 33     |
+| Parameter      | Value  |
 |----------------|--------|
+| compileSdk     | 33     |
 | targetSdk      | 33     |
 | minSdk         | 21     |
 | composeVersion | 1.2.1  |
