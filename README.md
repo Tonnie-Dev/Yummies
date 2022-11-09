@@ -31,7 +31,7 @@ and instructions for preparation.
 There is also a picture of the finished product which you can aim to match!
 
 <a href='https://play.google.com/store/apps/details?id=com.uxstate.countriespad'><img alt='Get it on Google Play' src="./screenshots/google_badge.png" width="280"/></a>
-## Screenshots
+## 📷 Screenshots 📷
 
 <p align="center">
 <img img width="200" height="400" src="./screenshots/screen_1.png"> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -56,7 +56,7 @@ These are the key parameters for Yummies:
 You can clone the repository or download or download the Zip file.
 
 
-## Architecture
+## 🛠 Architecture 🛠
 
 Yummies is implemented using Android Clean Architecture and follows the Model-View-ViewModel (MVVM) pattern.
 
@@ -167,7 +167,7 @@ This interface function takes no queries returns a CategoriesResponse DTO Object
 This app is implemented using Clean Architecture MVVM Pattern. It features these other
 libraries mostily from Android Jetpack
 
-### Technologies used:
+## ⚙️ Technologies ⚙️
 
 * [Android KTX](https://developer.android.com/kotlin/ktx) - helps to write more concise, idiomatic Kotlin code.
 * [Jetpack Compose](https://developer.android.com/jetpack/compose) - modern toolkit for building native Android UI
@@ -181,7 +181,7 @@ libraries mostily from Android Jetpack
 * [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
 * [Timber](https://github.com/JakeWharton/timber) - a logger with a small, extensible API which provides utility on top of Android's normal Log class.
 * [Lottie Animations](https://lottiefiles.com/) - provides Lightweight and scalable animations files
-## Authors
+## 🪶 Author(s) 🪶
 
 - [@Tonnie-Dev](https://github.com/Tonnie-Dev)
 
@@ -203,7 +203,8 @@ If you are interested in seeing a particular feature implemented in this app, pl
 ![Alt](https://repobeats.axiom.co/api/embed/84dfd3cd94832805dbcaa3569ec855d19e5c9401.svg "Repobeats analytics image")
 
 
-## License
+##  📜 License  📜
+
 
 
 
