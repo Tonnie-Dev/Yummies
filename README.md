@@ -1,10 +1,27 @@
 
 
-# Yummies   :meat_on_bone: :plate_with_cutlery: :poultry_leg:
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="./screenshots/black_fork_trans" alt="Logo" width="80" height="80">
+  </a>
 
-<p align  ="center">
-<img width="100" height="100" src="./screenshots/app_icon.png">
-</p>
+<h1 align = "center">
+<b><i>Yummies</i></b>
+</h1>
+
+  <p align="center">
+    A Recipe App for Android
+    <br />
+    <a href="#-screenshots-">Screenshots</a>
+    ·
+    <a href="#-architecture-">Architecture</a>
+    ·
+     <a href="#-technologies-">Technologies</a>
+    ·
+    <a href="#-license-">License</a>
+  </p>
+</div>
 
 Yummies is a wonderful Android app for homemade recipes.
 You may quickly search by food categories or specific
