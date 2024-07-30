@@ -23,6 +23,7 @@ fun DetailsScreen(
     viewModel: DetailsScreenViewModel = hiltViewModel()
 ) {
 
+    Text(modifier = Modifier.id("randomId"), text = "text")
     // val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
     val spacing = LocalSpacing.current
 
