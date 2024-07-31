@@ -1,0 +1,12 @@
+plugins {
+
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.hilt.plugin) apply false
+    alias(libs.plugins.ksp.plugin) apply false
+    alias(libs.plugins.parcelize.plugin) apply false
+    alias(libs.plugins.compose.compiler) apply false
+
+}
+
+
