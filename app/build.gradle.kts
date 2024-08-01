@@ -8,17 +8,17 @@ plugins {
 }
 
 android {
-    namespace ="com.uxstate.yummies"
-    compileSdk =34
+    namespace = "com.uxstate.yummies"
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.uxstate.yummies"
-        minSdk   = 21
-        targetSdk  = 34
-        versionCode  = 1
-        versionName  = "1.0"
+        minSdk = 21
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0"
 
-        testInstrumentationRunner  = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -38,14 +38,14 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility  = JavaVersion.VERSION_1_8
-        targetCompatibility  = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        compose  = true
+        compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.3.2"
@@ -96,6 +96,7 @@ dependencies {
     // Moshi Library Dependencies - Core Moshi JSON Library and Moshi"s Kotlin support and converter factory
     implementation(Square.moshi)
     implementation(Square.moshi.kotlinReflect)
+    implementation(Square.retrofit2.converter.moshi)
 
     // Room components
     implementation(libs.room.ktx)
@@ -109,24 +110,26 @@ dependencies {
     ksp(libs.compose.destinations.ksp.one)
 
     //shimmer
-    //implementation libs.shimmer
 
+    implementation(libs.shimmer)
 
     //Firebase Analytics
     //implementation libs.firebase.crashlytics.ktx
     //implementation libs.firebase.analytics.ktx
 
-    //Flow Layout
-    //implementation libs.accompanist.flowlayout
 
+    //Flow Layout
+
+    implementation(libs.accompanist.flowlayout)
 
     //Timber Logging
-    //implementation libs.timber
+    implementation(libs.timber)
 
     // Swipe to Refresh - Accompanist
-    //implementation libs.accompanist.swiperefresh
 
+    implementation(libs.accompanist.swiperefresh)
     // System UI Controller - Accompanist
     //implementation libs.accompanist.systemuicontroller
+    implementation(libs.accompanist.systemuicontroller)
 
 }
