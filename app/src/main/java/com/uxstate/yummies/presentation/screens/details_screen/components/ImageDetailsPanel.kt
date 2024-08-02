@@ -38,7 +38,6 @@ fun ImageDetailsPanel(
     Card(modifier = modifier) {
 
         Row(
-
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
