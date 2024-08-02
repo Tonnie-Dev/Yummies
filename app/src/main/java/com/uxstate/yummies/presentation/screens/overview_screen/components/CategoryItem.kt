@@ -5,10 +5,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,49 +33,49 @@ fun CategoryItem(
 
     val spacing = LocalSpacing.current
     Surface(
-        shape = RoundedCornerShape(spacing.spaceMedium),
-        elevation = spacing.spaceSmall,
-        modifier = modifier
-            .padding(spacing.spaceExtraSmall)
-            .clickable { onClickCategory(category.categoryType) }
+            shape = RoundedCornerShape(spacing.spaceMedium),
+            shadowElevation = spacing.spaceSmall,
+            modifier = modifier
+                    .padding(spacing.spaceExtraSmall)
+                    .clickable { onClickCategory(category.categoryType) }
     ) {
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .background(
-                    brush = Brush.linearGradient(
-                        MaterialTheme.colors.gradientColors
-                    )
-                )
-                .padding(spacing.spaceExtraSmall)
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                        .background(
+                                brush = Brush.linearGradient(
+                                        start = MaterialTheme.colorScheme.gradientColors
+                                )
+                        )
+                        .padding(spacing.spaceExtraSmall)
         ) {
 
             //  val url = category.categoryImageUrl.toUri().buildUpon().scheme("https").build()
             val painter = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(category.categoryImageUrl)
-                    .crossfade(true)
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_category_error)
-                    .build()
+                    model = ImageRequest.Builder(LocalContext.current)
+                            .data(category.categoryImageUrl)
+                            .crossfade(true)
+                            .placeholder(R.drawable.loading_animation)
+                            .error(R.drawable.ic_category_error)
+                            .build()
             )
             Image(
-                painter = painter,
-                contentDescription = stringResource(R.string.meal_category_label),
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .height(spacing.spaceExtraLarge)
-                    .aspectRatio(1f / 1f)
+                    painter = painter,
+                    contentDescription = stringResource(R.string.meal_category_label),
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier
+                            .height(spacing.spaceExtraLarge)
+                            .aspectRatio(1f / 1f)
 
             )
 
             Text(
-                text = category.categoryType,
-                color = MaterialTheme.colors.onSurface.copy(alpha = ContentAlpha.medium),
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.subtitle2
+                    text = category.categoryType,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleSmall
             )
         }
     }
@@ -87,12 +86,12 @@ fun CategoryItem(
 fun CategoryItemPreview() {
 
     CategoryItem(
-        category = Category(
-            categoryId = 13,
-            categoryType = "Miscellaneous",
-            categoryDescription = "Mutton is Good",
-            categoryImageUrl = ""
-        ),
-        onClickCategory = {}
+            category = Category(
+                    categoryId = 13,
+                    categoryType = "Miscellaneous",
+                    categoryDescription = "Mutton is Good",
+                    categoryImageUrl = ""
+            ),
+            onClickCategory = {}
     )
 }
