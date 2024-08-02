@@ -1,7 +1,11 @@
 package com.uxstate.yummies.presentation.screens.details_screen
 
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.material.*
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberBottomSheetScaffoldState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -13,7 +17,8 @@ import com.uxstate.yummies.presentation.screens.details_screen.components.SheetI
 import com.uxstate.yummies.presentation.screens.details_screen.details_event.DetailsScreenEvent
 import com.uxstate.yummies.util.LocalSpacing
 
-@OptIn(ExperimentalMaterialApi::class)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun DetailsScreen(
@@ -23,14 +28,15 @@ fun DetailsScreen(
     viewModel: DetailsScreenViewModel = hiltViewModel()
 ) {
 
-    Text(modifier = Modifier.id("randomId"), text = "text")
+    Text( text = "text")
     // val isMealStarred by viewModel.currentMealAsPerDatabase.collectAsState()
     val spacing = LocalSpacing.current
 
+
+
+
     // bottom sheet state with initial value
-    val sheetState = rememberBottomSheetState(
-        initialValue = BottomSheetValue.Collapsed
-    )
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
 
     // scaffold state with bottom sheet state
     val scaffoldState = rememberBottomSheetScaffoldState(
