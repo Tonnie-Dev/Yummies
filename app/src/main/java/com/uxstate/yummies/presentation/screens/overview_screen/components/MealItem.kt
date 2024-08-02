@@ -3,9 +3,9 @@ package com.uxstate.yummies.presentation.screens.overview_screen.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,41 +25,40 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
 
     val spacing = LocalSpacing.current
     Surface(
-        shape = RoundedCornerShape(spacing.spaceMedium),
-        elevation = spacing.spaceSmall,
-        modifier = modifier.padding(spacing.spaceExtraSmall)
+            shape = RoundedCornerShape(spacing.spaceMedium),
+            shadowElevation = spacing.spaceExtraSmall,
+            modifier = modifier.padding(spacing.spaceExtraSmall)
     ) {
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier
-                .padding(spacing.spaceExtraSmall)
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                        .padding(spacing.spaceExtraSmall)
         ) {
 
             val painter = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(meal.imageUrl)
-                    // .size(Size.ORIGINAL)
-                    .crossfade(true)
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_meal_error)
-                    .build()
+                    model = ImageRequest.Builder(LocalContext.current)
+                            .data(meal.imageUrl)
+                            // .size(Size.ORIGINAL)
+                            .crossfade(true)
+                            .placeholder(R.drawable.loading_animation)
+                            .error(R.drawable.ic_meal_error)
+                            .build()
             )
             Image(
-                painter = painter,
-                contentDescription = stringResource(R.string.meal_category_label),
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxWidth()
+                    painter = painter,
+                    contentDescription = stringResource(R.string.meal_category_label),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxWidth()
 
             )
 
             Text(
-                text = meal.name,
-
-                style = MaterialTheme.typography.subtitle2,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                    text = meal.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
             )
         }
     }
@@ -70,16 +69,16 @@ fun MealItem(meal: Meal, modifier: Modifier = Modifier, onClickCategory: () -> U
 fun MealItemPreview() {
 
     MealItem(
-        meal = Meal(
-            id = 0,
-            name = "Salmon",
-            category = "",
-            origin = "",
-            directions = "",
-            imageUrl = "",
-            ingredients = listOf(),
-            units = listOf()
-        ),
-        onClickCategory = {}
+            meal = Meal(
+                    id = 0,
+                    name = "Salmon",
+                    category = "",
+                    origin = "",
+                    directions = "",
+                    imageUrl = "",
+                    ingredients = listOf(),
+                    units = listOf()
+            ),
+            onClickCategory = {}
     )
 }
