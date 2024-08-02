@@ -75,7 +75,7 @@ fun SearchBoxItem(
                         cursorColor = MaterialTheme.colorScheme.primary,
                         focusedIndicatorColor = MaterialTheme.colorScheme.surface,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.surface,
-                        
+
                         )
         )
     }
