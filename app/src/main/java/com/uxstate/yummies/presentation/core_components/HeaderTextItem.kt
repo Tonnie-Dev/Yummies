@@ -1,9 +1,8 @@
 package com.uxstate.yummies.presentation.core_components
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,9 +17,9 @@ fun HeaderTextItem(
     text: String,
     modifier: Modifier = Modifier,
     textAlignment: TextAlign = TextAlign.Start,
-    color: Color = MaterialTheme.colors.onSurface,
+    color: Color = MaterialTheme.colorScheme.onSurface,
     fontWeight: FontWeight = FontWeight.Bold,
-    style: TextStyle = MaterialTheme.typography.h6
+    style: TextStyle = MaterialTheme.typography.bodySmall
 
 ) {
 
@@ -30,7 +29,7 @@ fun HeaderTextItem(
         text = text,
         modifier = modifier.padding(spacing.spaceSmall),
         textAlign = textAlignment,
-        color = color.copy(alpha = ContentAlpha.medium),
+        color = color.copy(alpha = .5f),
         fontWeight = fontWeight,
         style = style,
         overflow = TextOverflow.Ellipsis
