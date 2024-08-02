@@ -4,10 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,83 +39,82 @@ fun MealBoxItem(
 
     val spacing = LocalSpacing.current
     Card(
-        elevation = spacing.spaceSmall,
-        backgroundColor = MaterialTheme.colors.surface,
+            elevation = CardDefaults.elevatedCardElevation(spacing.spaceSmall),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
 
-        modifier = modifier
-            .fillMaxWidth()
-            .clickable {
+            modifier = modifier
+                    .fillMaxWidth()
+                    .clickable {
 
-                onClickMeal()
-            }
-            .padding(spacing.spaceSmall)
+                        onClickMeal()
+                    }
+                    .padding(spacing.spaceSmall)
     ) {
         Box(
-            modifier = modifier, contentAlignment = Alignment.BottomCenter
+                modifier = modifier, contentAlignment = Alignment.BottomCenter
         ) {
 
             val painter = rememberAsyncImagePainter(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(meal.imageUrl)
-                    .crossfade(true)
-                    .build()
+                    model = ImageRequest.Builder(LocalContext.current)
+                            .data(meal.imageUrl)
+                            .crossfade(true)
+                            .build()
             )
 
             Image(
-                painter = painter,
-                contentDescription = meal.name,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(spacing.spaceMedium))
-                    .fillMaxWidth()
-                    .aspectRatio(4f / 3f)
-                    .padding(spacing.spaceLarge)
+                    painter = painter,
+                    contentDescription = meal.name,
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier
+                            .clip(RoundedCornerShape(spacing.spaceMedium))
+                            .fillMaxWidth()
+                            .aspectRatio(4f / 3f)
+                            .padding(spacing.spaceLarge)
             )
 
             Surface(
-                color = Gray100,
-                elevation = spacing.spaceExtraSmall,
-                modifier = Modifier
-                    .align(
-                        Alignment.BottomCenter
-                    )
-                    .fillMaxWidth()
-                    .padding(
-                        spacing.spaceLarge
-                    )
+                    color = Gray100,
+                    shadowElevation = spacing.spaceExtraSmall,
+                    modifier = Modifier
+                            .align(
+                                    Alignment.BottomCenter
+                            )
+                            .fillMaxWidth()
+                            .padding(
+                                    spacing.spaceLarge
+                            )
             ) {
 
                 Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                 ) {
                     Column() {
 
                         Text(
-                            text = meal.name,
-                            color = Color.White,
-                            fontWeight = FontWeight.Bold,
-                            style = MaterialTheme.typography.h5,
-
-                            modifier = Modifier
-                                .padding(spacing.spaceExtraSmall)
+                                text = meal.name,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                style = MaterialTheme.typography.headlineSmall,
+                                modifier = Modifier
+                                        .padding(spacing.spaceExtraSmall)
                         )
                         Text(
-                            text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
-                            color = Color.White,
-                            modifier = Modifier
-                                .padding(spacing.spaceExtraSmall)
+                                text = " ${meal.ingredientsCount} Ingredients | ${meal.origin}",
+                                color = Color.White,
+                                modifier = Modifier
+                                        .padding(spacing.spaceExtraSmall)
                         )
                     }
                     Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = stringResource(R.string.delete_meal),
-                        tint = Color.White,
-                        modifier = Modifier
-                            .size(spacing.spaceLarge)
-                            .clickable {
-                                onDelete()
-                            }
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = stringResource(R.string.delete_meal),
+                            tint = Color.White,
+                            modifier = Modifier
+                                    .size(spacing.spaceLarge)
+                                    .clickable {
+                                        onDelete()
+                                    }
                     )
                 }
             }
@@ -123,17 +126,17 @@ fun MealBoxItem(
 @Composable
 fun MealBoxItemPreview() {
     MealBoxItem(
-        meal = Meal(
-            id = 0,
-            name = "Salmon Sushi Matcha",
-            category = "",
-            origin = "Italian",
-            directions = "",
-            imageUrl = "",
-            ingredients = listOf("Onion", "Pepper"),
-            units = listOf()
-        ),
-        onClickMeal = {},
-        onDelete = {}
+            meal = Meal(
+                    id = 0,
+                    name = "Salmon Sushi Matcha",
+                    category = "",
+                    origin = "Italian",
+                    directions = "",
+                    imageUrl = "",
+                    ingredients = listOf("Onion", "Pepper"),
+                    units = listOf()
+            ),
+            onClickMeal = {},
+            onDelete = {}
     )
 }
