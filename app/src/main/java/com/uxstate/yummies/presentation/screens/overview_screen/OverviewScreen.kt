@@ -1,13 +1,22 @@
 package com.uxstate.yummies.presentation.screens.overview_screen
 
-import androidx.compose.animation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,7 +39,6 @@ import com.uxstate.yummies.presentation.screens.overview_screen.components.Categ
 import com.uxstate.yummies.presentation.screens.overview_screen.components.MealCard
 import com.uxstate.yummies.presentation.screens.overview_screen.components.SearchBoxItem
 import com.uxstate.yummies.presentation.screens.overview_screen.overview_events.OverviewEvent
-import com.uxstate.yummies.presentation.ui.theme.statusBarColor
 import com.uxstate.yummies.util.LocalSpacing
 import timber.log.Timber
 
@@ -38,8 +46,7 @@ import timber.log.Timber
 @RootNavGraph(start = true)
 @Composable
 fun OverviewScreen(
-    viewModel: OverviewViewModel = hiltViewModel(),
-    navigator: DestinationsNavigator
+    viewModel: OverviewViewModel = hiltViewModel(), navigator: DestinationsNavigator
 ) {
     val starredMeals by viewModel.starredMeals.collectAsState()
 
@@ -47,31 +54,27 @@ fun OverviewScreen(
     val mealsState by viewModel.stateMeals.collectAsState()
     val categoriesState by viewModel.stateCategory.collectAsState()
     val swipeRefreshState = rememberSwipeRefreshState(
-        isRefreshing = mealsState.isLoading
+            isRefreshing = mealsState.isLoading
     )
 
     val spacing = LocalSpacing.current
     val uiController = rememberSystemUiController()
-    uiController.setStatusBarColor(color = MaterialTheme.colors.statusBarColor)
+    uiController.setStatusBarColor(color = MaterialTheme.colorScheme.surface)
 
     Surface {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(spacing.spaceSmall)
+                modifier = Modifier
+                        .fillMaxSize()
+                        .padding(spacing.spaceSmall)
         ) {
 
             // Search Box
-            SearchBoxItem(
-                query = mealsState.searchQuery,
-                onSearchTextChange = {
-                    viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
-                }, onClearText = {
+            SearchBoxItem(query = mealsState.searchQuery, onSearchTextChange = {
+                viewModel.onEvent(OverviewEvent.OnSearchQueryChange(it))
+            }, onClearText = {
 
                 viewModel.onEvent(OverviewEvent.OnClearText)
-            }
-            )
-            /*        Surface(
+            })/*        Surface(
                         modifier = Modifier
                             .padding(spacing.spaceSmall)
                             .background(brush = Brush.linearGradient(MaterialTheme.colors.gradientColors)),
@@ -90,27 +93,22 @@ fun OverviewScreen(
                         ) {
 
                         }
-                    }*/
-            // Header 1
-            CategoryTogglePanel(
-                isShow = categoriesState.isShowCategories,
-                onClickFavorites = {
-                    navigator.navigate(SavedItemsScreenDestination)
-                },
+                    }*/ // Header 1
+            CategoryTogglePanel(isShow = categoriesState.isShowCategories, onClickFavorites = {
+                navigator.navigate(SavedItemsScreenDestination)
+            },
 
-                onClickCategories = {
-                    viewModel.onEvent(OverviewEvent.OnToggleCategoryPanel)
-                }
-            )
+                    onClickCategories = {
+                        viewModel.onEvent(OverviewEvent.OnToggleCategoryPanel)
+                    })
 
             AnimatedVisibility(
-                visible = categoriesState.isShowCategories,
-                enter = fadeIn() + slideInVertically(),
-                exit = fadeOut() + slideOutVertically()
+                    visible = categoriesState.isShowCategories,
+                    enter = fadeIn() + slideInVertically(),
+                    exit = fadeOut() + slideOutVertically()
             ) {
 
-                Timber.i("Received meals are: $starredMeals")
-                // Categories
+                Timber.i("Received meals are: $starredMeals") // Categories
                 LazyRow() {
 
                     items(categoriesState.categories) { category ->
@@ -133,17 +131,13 @@ fun OverviewScreen(
                 } else {
 
                     // apply swipe refresh view
-                    SwipeRefresh(
-                        state = swipeRefreshState,
-                        onRefresh = {
-                            viewModel.onEvent(event = OverviewEvent.OnRefresh)
-                        }
-                    ) {
+                    SwipeRefresh(state = swipeRefreshState, onRefresh = {
+                        viewModel.onEvent(event = OverviewEvent.OnRefresh)
+                    }) {
 
                         // content to be refreshed
                         LazyColumn(
-                            contentPadding =
-                            PaddingValues(vertical = spacing.spaceMedium)
+                                contentPadding = PaddingValues(vertical = spacing.spaceMedium)
                         ) {
 
                             items(mealsState.meals) { meal ->
@@ -152,16 +146,13 @@ fun OverviewScreen(
                                     starredMeal.id == meal.id
                                 }
                                 MealCard(
-                                    meal = meal,
-                                    onClickMeal = {
-                                        navigator.navigate(
+                                        meal = meal, onClickMeal = {
+                                    navigator.navigate(
                                             DetailsScreenDestination(
-                                                meal = it,
-                                                isStarred = isStarred
+                                                    meal = it, isStarred = isStarred
                                             )
-                                        )
-                                    },
-                                    isStarred = isStarred
+                                    )
+                                }, isStarred = isStarred
                                 )
                             }
                         }
