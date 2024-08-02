@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.Scaffold
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,7 +30,7 @@ import com.uxstate.yummies.presentation.screens.saved_items_screen.components.Me
 import com.uxstate.yummies.util.Constants.PLACEMENT_ANIM_DURATION
 import com.uxstate.yummies.util.LocalSpacing
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Destination
 @Composable
 fun SavedItemsScreen(
@@ -41,23 +43,23 @@ fun SavedItemsScreen(
 
     Scaffold(
         topBar = {
-            TopAppBar {
+            TopAppBar ({
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = stringResource(
-                            id = R.string.back_label
-                        ),
-                        tint = Color.Black,
-                        modifier = Modifier
-                            .clickable {
-                                navigator.navigateUp()
-                            }
-                            .size(spacing.spaceLarge)
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = stringResource(
+                                    id = R.string.back_label
+                            ),
+                            tint = Color.Black,
+                            modifier = Modifier
+                                    .clickable {
+                                        navigator.navigateUp()
+                                    }
+                                    .size(spacing.spaceLarge)
                     )
                     HeaderTextItem(text = "Saved Meals")
                 }
-            }
+            })
         }
 
     ) { paddingValues ->
