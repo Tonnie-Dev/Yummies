@@ -1,7 +1,9 @@
 package com.uxstate.yummies.presentation.ui.theme
 
-import androidx.compose.material.Colors
+import androidx.compose.material3.ColorScheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 
 val Purple200 = Color(0xFFBB86FC)
 val Purple500 = Color(0xFF6200EE)
@@ -30,16 +32,38 @@ val Lime50 = Color(0xFFF9FBE7)
 
 val Gray100 = Color(0x7F000000)
 
-val Colors.statusBarColor
+val ColorScheme.statusBarColor
     get() = if (this.isLight) Lime800 else Color.Black
 
-val Colors.gradientColors
+val ColorScheme.gradientColors
     get() = if (this.isLight) listOf(Yellow300, Yellow200, Yellow50)
     else listOf(Lime300, Lime200, Lime50)
 
-val Colors.starredStarColor
-    get() = if (this.isLight) Color(0xFFF26227)
+val ColorScheme.starredStarColor
+    get() = if (isDarkTheme) Color(0xFFF26227)
     else Color(0xFFEE8A62)
 
-val Colors.cardColor
+val ColorScheme.cardColor
     get() = if (this.isLight)Yellow300 else Lime300
+
+
+
+val ColorScheme.isLight: Boolean
+    get() = this.primary.luminance() > 0.5
+
+val ColorScheme.isDarkTheme: Boolean
+    get() = !this.isLight
+
+val ColorScheme.statusBarColor
+    get() = if (this.isLight) Lime800 else Color.Black
+
+val ColorScheme.gradientColors
+    get() = if (this.isLight) listOf(Yellow300, Yellow200, Yellow50)
+    else listOf(Lime300, Lime200, Lime50)
+
+val ColorScheme.starredStarColor
+    get() = if (this.isDarkTheme) Color(0xFFF26227)
+    else Color(0xFFEE8A62)
+
+val ColorScheme.cardColor
+    get() = if (this.isLight) Yellow300 else Lime300
