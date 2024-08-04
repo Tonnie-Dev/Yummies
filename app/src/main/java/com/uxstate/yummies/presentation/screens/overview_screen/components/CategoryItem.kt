@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -46,7 +47,7 @@ fun CategoryItem(
                 modifier = Modifier
                         .background(
                                 brush = Brush.linearGradient(
-                                        start = MaterialTheme.colorScheme.gradientColors
+                                        colors = MaterialTheme.colorScheme.gradientColors
                                 )
                         )
                         .padding(spacing.spaceExtraSmall)
