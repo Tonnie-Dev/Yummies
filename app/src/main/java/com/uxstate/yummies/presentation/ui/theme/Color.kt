@@ -30,21 +30,6 @@ val Lime300 = Color(0xFFDCE775)
 val Lime200 = Color(0xFFE6EE9C)
 val Lime50 = Color(0xFFF9FBE7)
 
-val Gray100 = Color(0x7F000000)
-
-val ColorScheme.statusBarColor
-    get() = if (this.isLight) Lime800 else Color.Black
-
-val ColorScheme.gradientColors
-    get() = if (this.isLight) listOf(Yellow300, Yellow200, Yellow50)
-    else listOf(Lime300, Lime200, Lime50)
-
-val ColorScheme.starredStarColor
-    get() = if (isDarkTheme) Color(0xFFF26227)
-    else Color(0xFFEE8A62)
-
-val ColorScheme.cardColor
-    get() = if (this.isLight)Yellow300 else Lime300
 
 
 
