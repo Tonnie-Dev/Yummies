@@ -79,7 +79,7 @@ jobs:
            uses: r0adkll/upload-google-play@v1
            with:
               serviceAccountJsonPlainText: '${{ secrets.SERVICE_ACCOUNT_JSON }}'
-              packageName: com.uxstate.launchpad
+              packageName: com.uxstate.yummies
               releaseFiles: ${{ github.workspace }}/app-release.aab
               track: production
               continue-on-error: false  # Fail if deployment fails
